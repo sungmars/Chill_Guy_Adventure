@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RangedEnemy : Enemy
@@ -13,18 +11,25 @@ public class RangedEnemy : Enemy
     {
         if (Vector2.Distance(transform.position, player.position) > attackRange)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+            Vector2 direction = (player.position - transform.position).normalized;
+            rb.velocity = direction * moveSpeed;
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
         }
     }
 
     protected override void Attack()
     {
+        Debug.Log("Ranged attack! Shooting projectile.");
         if (Time.time >= nextFireTime)
         {
             ShootProjectile();
             nextFireTime = Time.time + 1f / fireRate;
         }
     }
+
     private void ShootProjectile()
     {
         Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);

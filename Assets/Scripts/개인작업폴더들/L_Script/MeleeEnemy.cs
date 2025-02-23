@@ -1,23 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeEnemy : Enemy
 {
     protected override void Move()
     {
-        if (Vector2.Distance(transform.position, player.position) > attackRange)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-        }
+        Vector2 direction = (player.position - transform.position).normalized;
+        rb.velocity = direction * moveSpeed;
     }
 
     protected override void Attack()
     {
-        if(Vector2.Distance(transform.position, player.position) <= attackRange)
-        {
-            Debug.Log("대충 데미지 메서드 호출");
-        }
+        Debug.Log("때림 " + attackDamage + " 의 데미지");
+        // 플레이어에게 데미지를 주는 코드
     }
 }
-
