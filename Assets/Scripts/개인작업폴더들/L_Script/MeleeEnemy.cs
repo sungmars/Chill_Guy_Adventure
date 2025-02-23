@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class MeleeEnemy : Enemy
+public class MeleeEnemy : EnemyController
 {
     protected override void Move()
     {
@@ -11,7 +11,10 @@ public class MeleeEnemy : Enemy
 
     protected override void Attack()
     {
-        Debug.Log("때림 " + attackDamage + " 의 데미지");
+        if (Vector2.Distance(transform.position, player.position) <= attackRange)
+        {
+            Debug.Log("때림 " + attackDamage + " 의 데미지");
+        }
         // 플레이어에게 데미지를 주는 코드
     }
 }

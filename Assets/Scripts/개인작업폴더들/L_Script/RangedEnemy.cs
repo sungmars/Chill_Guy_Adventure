@@ -1,12 +1,11 @@
 using UnityEngine;
 
-public class RangedEnemy : Enemy
+public class RangedEnemy : EnemyController
 {
     public GameObject projectilePrefab;
     public Transform firePoint;
-    public float fireRate;
     private float nextFireTime;
-
+ 
     protected override void Move()
     {
         if (Vector2.Distance(transform.position, player.position) > attackRange)
@@ -22,16 +21,17 @@ public class RangedEnemy : Enemy
 
     protected override void Attack()
     {
-        Debug.Log("Ranged attack! Shooting projectile.");
+        Debug.Log("사거리 안입니다.");
         if (Time.time >= nextFireTime)
         {
             ShootProjectile();
-            nextFireTime = Time.time + 1f / fireRate;
+            nextFireTime = Time.time + 1f / attackCooldown; //공격속도 방영하여 쿨다운 적용
         }
     }
 
     private void ShootProjectile()
     {
         Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+        Debug.Log("사거리 밖입니다.");
     }
 }

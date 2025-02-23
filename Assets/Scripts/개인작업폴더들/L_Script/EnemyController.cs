@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour
+public abstract class EnemyController : MonoBehaviour
 {
     [Header("Enemy Stats")]
     public float moveSpeed;
@@ -30,15 +30,15 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    protected abstract void Move(); // 이동 패턴 (추적 또는 순찰 등)
+    protected abstract void Move(); // 이동 패턴 
     protected abstract void Attack(); // 공격 패턴
 
     protected void TryAttack()
     {
-        if (Time.time >= lastAttackTime + attackCooldown && Vector2.Distance(transform.position, player.position) <= attackRange)
+        if (Time.time >= lastAttackTime + attackCooldown)
         {
             Attack();
-            lastAttackTime = Time.time;
+            lastAttackTime = Time.time + 1f / attackCooldown;
         }
     }
 
