@@ -38,7 +38,7 @@ public abstract class EnemyController : MonoBehaviour
         if (Time.time >= lastAttackTime + attackCooldown)
         {
             Attack();
-            lastAttackTime = Time.time + 1f / attackCooldown;
+            lastAttackTime = Time.time;
         }
     }
 
