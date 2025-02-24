@@ -6,18 +6,7 @@ public class RangedEnemy : EnemyController
     public Transform firePoint;
     private float nextFireTime;
  
-    protected override void Move()
-    {
-        if (Vector2.Distance(transform.position, player.position) > attackRange)
-        {
-            Vector2 direction = (player.position - transform.position).normalized;
-            rb.velocity = direction * speed;
-        }
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
-    }
+    
 
     protected override void Attack()//츄라이 코드 안되면 수정예정
     {
