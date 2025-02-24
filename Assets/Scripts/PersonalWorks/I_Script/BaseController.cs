@@ -1,65 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class BaseController : MonoBehaviour
 {
+    // 컴포넌트 참조들
     protected Rigidbody2D _rigidbody2D;
+    protected AnimationHandler _animationHandler;
+    protected WeaponHandler weaponHandler;
 
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private Transform weaponPivot;
-        
+    // 이동 및 바라보는 방향
     protected Vector2 movementDirection = Vector2.zero;
     public Vector2 MovementDirection { get { return movementDirection; } }
-
     protected Vector2 lookDirection = Vector2.zero;
     public Vector2 LookDirection { get { return lookDirection; } }
 
+    // 넉백
     private Vector2 knockback = Vector2.zero;
     private float knockbackDuration = 0.0f;
 
-    protected AnimationHandler _animationHandler;
-
-    [SerializeField] public WeaponHandler WeaponPrefab;
-    protected WeaponHandler weaponHandler;
-
+    // 공격
     protected bool isAttacking;
-    private float timeSinceLastAttack = float.MaxValue;
+    
 
-    protected string _name;
-    protected int hp;
+    // 스탯
+    public string characterName;    
+    public int level = 1;          
+    public float attack;            
+    public float defense;           
+    public string equipItem;        
+    public float speed;             
+    public float attackSpeed;       
+    public float exp;               
+    public int gold;                
+    public float hp;                  
+
+    // 기존 코드에 있던 스탯 필드들 
     protected int maxHp;
     protected int damage;
-    protected int level;
-    protected int attack;
-    protected int defense;
-    protected float speed;
-    protected float exp;
-    protected int gold;
+    //사망시 불값
+    public static bool isgameOver;
 
-    protected virtual void Awake()
-    {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-        _animationHandler = GetComponent<AnimationHandler>();
-
-        if (WeaponPrefab != null)
-            weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
-        else
-            weaponHandler = GetComponentInChildren<WeaponHandler>();
-    }
+    
 
     protected virtual void Start()
     {
-
+        isgameOver = false;
     }
 
-    protected void Update()
-    {    
-        _animationHandler.UpdateState(movementDirection);
-        Rotate(lookDirection);
-        HandleAttackDelay();
-    }
+    
 
     protected virtual void FixedUpdate()
     {
@@ -72,6 +61,7 @@ public class BaseController : MonoBehaviour
 
     private void Movement(Vector2 direction)
     {
+        // 이동 속도 조정 (원래 5 배속)
         direction = direction * 5;
         if (knockbackDuration > 0.0f)
         {
@@ -82,16 +72,7 @@ public class BaseController : MonoBehaviour
         _rigidbody2D.velocity = direction;
     }
 
-    private void Rotate(Vector2 direction)
-    {
-        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bool isLeft = Mathf.Abs(rotZ) > 90f;
-
-        _spriteRenderer.flipX = isLeft;
-
-        if (weaponPivot != null) weaponPivot.rotation = Quaternion.Euler(0f, 0f, rotZ);
-        weaponHandler?.Rotate();
-    }
+    
 
     public void ApplyKnockback(Transform other, float power, float duration)
     {
@@ -99,20 +80,32 @@ public class BaseController : MonoBehaviour
         knockback = -(other.position - transform.position).normalized * power;
     }
 
-    private void HandleAttackDelay()
-    {
-        if (weaponHandler == null) return;
-        if (timeSinceLastAttack <= weaponHandler.Delay) timeSinceLastAttack += Time.deltaTime;
-        
-        if (isAttacking && timeSinceLastAttack > weaponHandler.Delay)
-        {
-            timeSinceLastAttack = 0;
-            Attack();
-        }
-    }
+    
 
     protected virtual void Attack()
     {
-        if (lookDirection != Vector2.zero) weaponHandler?.Attack();
+        if (lookDirection != Vector2.zero)
+            weaponHandler?.Attack();
+    }
+
+
+    public virtual void TakeDamage(int damage)
+    {
+        int actualDamage = Mathf.Max(damage - (int)defense, 0);
+        hp -= actualDamage;
+        if (hp <= 0)
+            Die();
+    }
+
+    
+    public virtual void Die()
+    {
+        if (gameObject.CompareTag("Player"))
+        {
+            isgameOver = true;
+            Debug.Log("플레이어 사망");
+        }
+        else
+            Destroy(gameObject);
     }
 }

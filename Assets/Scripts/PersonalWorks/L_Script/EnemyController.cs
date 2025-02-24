@@ -4,20 +4,21 @@ using UnityEngine;
 public abstract class EnemyController : BaseController
 {
     public float attackRange;
-    public float attackCooldown;
 
     protected Transform player;
     protected bool isChasing;
     protected Rigidbody2D rb;
     private float lastAttackTime;
 
+
     protected override void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
+        base.Start();
     }
-
-    protected virtual void FixedUpdate()
+    
+    protected override void FixedUpdate()
     {
         if (player != null)
         {
@@ -27,11 +28,11 @@ public abstract class EnemyController : BaseController
     }
 
     protected abstract void Move(); // 이동 패턴 
-    protected abstract void Attack(); // 공격 패턴
+
 
     protected void TryAttack()
     {
-        if (Time.time >= lastAttackTime + attackCooldown)
+        if (Time.time >= lastAttackTime + attackSpeed)
         {
             Attack();
             lastAttackTime = Time.time;
