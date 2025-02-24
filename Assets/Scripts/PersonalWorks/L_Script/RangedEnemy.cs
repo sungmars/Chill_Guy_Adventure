@@ -11,7 +11,7 @@ public class RangedEnemy : EnemyController
         if (Vector2.Distance(transform.position, player.position) > attackRange)
         {
             Vector2 direction = (player.position - transform.position).normalized;
-            rb.velocity = direction * moveSpeed;
+            rb.velocity = direction * speed;
         }
         else
         {
@@ -25,7 +25,7 @@ public class RangedEnemy : EnemyController
         if (Time.time >= nextFireTime)
         {
             ShootProjectile();
-            nextFireTime = Time.time + 1f / attackCooldown; //공격속도 방영하여 쿨다운 적용
+            nextFireTime = Time.time + 1f / attackSpeed; //공격속도 방영하여 쿨다운 적용
         }
     }
 
