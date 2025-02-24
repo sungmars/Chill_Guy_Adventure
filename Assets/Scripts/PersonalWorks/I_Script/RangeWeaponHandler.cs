@@ -50,16 +50,16 @@ public class RangeWeaponHandler : WeaponHandler
             float angle = minAngle + projectileAngleSpace * i;
             float randomSpread = Random.Range(-spread, spread);
             angle += randomSpread;
-            CreateProjectile(Controller.LookDirection, angle);
+            CreateProjectile(playerController.PlayerToEnemy, angle);
         }
     }
 
-    private void CreateProjectile(Vector2 _lookDirection, float angle)
+    private void CreateProjectile(Vector2 _attackDirection, float angle)
     {
         projectileManager.ShootBullet(
             this,
             projectileSpawnPosition.position,
-            RotateVector2(_lookDirection, angle)
+            RotateVector2(_attackDirection, angle)
             );
     }
 

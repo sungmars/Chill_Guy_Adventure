@@ -17,7 +17,7 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private float speed = 1f;
     public float Speed { get => speed; set => speed = value; }
 
-    [SerializeField] private float attackRange = 10f;
+    [SerializeField] private float attackRange = 5f;
     public float AttackRange { get => attackRange; set => attackRange = value; }
 
     public LayerMask target;
@@ -35,6 +35,7 @@ public class WeaponHandler : MonoBehaviour
     private static readonly int isAttack = Animator.StringToHash("isAttack");
 
     public BaseController Controller { get; private set; }
+    public PlayerController playerController { get; private set; }
 
     private Animator animator;
     private SpriteRenderer weaponRenderer;
@@ -42,6 +43,7 @@ public class WeaponHandler : MonoBehaviour
     protected virtual void Awake()
     {
         Controller = GetComponentInParent<BaseController>();
+        playerController = GetComponentInParent<PlayerController>();
         animator = GetComponentInChildren<Animator>();
         weaponRenderer = GetComponentInChildren<SpriteRenderer>();
 

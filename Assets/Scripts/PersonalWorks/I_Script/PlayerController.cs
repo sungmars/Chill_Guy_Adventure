@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,10 @@ public class PlayerController : BaseController
     [SerializeField] public WeaponHandler WeaponPrefab;
     private float timeSinceLastAttack = float.MaxValue;
     private float maxExp;
+
+    public GameObject[] enemies;
+    private Vector2 playerToEnemy;
+    public Vector2 PlayerToEnemy {  get { return playerToEnemy; } }
     
     protected virtual void Awake()
     {
@@ -32,6 +37,11 @@ public class PlayerController : BaseController
         _animationHandler.UpdateState(movementDirection);
         Rotate(lookDirection);
         HandleAttackDelay();
+
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        playerToEnemy = enemies[0].transform.position - _rigidbody2D.transform.position;
+
+        OnFire();
     }
     private void HandleAttackDelay()
     {
@@ -60,8 +70,7 @@ public class PlayerController : BaseController
     void OnMove(InputValue inputValue)
     {
         movementDirection = inputValue.Get<Vector2>();
-        movementDirection = movementDirection.normalized;
-        Debug.Log("Move");
+        movementDirection = movementDirection.normalized;        
     }
 
     void OnLook(InputValue inputValue)
@@ -74,9 +83,10 @@ public class PlayerController : BaseController
         else lookDirection = lookDirection.normalized;
     }
 
-    void OnFire(InputValue inputValue)
+    void OnFire()
     {
-        isAttacking = inputValue.isPressed;
+        if (Mathf.Abs(playerToEnemy.magnitude) < 5f) isAttacking = true;
+        else isAttacking = false;
     }
 
     private void PlusExp(float exp)
