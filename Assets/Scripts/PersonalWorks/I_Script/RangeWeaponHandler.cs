@@ -51,9 +51,9 @@ public class RangeWeaponHandler : WeaponHandler
             float randomSpread = Random.Range(-spread, spread);
             angle += randomSpread;
 
-            for (int j = 0; j < playerController.PlayerToEnemyVectors.Count; j++)
+            for (int j = 0; j < playerController.spawnedEnemies.Count; j++)
             {
-                if (Mathf.Abs(playerController.PlayerToEnemyVectors[j].magnitude) <= 3f)
+                if (playerController.IsInLongRange[j])
                     CreateProjectile(playerController.PlayerToEnemyVectors[j], angle);
             }
         }

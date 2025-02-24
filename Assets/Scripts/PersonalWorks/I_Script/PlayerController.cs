@@ -13,10 +13,16 @@ public class PlayerController : BaseController
     private float timeSinceLastAttack = float.MaxValue;
     private float maxExp;
 
+    private float longAttackRange = 3f;
+    public float LongAttackRange { get { return longAttackRange; } }
+
     public List<GameObject> spawnedEnemies;
         
     private List<Vector2> playerToEnemyVectors;
-    public List<Vector2> PlayerToEnemyVectors {  get { return playerToEnemyVectors; } }    
+    public List<Vector2> PlayerToEnemyVectors { get { return playerToEnemyVectors; } }
+
+    private List<bool> isInLongRange;
+    public List<bool> IsInLongRange { get { return isInLongRange; } }
     
     protected virtual void Awake()
     {
@@ -28,11 +34,13 @@ public class PlayerController : BaseController
         else
             weaponHandler = GetComponentInChildren<WeaponHandler>();
     }
+
     protected override void Start()
     {
         base.Start();
         m_Camera = Camera.main;        
     }
+
     protected void Update()
     {
         _animationHandler.UpdateState(movementDirection);
@@ -51,11 +59,13 @@ public class PlayerController : BaseController
         }
 
         playerToEnemyVectors = new List<Vector2>();
+        isInLongRange = new List<bool>();
         for (int i = 0; i < spawnedEnemies.Count; i++)
         {
             playerToEnemyVectors.Add(spawnedEnemies[i].transform.position - _rigidbody2D.transform.position);
+            isInLongRange.Add(Mathf.Abs(playerToEnemyVectors[i].magnitude) <= longAttackRange);
         }
-        
+
         OnFire();
     }
 
@@ -102,13 +112,14 @@ public class PlayerController : BaseController
     }
 
     void OnFire()
-    {   
-        if (Mathf.Abs(playerToEnemyVectors[0].magnitude) <= 3f) isAttacking = true;        
-        else if (Mathf.Abs(playerToEnemyVectors[1].magnitude) <= 3f) isAttacking = true;
-        else if (Mathf.Abs(playerToEnemyVectors[2].magnitude) <= 3f) isAttacking = true;
-        else if (Mathf.Abs(playerToEnemyVectors[3].magnitude) <= 3f) isAttacking = true;
+    {
+        for (int i = 0; i < spawnedEnemies.Count; i++)
+        {
+            if (isInLongRange[i]) isAttacking = true;            
+        }
 
-        else isAttacking = false;
+        bool isAllFalse = isInLongRange.All(item => false);
+        if (isAllFalse) isAttacking = false;
     }
 
     private void PlusExp(float exp)
