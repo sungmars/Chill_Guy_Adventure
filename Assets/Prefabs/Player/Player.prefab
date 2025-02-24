@@ -247,13 +247,13 @@ MonoBehaviour:
   characterName: 
   level: 1
   attack: 0
-  defense: 0
+  defense: 10000
   equipItem: 
   speed: 0
   attackSpeed: 0
   exp: 0
   gold: 0
-  hp: 0
+  hp: 10000
   _spriteRenderer: {fileID: 4333628374106676394}
   weaponPivot: {fileID: 8444050852684987741}
   WeaponPrefab: {fileID: 2789462198808765568, guid: f81434a3f5a40b74bb15ef6f8d59aa62, type: 3}

@@ -9,7 +9,7 @@ public abstract class EnemyController : BaseController
     protected bool isChasing;
     protected Rigidbody2D rb;
     private float lastAttackTime;
-
+    protected bool isStopped = false;
 
     protected override void Start()
     {
@@ -20,11 +20,13 @@ public abstract class EnemyController : BaseController
     
     protected override void FixedUpdate()
     {
-        if (player != null)
+        if (!isStopped && player != null)
         {
+            Move();
             Move();
             TryAttack();
         }
+
     }
 
     protected abstract void Move(); // 이동 패턴 
@@ -36,9 +38,15 @@ public abstract class EnemyController : BaseController
         {
             Attack();
             lastAttackTime = Time.time;
+            StartCoroutine(StopMovementCoroutine(0.5f));
         }
     }
-
+    private IEnumerator StopMovementCoroutine(float duration)
+    {
+        isStopped = true;
+        yield return new WaitForSeconds(duration);
+        isStopped = false;
+    }
     public override void Die()
     {
         //플레이어에게 경험치와 골드 주기
