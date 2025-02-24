@@ -5,6 +5,8 @@ using UnityEngine;
 public class AnimationHandler : MonoBehaviour
 {
     protected Animator _animator;
+
+    private static readonly int isDamage = Animator.StringToHash("isDamage");
     
     protected void Awake()
     {
@@ -23,5 +25,15 @@ public class AnimationHandler : MonoBehaviour
 
         _animator.SetFloat("xDir", moveVector.x);
         _animator.SetFloat("yDir", moveVector.y);
+    }
+
+    public void Damage()
+    {
+        _animator.SetBool(isDamage, true);
+    }
+
+    public void InvincibilityEnd()
+    {
+        _animator.SetBool(isDamage, false);
     }
 }
