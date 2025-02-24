@@ -56,7 +56,7 @@ public class WeaponHandler : MonoBehaviour
 
     public virtual void Attack()
     {
-
+        AttackAnimation();
     }
 
     public void AttackAnimation()
@@ -64,8 +64,8 @@ public class WeaponHandler : MonoBehaviour
         animator.SetTrigger(isAttack);
     }
 
-    public virtual void Rotate(bool isLeft)
+    public virtual void Rotate()
     {
-        weaponRenderer.flipY = isLeft;
+        weaponRenderer.flipX = true;
     }
 }

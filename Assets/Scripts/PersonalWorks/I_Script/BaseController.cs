@@ -57,7 +57,8 @@ public class BaseController : MonoBehaviour
     protected void Update()
     {    
         _animationHandler.UpdateState(movementDirection);
-        Rotate(lookDirection);        
+        Rotate(lookDirection);
+        HandleAttackDelay();
     }
 
     protected virtual void FixedUpdate()
@@ -89,12 +90,29 @@ public class BaseController : MonoBehaviour
         _spriteRenderer.flipX = isLeft;
 
         if (weaponPivot != null) weaponPivot.rotation = Quaternion.Euler(0f, 0f, rotZ);
-        weaponHandler?.Rotate(isLeft);
+        weaponHandler?.Rotate();
     }
 
     public void ApplyKnockback(Transform other, float power, float duration)
     {
         knockbackDuration = duration;
         knockback = -(other.position - transform.position).normalized * power;
+    }
+
+    private void HandleAttackDelay()
+    {
+        if (weaponHandler == null) return;
+        if (timeSinceLastAttack <= weaponHandler.Delay) timeSinceLastAttack += Time.deltaTime;
+        
+        if (isAttacking && timeSinceLastAttack > weaponHandler.Delay)
+        {
+            timeSinceLastAttack = 0;
+            Attack();
+        }
+    }
+
+    protected virtual void Attack()
+    {
+        if (lookDirection != Vector2.zero) weaponHandler?.Attack();
     }
 }

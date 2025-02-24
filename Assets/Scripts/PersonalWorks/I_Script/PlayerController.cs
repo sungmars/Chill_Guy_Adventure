@@ -31,6 +31,11 @@ public class PlayerController : BaseController
         else lookDirection = lookDirection.normalized;
     }
 
+    void OnFire(InputValue inputValue)
+    {
+        isAttacking = inputValue.isPressed;
+    }
+
     private void PlusExp(float exp)
     {
         this.exp += exp;
