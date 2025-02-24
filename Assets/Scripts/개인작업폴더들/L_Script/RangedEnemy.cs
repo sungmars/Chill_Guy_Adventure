@@ -11,7 +11,7 @@ public class RangedEnemy : EnemyController
         if (Vector2.Distance(transform.position, player.position) > attackRange)
         {
             Vector2 direction = (player.position - transform.position).normalized;
-            rb.velocity = direction * moveSpeed;
+            rb.velocity = direction * speed;
         }
         else
         {

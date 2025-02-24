@@ -1,12 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class EnemyController : MonoBehaviour
+public abstract class EnemyController : BaseController
 {
-    [Header("Enemy Stats")]
-    public float moveSpeed;
-    public int health;
-    public int attackDamage;
     public float attackRange;
     public float attackCooldown;
 
@@ -15,7 +11,7 @@ public abstract class EnemyController : MonoBehaviour
     protected Rigidbody2D rb;
     private float lastAttackTime;
 
-    protected virtual void Start()
+    protected override void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
@@ -42,17 +38,15 @@ public abstract class EnemyController : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamage(int damage)
+    public override void Die()
     {
-        health -= damage;
-        if (health <= 0)
+        //플레이어에게 경험치와 골드 주기
+        PlayerController playerController = player.GetComponent<PlayerController>();
+        if (playerController != null)
         {
-            Die();
+            playerController.ReceiveExp(exp);
+            playerController.ReceiveGold(gold);
         }
-    }
-
-    protected virtual void Die()
-    {
-        Destroy(gameObject);
+        base.Die();
     }
 }
