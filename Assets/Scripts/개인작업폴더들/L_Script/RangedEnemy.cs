@@ -19,7 +19,7 @@ public class RangedEnemy : EnemyController
         }
     }
 
-    protected override void Attack()
+    protected override void Attack()//츄라이 코드 안되면 수정예정
     {
         Debug.Log("사거리 안입니다.");
         if (Time.time >= nextFireTime)

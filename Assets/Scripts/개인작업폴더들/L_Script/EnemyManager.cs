@@ -27,3 +27,28 @@ public class EnemyManager : MonoBehaviour
         Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
     }
 }
+//public class EnemyManager : MonoBehaviour
+//{
+//    public GameObject meleeEnemyPrefab;
+//    public GameObject rangedEnemyPrefab;
+//    public Transform[] spawnPoints;
+
+//    private void Start()
+//    {
+//        SpawnEnemies();
+//    }
+
+//    private void SpawnEnemies()
+//    {
+//        if (spawnPoints.Length == 0) return;
+
+//        int enemyCount = Random.Range(4, 9); // 4에서 8마리 사이의 적 생성
+
+//        for (int i = 0; i < enemyCount; i++)
+//        {
+//            Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+//            GameObject enemyPrefab = Random.Range(0, 2) == 0 ? meleeEnemyPrefab : rangedEnemyPrefab;
+//            Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+//        }
+//    }
+//}
