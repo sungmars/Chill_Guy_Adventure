@@ -5,22 +5,40 @@ public class RangedEnemy : EnemyController
     public GameObject projectilePrefab;
     public Transform firePoint;
     private float nextFireTime;
- 
-    
+    [SerializeField] private float projectileSpeed = 10f; // 발사체 속도
 
-    protected override void Attack()//츄라이 코드 안되면 수정예정
+    void Update()
+    {
+        if (player != null)
+        {
+            Vector2 direction = player.position - firePoint.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            firePoint.rotation = Quaternion.Euler(0f, 0f, angle);
+        }
+    }
+
+    protected override void Attack()
     {
         Debug.Log("사거리 안입니다.");
         if (Time.time >= nextFireTime)
         {
             ShootProjectile();
-            nextFireTime = Time.time + 1f / attackSpeed; //공격속도 방영하여 쿨다운 적용
+            nextFireTime = Time.time + 1f / attackSpeed; // 공격속도 반영하여 쿨다운 적용
         }
     }
 
     private void ShootProjectile()
     {
-        Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-        Debug.Log("사거리 밖입니다.");
+        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        // 플레이어 방향 계산
+        Vector2 direction = (player.position - firePoint.position).normalized;
+        // 발사체의 회전을 플레이어 방향에 맞게 조정
+        projectile.transform.right = direction;
+        // 속도 부여
+        Rigidbody2D arrowRb = projectile.GetComponent<Rigidbody2D>();
+        if (arrowRb != null)
+        {
+            arrowRb.velocity = direction * projectileSpeed;
+        }
     }
 }

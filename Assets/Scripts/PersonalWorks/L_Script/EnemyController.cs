@@ -74,6 +74,7 @@ public abstract class EnemyController : BaseController
     }
     public override void TakeDamage(int damage)
     {
+        Debug.Log("아파요 주인님 ㅠㅠ");
         base.TakeDamage(damage);
         animator.SetTrigger("KnockbackTrigger");
         animator.SetBool("IsRun", false);
