@@ -2,55 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossController : EnemyController
+public class BossController : MonoBehaviour
 {
     [SerializeField] SpriteRenderer bossSR;
+
+    [SerializeField] Transform player;
+    [SerializeField] public WeaponHandler WeaponPrefab;
+    [SerializeField] private Transform weaponPivot;
+    protected WeaponHandler weaponHandler;
 
     private bool flipX = false;
     private bool onSkill = false;
 
-    protected override void Attack()
+    private void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        if (WeaponPrefab != null)
+            weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
+        else
+            weaponHandler = GetComponentInChildren<WeaponHandler>();
     }
 
-    protected override void Move()
+    private void Start()
+    {
+        
+    }
+
+    private void FixedUpdate()
     {
         if (!onSkill)
-        {
-            if (player.transform.position.x < transform.position.x)
-            {
-                flipX = false;
-                bossSR.flipX = flipX;
-            }
-            else
-            {
-                flipX = true;
-                bossSR.flipX = flipX;
-            }
-        }
+            RandomSkill();
     }
-
-    protected override void FixedUpdate()
-    {
-        base.FixedUpdate();
-    }
-
-    protected override void Start()
-    {
-        base.Start();
-        StartCoroutine(Rush());
-    }
+    
 
     protected void RandomSkill()
     {
-        int idxSkill = Random.Range(0, 5);
+        //int idxSkill = Random.Range(0, 5);
+        int idxSkill = 0;
 
         switch (idxSkill)
         {
             case 0:
-                StartCoroutine(Rush());
+                StartCoroutine(RushAttack());
                 break;
-            case 1:
+            case 1:           
+                StartCoroutine(SoundWaveAttack());
                 break;
             case 2:
                 break;
@@ -63,31 +60,35 @@ public class BossController : EnemyController
         }
     }
 
-    protected IEnumerator Rush()
+    protected IEnumerator RushAttack()
     {
         onSkill = true;
-        Vector2 backPos;
-        Vector2 temPos;
         Vector2 targetPos = new Vector2(player.transform.position.x, player.transform.position.y);
-
-        backPos = (Vector2)transform.position - targetPos.normalized;
-
+        Vector2 curPos = transform.position;
+        Vector2 backDir = (curPos - targetPos).normalized;
+        Vector2 backPos = curPos + backDir * 1f;
+        Vector2 movePos;
         while (Vector2.Distance(backPos, transform.position) > 0.1f)
         {
-            temPos = Vector2.Lerp(transform.position, backPos, Time.deltaTime * 1.5f);
-            transform.position = temPos;
+            movePos = Vector2.Lerp(transform.position, backPos, Time.deltaTime * 1.5f);
+            transform.position = movePos;
             yield return new WaitForSeconds(0f);
         }
 
         while (Vector2.Distance(targetPos, transform.position) > 0.1f)
         {
-            temPos = Vector2.Lerp(transform.position, targetPos, Time.deltaTime * 1.5f);
-            transform.position = temPos;
+            movePos = Vector2.Lerp(transform.position, targetPos, Time.deltaTime * 2f);
+            transform.position = movePos;
             yield return new WaitForSeconds(0f);
         }
-
-
         onSkill = false;
-        yield return null;
+        yield return new WaitForSeconds(3f);
+    }
+
+    protected IEnumerator SoundWaveAttack()
+    {
+        onSkill = true;        
+        onSkill = false;
+        yield return new WaitForSeconds(3f);
     }
 }
