@@ -4,33 +4,57 @@ using UnityEngine;
 public abstract class EnemyController : BaseController
 {
     public float attackRange;
-
+    protected Animator animator;
     protected Transform player;
     protected bool isChasing;
     protected Rigidbody2D rb;
     private float lastAttackTime;
     protected bool isStopped = false;
+    // 스프라이트 뒤집기를 위한 SpriteRenderer 추가
+    [SerializeField] private SpriteRenderer _spriteRenderer;
 
     protected override void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        if (_spriteRenderer == null)
+            _spriteRenderer = GetComponent<SpriteRenderer>();
         base.Start();
     }
-    
+
     protected override void FixedUpdate()
     {
         if (!isStopped && player != null)
         {
             Move();
-            Move();
             TryAttack();
         }
-
     }
 
-    protected abstract void Move(); // 이동 패턴 
+    protected virtual void Move()
+    {
+        animator.SetBool("IsRun",true);
+        //플레이어 바라보기
+        if (player.position.x < transform.position.x)
+            _spriteRenderer.flipX = true;
+        else
+            _spriteRenderer.flipX = false;
 
+        if (isStopped)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        }
+        else if (Vector2.Distance(transform.position, player.position) > attackRange)
+        {
+            Vector2 direction = (player.position - transform.position).normalized;
+            rb.velocity = direction * speed;
+        }
+        else
+            rb.velocity = Vector2.zero;
+
+    }
 
     protected void TryAttack()
     {
@@ -38,18 +62,25 @@ public abstract class EnemyController : BaseController
         {
             Attack();
             lastAttackTime = Time.time;
-            StartCoroutine(StopMovementCoroutine(0.5f));
+            StartCoroutine(StopMoveCoroutine(0.5f));
         }
     }
-    private IEnumerator StopMovementCoroutine(float duration)
+
+    private IEnumerator StopMoveCoroutine(float duration)
     {
         isStopped = true;
         yield return new WaitForSeconds(duration);
         isStopped = false;
     }
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        animator.SetTrigger("KnockbackTrigger");
+        animator.SetBool("IsRun", false);
+    }
     public override void Die()
     {
-        //플레이어에게 경험치와 골드 주기
+        // 플레이어에게 경험치와 골드 주기
         PlayerController playerController = player.GetComponent<PlayerController>();
         if (playerController != null)
         {
