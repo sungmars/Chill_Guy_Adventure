@@ -13,9 +13,10 @@ public class PlayerController : BaseController
     private float timeSinceLastAttack = float.MaxValue;
     private float maxExp;
 
-    public GameObject[] enemies;
-    private Vector2 playerToEnemy;
-    public Vector2 PlayerToEnemy {  get { return playerToEnemy; } }
+    public List<GameObject> spawnedEnemies;
+        
+    private List<Vector2> playerToEnemyVectors;
+    public List<Vector2> PlayerToEnemyVectors {  get { return playerToEnemyVectors; } }    
     
     protected virtual void Awake()
     {
@@ -37,12 +38,27 @@ public class PlayerController : BaseController
         _animationHandler.UpdateState(movementDirection);
         Rotate(lookDirection);
         HandleAttackDelay();
+    }
 
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        playerToEnemy = enemies[0].transform.position - _rigidbody2D.transform.position;
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
 
+        spawnedEnemies = new List<GameObject>();
+        foreach (GameObject spawnedEnemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            spawnedEnemies.Add(spawnedEnemy);
+        }
+
+        playerToEnemyVectors = new List<Vector2>();
+        for (int i = 0; i < spawnedEnemies.Count; i++)
+        {
+            playerToEnemyVectors.Add(spawnedEnemies[i].transform.position - _rigidbody2D.transform.position);
+        }
+        
         OnFire();
     }
+
     private void HandleAttackDelay()
     {
         if (weaponHandler == null) return;
@@ -55,6 +71,7 @@ public class PlayerController : BaseController
             Attack();
         }
     }
+
     private void Rotate(Vector2 direction)
     {
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -67,6 +84,7 @@ public class PlayerController : BaseController
 
         weaponHandler?.Rotate();
     }
+
     void OnMove(InputValue inputValue)
     {
         movementDirection = inputValue.Get<Vector2>();
@@ -84,8 +102,12 @@ public class PlayerController : BaseController
     }
 
     void OnFire()
-    {
-        if (Mathf.Abs(playerToEnemy.magnitude) < 5f) isAttacking = true;
+    {   
+        if (Mathf.Abs(playerToEnemyVectors[0].magnitude) <= 3f) isAttacking = true;        
+        else if (Mathf.Abs(playerToEnemyVectors[1].magnitude) <= 3f) isAttacking = true;
+        else if (Mathf.Abs(playerToEnemyVectors[2].magnitude) <= 3f) isAttacking = true;
+        else if (Mathf.Abs(playerToEnemyVectors[3].magnitude) <= 3f) isAttacking = true;
+
         else isAttacking = false;
     }
 

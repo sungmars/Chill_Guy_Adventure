@@ -50,7 +50,12 @@ public class RangeWeaponHandler : WeaponHandler
             float angle = minAngle + projectileAngleSpace * i;
             float randomSpread = Random.Range(-spread, spread);
             angle += randomSpread;
-            CreateProjectile(playerController.PlayerToEnemy, angle);
+
+            for (int j = 0; j < playerController.PlayerToEnemyVectors.Count; j++)
+            {
+                if (Mathf.Abs(playerController.PlayerToEnemyVectors[j].magnitude) <= 3f)
+                    CreateProjectile(playerController.PlayerToEnemyVectors[j], angle);
+            }
         }
     }
 
