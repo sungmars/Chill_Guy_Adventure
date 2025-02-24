@@ -14,7 +14,6 @@ public class IntroCameraController : MonoBehaviour
         while ((int)transform.position.x != 0)
         {
             x = Mathf.Lerp(transform.position.x, boss.transform.position.x, Time.deltaTime);
-            Debug.Log(x);
             transform.position = new Vector3(x, y, z);
             yield return new WaitForSeconds(0f);
         }
