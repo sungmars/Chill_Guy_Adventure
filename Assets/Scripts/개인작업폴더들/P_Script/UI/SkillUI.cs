@@ -10,22 +10,22 @@ public class SkillUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public Image iconImage;
     public Image coolImage;
 
-    public GameObject tooltipUI; // ½ºÅ³ ¼³¸í UI
-    public TextMeshProUGUI tooltipTitle; // ½ºÅ³ ¼³¸í UI
-    public TextMeshProUGUI tooltipDesc; // ½ºÅ³ ¼³¸í UI
+    public GameObject tooltipUI; // ìŠ¤í‚¬ ì„¤ëª… UI
+    public TextMeshProUGUI tooltipTitle; // ìŠ¤í‚¬ ì„¤ëª… UI
+    public TextMeshProUGUI tooltipDesc; // ìŠ¤í‚¬ ì„¤ëª… UI
 
     public void Awake()
     {
-        tooltipUI.SetActive(false); // ÅøÆÁ UI ºñÈ°¼ºÈ­
+        tooltipUI.SetActive(false); // íˆ´íŒ UI ë¹„í™œì„±í™”
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        tooltipUI.SetActive(true); // ¸¶¿ì½º ¿Ã¸®¸é ÅøÆÁ UI È°¼ºÈ­
+        tooltipUI.SetActive(true); // ë§ˆìš°ìŠ¤ ì˜¬ë¦¬ë©´ íˆ´íŒ UI í™œì„±í™”
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        tooltipUI.SetActive(false); // ¸¶¿ì½º ³ª°¡¸é ÅøÆÁ UI ºñÈ°¼ºÈ­
+        tooltipUI.SetActive(false); // ë§ˆìš°ìŠ¤ ë‚˜ê°€ë©´ íˆ´íŒ UI ë¹„í™œì„±í™”
     }
 }

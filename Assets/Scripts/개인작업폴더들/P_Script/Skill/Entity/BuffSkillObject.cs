@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class BuffSkillObject : MonoBehaviour
 {
-    // [SerializeField] private LayerMask wallLayer; // º® Layer
-    // [SerializeField] private LayerMask targetLayer; // Àû Layer
+    // [SerializeField] private LayerMask wallLayer; // ë²½ Layer
+    // [SerializeField] private LayerMask targetLayer; // ì  Layer
 
-    private SpriteRenderer spriteRenderer; // ½ºÇÁ¶óÀÌÆ® »ö»ó
+    private SpriteRenderer spriteRenderer; // ìŠ¤í”„ë¼ì´íŠ¸ ìƒ‰ìƒ
 
-    private bool isReady; // Init ½ÇÇà ÈÄ Update ½ÇÇà µÉ ¼ö ÀÖµµ·Ï ÇÔ
-    private float duration; // ÃÖ´ë »ıÁ¸ ½Ã°£
-    private float currentDuration; // ÇöÀç »ıÁ¸ ½Ã°£
+    private bool isReady; // Init ì‹¤í–‰ í›„ Update ì‹¤í–‰ ë  ìˆ˜ ìˆë„ë¡ í•¨
+    private float duration; // ìµœëŒ€ ìƒì¡´ ì‹œê°„
+    private float currentDuration; // í˜„ì¬ ìƒì¡´ ì‹œê°„
 
 
     private void Awake()
@@ -29,27 +29,27 @@ public class BuffSkillObject : MonoBehaviour
 
         if (currentDuration > duration)
         {
-            // ½Ã°£ Áö³ª¸é ¹°Ã¼ ÆÄ±«
+            // ì‹œê°„ ì§€ë‚˜ë©´ ë¬¼ì²´ íŒŒê´´
             DestroyObject(transform.position, createFx: false);
         }
 
     }
 
-    // ÃÊ±â ¹æÇâ °ª
+    // ì´ˆê¸° ë°©í–¥ ê°’
     public void Init(Color color, float duration)
     {
-        currentDuration = 0; // »ıÁ¸ ½Ã°£ 0À¸·Î ÃÊ±âÈ­
-        spriteRenderer.color = color; // ½ºÇÁ¶óÀÌÆ® »ö»ó
+        currentDuration = 0; // ìƒì¡´ ì‹œê°„ 0ìœ¼ë¡œ ì´ˆê¸°í™”
+        spriteRenderer.color = color; // ìŠ¤í”„ë¼ì´íŠ¸ ìƒ‰ìƒ
 
         this.duration = duration;
-        isReady = true; // Update ½ÇÇà µÉ ¼ö ÀÖµµ·Ï ÇÔ
-        // TODO : ¹öÇÁÀû¿ë
+        isReady = true; // Update ì‹¤í–‰ ë  ìˆ˜ ìˆë„ë¡ í•¨
+        // TODO : ë²„í”„ì ìš©
     }
 
-    // Destroy Àü ÆÄÆ¼Å¬ »ı¼º
+    // Destroy ì „ íŒŒí‹°í´ ìƒì„±
     private void DestroyObject(Vector3 position, bool createFx)
     {
-        // TODO : ¹öÇÁ²¨Áü
+        // TODO : ë²„í”„êº¼ì§
         if (createFx)
         {
             // ParticleManager.Instance.CreateImpactParticlesAtPostion(position);

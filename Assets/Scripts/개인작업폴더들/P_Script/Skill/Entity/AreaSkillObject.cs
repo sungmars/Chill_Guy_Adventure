@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class AreaSkillObject : MonoBehaviour
 {
-    // [SerializeField] private LayerMask wallLayer; // º® Layer
-    [SerializeField] private LayerMask targetLayer; // Àû Layer
+    // [SerializeField] private LayerMask wallLayer; // ë²½ Layer
+    [SerializeField] private LayerMask targetLayer; // ì  Layer
 
-    private SpriteRenderer spriteRenderer; // ½ºÇÁ¶óÀÌÆ® »ö»ó
+    private SpriteRenderer spriteRenderer; // ìŠ¤í”„ë¼ì´íŠ¸ ìƒ‰ìƒ
 
-    private bool isReady; // Init ½ÇÇà ÈÄ Update ½ÇÇà µÉ ¼ö ÀÖµµ·Ï ÇÔ
-    private float duration; // ÃÖ´ë »ıÁ¸ ½Ã°£
-    private float currentDuration; // ÇöÀç »ıÁ¸ ½Ã°£
-    private float damageInterval; // µ¥¹ÌÁö ÀÔÈ÷´Â °£°İ (0.5ÃÊ?)
+    private bool isReady; // Init ì‹¤í–‰ í›„ Update ì‹¤í–‰ ë  ìˆ˜ ìˆë„ë¡ í•¨
+    private float duration; // ìµœëŒ€ ìƒì¡´ ì‹œê°„
+    private float currentDuration; // í˜„ì¬ ìƒì¡´ ì‹œê°„
+    private float damageInterval; // ë°ë¯¸ì§€ ì…íˆëŠ” ê°„ê²© (0.5ì´ˆ?)
 
-    private Dictionary<Collider, Coroutine> activeCoroutines = new Dictionary<Collider, Coroutine>(); // ÀåÆÇ¾È¿¡ µé¾î ¿Â ¸ó½ºÅÍ ¸ñ·Ïµé
+    private Dictionary<Collider, Coroutine> activeCoroutines = new Dictionary<Collider, Coroutine>(); // ì¥íŒì•ˆì— ë“¤ì–´ ì˜¨ ëª¬ìŠ¤í„° ëª©ë¡ë“¤
 
 
     private void Awake()
@@ -34,26 +34,26 @@ public class AreaSkillObject : MonoBehaviour
 
         if (currentDuration > duration)
         {
-            // ½Ã°£ Áö³ª¸é ¹°Ã¼ ÆÄ±«
+            // ì‹œê°„ ì§€ë‚˜ë©´ ë¬¼ì²´ íŒŒê´´
             DestroyObject(transform.position, createFx: false);
         }
 
 
     }
 
-    // ÃÊ±â ¹æÇâ °ª
+    // ì´ˆê¸° ë°©í–¥ ê°’
     public void Init(Color color, float duration)
     {
-        currentDuration = 0; // »ıÁ¸ ½Ã°£ 0À¸·Î ÃÊ±âÈ­
-        spriteRenderer.color = color; // ½ºÇÁ¶óÀÌÆ® »ö»ó
+        currentDuration = 0; // ìƒì¡´ ì‹œê°„ 0ìœ¼ë¡œ ì´ˆê¸°í™”
+        spriteRenderer.color = color; // ìŠ¤í”„ë¼ì´íŠ¸ ìƒ‰ìƒ
 
         this.duration = duration;
-        isReady = true; // Update ½ÇÇà µÉ ¼ö ÀÖµµ·Ï ÇÔ
+        isReady = true; // Update ì‹¤í–‰ ë  ìˆ˜ ìˆë„ë¡ í•¨
     }
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (targetLayer.Contain(collision.gameObject.layer)) // Àû°ú Ãæµ¹ ½Ã ±â´É ÀÛµ¿ ÈÄ ÆÄ±« 
+        if (targetLayer.Contain(collision.gameObject.layer)) // ì ê³¼ ì¶©ëŒ ì‹œ ê¸°ëŠ¥ ì‘ë™ í›„ íŒŒê´´ 
         {
 
             if (!activeCoroutines.ContainsKey(collision))
@@ -66,7 +66,7 @@ public class AreaSkillObject : MonoBehaviour
 
     private void OnTriggerExit(Collider collision)
     {
-        if (targetLayer.Contain(collision.gameObject.layer)) // Àû°ú Ãæµ¹ ½Ã ±â´É ÀÛµ¿ ÈÄ ÆÄ±« 
+        if (targetLayer.Contain(collision.gameObject.layer)) // ì ê³¼ ì¶©ëŒ ì‹œ ê¸°ëŠ¥ ì‘ë™ í›„ íŒŒê´´ 
         {
 
             if (activeCoroutines.TryGetValue(collision, out Coroutine coroutine))
@@ -81,14 +81,14 @@ public class AreaSkillObject : MonoBehaviour
     {
         while (true)
         {
-            // TODO : Àû °ø°İ
-            Debug.Log($"Todo: {damageInterval}ÃÊ ¸¶´Ù Àû °ø°İ!");
+            // TODO : ì  ê³µê²©
+            Debug.Log($"Todo: {damageInterval}ì´ˆ ë§ˆë‹¤ ì  ê³µê²©!");
             yield return new WaitForSeconds(damageInterval);
         }
     }
 
 
-    // Destroy Àü ÆÄÆ¼Å¬ »ı¼º
+    // Destroy ì „ íŒŒí‹°í´ ìƒì„±
     private void DestroyObject(Vector3 position, bool createFx)
     {
         if (createFx)

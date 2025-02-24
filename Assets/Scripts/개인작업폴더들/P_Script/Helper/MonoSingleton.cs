@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// MonoSingle »ç¿ë ½Ã ¹«Á¶°Ç Scene¿¡ ¹èÄ¡ÇÏ´Â °ÍÀÌ ÁÁÀ½
+// MonoSingle ì‚¬ìš© ì‹œ ë¬´ì¡°ê±´ Sceneì— ë°°ì¹˜í•˜ëŠ” ê²ƒì´ ì¢‹ìŒ
 public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T instance = null;
@@ -8,7 +8,7 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         get
         {
-            // GameObject¸¦ ¸¸µéÁö ¾Ê¾Æ¼­ Awake°¡ µÇÁö ¾Ê¾ÒÀ» ½Ã »ı¼ºÇØÁÖ´Â ·ÎÁ÷
+            // GameObjectë¥¼ ë§Œë“¤ì§€ ì•Šì•„ì„œ Awakeê°€ ë˜ì§€ ì•Šì•˜ì„ ì‹œ ìƒì„±í•´ì£¼ëŠ” ë¡œì§
             if (instance == null)
             {
                 GameObject go = new GameObject(typeof(T).Name);
@@ -18,7 +18,7 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    // Scene¿¡ ¹èÄ¡ÇÏ¸é Awake°¡ ½ÇÇà µÇ¾î ÇÏ³ª¸¸ ³²±â°í ³ª¸ÓÁö´Â Destory()
+    // Sceneì— ë°°ì¹˜í•˜ë©´ Awakeê°€ ì‹¤í–‰ ë˜ì–´ í•˜ë‚˜ë§Œ ë‚¨ê¸°ê³  ë‚˜ë¨¸ì§€ëŠ” Destory()
     public void Awake()
     {
         if (instance != null)

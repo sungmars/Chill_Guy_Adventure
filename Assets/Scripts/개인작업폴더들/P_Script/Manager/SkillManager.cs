@@ -14,8 +14,8 @@ public class SkillManager : MonoSingleton<SkillManager>
 
     [Header("Skill UI")]
     public Transform currentSkillPivot;
-    public List<SkillHandler> mouseSkillHandlers; // ¿ŞÂÊ 0, ¿À¸¥ÂÊ 1
-    public List<SkillUI> mouseSkillUIs; // ¿ŞÂÊ 0, ¿À¸¥ÂÊ 1
+    public List<SkillHandler> mouseSkillHandlers; // ì™¼ìª½ 0, ì˜¤ë¥¸ìª½ 1
+    public List<SkillUI> mouseSkillUIs; // ì™¼ìª½ 0, ì˜¤ë¥¸ìª½ 1
     new void Awake()
     {
         base.Awake();
@@ -37,10 +37,10 @@ public class SkillManager : MonoSingleton<SkillManager>
     {
         int getListType = UnityEngine.Random.Range(0, 3);
 
-        // ¼±ÅÃµÈ ¸®½ºÆ®¸¦ ÀúÀåÇÒ º¯¼ö ¼±¾ğ
+        // ì„ íƒëœ ë¦¬ìŠ¤íŠ¸ë¥¼ ì €ì¥í•  ë³€ìˆ˜ ì„ ì–¸
         List<SkillHandler> selectedList = null;
 
-        // switch ¹®À» »ç¿ëÇØ ¸®½ºÆ® ¼±ÅÃ
+        // switch ë¬¸ì„ ì‚¬ìš©í•´ ë¦¬ìŠ¤íŠ¸ ì„ íƒ
         switch (getListType)
         {
             case 0:

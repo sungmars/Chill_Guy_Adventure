@@ -7,31 +7,31 @@ using UnityEngine.SceneManagement;
 public class RangeSkillHandler : SkillHandler
 {
     [Header("Skill Sprite")]
-    public GameObject rangeObject; // ¹ß»çÃ¼
+    public GameObject rangeObject; // ë°œì‚¬ì²´
 
     [Header("Skill Stats")]
     public float damage = 1f;
-    public float speed = 10f; // ¹ß»çÃ¼ ½ºÇÇµå
-    public int rangeCount = 1; // ¹ß»çÃ¼ ¼ıÀÚ
-    public float rangeAngel = 1f; // ¹ß»çÃ¼ °¢µµ
-    public float angelSpread = 1f; // ¹ß»çÃ¼ ¿ÀÂ÷
+    public float speed = 10f; // ë°œì‚¬ì²´ ìŠ¤í”¼ë“œ
+    public int rangeCount = 1; // ë°œì‚¬ì²´ ìˆ«ì
+    public float rangeAngel = 1f; // ë°œì‚¬ì²´ ê°ë„
+    public float angelSpread = 1f; // ë°œì‚¬ì²´ ì˜¤ì°¨
 
 
     public override void AwakeningAction()
     {
-        // ÄğÅ¸ÀÓÀÌ ‰ç´ÂÁö È®ÀÎ
+        // ì¿¨íƒ€ì„ì´ ë¬ëŠ”ì§€ í™•ì¸
         if (!CheckCoolDown()) return;
 
-        // ¹ß»ç
+        // ë°œì‚¬
         CreateRangeObject();
     }
 
     public override void NormalAction()
     {
-        // ÄğÅ¸ÀÓÀÌ ‰ç´ÂÁö È®ÀÎ
+        // ì¿¨íƒ€ì„ì´ ë¬ëŠ”ì§€ í™•ì¸
         if (!CheckCoolDown()) return;
 
-        // ¹ß»ç
+        // ë°œì‚¬
         CreateRangeObject();
     }
 

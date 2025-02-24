@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class AreaSkillHandler : SkillHandler
 {
     [Header("Skill Sprite")]
-    public GameObject areaObject; // »Ï·Î·Õ ¹öÇÁ
+    public GameObject areaObject; // ë¾°ë¡œë¡± ë²„í”„
 
     [Header("Skill Stats")]
     public float damage = 1f;
@@ -15,19 +15,19 @@ public class AreaSkillHandler : SkillHandler
 
     public override void AwakeningAction()
     {
-        // ÄğÅ¸ÀÓÀÌ ‰ç´ÂÁö È®ÀÎ
+        // ì¿¨íƒ€ì„ì´ ë¬ëŠ”ì§€ í™•ì¸
         if (!CheckCoolDown()) return;
 
-        // Áö¿ª ¿ÀºêÁ§Æ® »ı¼º
+        // ì§€ì—­ ì˜¤ë¸Œì íŠ¸ ìƒì„±
         CreateArea();
     }
 
     public override void NormalAction()
     {
-        // ÄğÅ¸ÀÓÀÌ ‰ç´ÂÁö È®ÀÎ
+        // ì¿¨íƒ€ì„ì´ ë¬ëŠ”ì§€ í™•ì¸
         if (!CheckCoolDown()) return;
 
-        // Áö¿ª ¿ÀºêÁ§Æ® »ı¼º
+        // ì§€ì—­ ì˜¤ë¸Œì íŠ¸ ìƒì„±
         CreateArea();
     }
 

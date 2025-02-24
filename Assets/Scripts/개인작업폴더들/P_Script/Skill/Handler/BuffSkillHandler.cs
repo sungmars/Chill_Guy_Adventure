@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class BuffSkillHandler : SkillHandler
 {
     [Header("Skill Sprite")]
-    public GameObject buffObject; // »Ï·Î·Õ ¹öÇÁ
+    public GameObject buffObject; // ë¾°ë¡œë¡± ë²„í”„
 
     [Header("Skill Stats")]
     public float buffTime = 3f;
@@ -19,19 +19,19 @@ public class BuffSkillHandler : SkillHandler
 
     public override void AwakeningAction()
     {
-        // ÄğÅ¸ÀÓÀÌ ‰ç´ÂÁö È®ÀÎ
+        // ì¿¨íƒ€ì„ì´ ë¬ëŠ”ì§€ í™•ì¸
         if (!CheckCoolDown()) return;
 
-        // TODO : ¹öÇÁ¿Í ÇÔ²² Sprite ¿ÀºêÁ§Æ® »ı¼º
+        // TODO : ë²„í”„ì™€ í•¨ê»˜ Sprite ì˜¤ë¸Œì íŠ¸ ìƒì„±
         CreateBuff();
     }
 
     public override void NormalAction()
     {
-        // ÄğÅ¸ÀÓÀÌ ‰ç´ÂÁö È®ÀÎ
+        // ì¿¨íƒ€ì„ì´ ë¬ëŠ”ì§€ í™•ì¸
         if (!CheckCoolDown()) return;
 
-        // TODO : ¹öÇÁ¿Í ÇÔ²² Sprite ¿ÀºêÁ§Æ® »ı¼º
+        // TODO : ë²„í”„ì™€ í•¨ê»˜ Sprite ì˜¤ë¸Œì íŠ¸ ìƒì„±
         CreateBuff();
     }
     public void CreateBuff()

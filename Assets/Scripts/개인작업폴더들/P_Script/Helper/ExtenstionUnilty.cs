@@ -4,26 +4,26 @@ using UnityEngine;
 
 public static class ExtenstionUnilty
 {
-    public static bool Contain(this LayerMask layerMask, int layer) // Layer¿¡ Á¸ÀçÇÏ´ÂÁö È®ÀÎ
+    public static bool Contain(this LayerMask layerMask, int layer) // Layerì— ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸
     {
         return (layerMask & (1 << layer)) != 0;
     }
 
-    public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component // ÄÄÆ÷³ÍÆ® ÀÖÀ¸¸é Get ¾øÀ¸¸é Add ÈÄ ¹İÈ¯
+    public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component // ì»´í¬ë„ŒíŠ¸ ìˆìœ¼ë©´ Get ì—†ìœ¼ë©´ Add í›„ ë°˜í™˜
     {
         var component = gameObject.GetComponent<T>();
         if (component == null) gameObject.AddComponent<T>();
         return component;
     }
 
-    public static T GetRandomItem<T>(this IList<T> list) // ¸®½ºÆ®¿¡¼­ ·£´ıÇÑ ¾ÆÀÌÅÛ ÇÏ³ª ¾ò±â
+    public static T GetRandomItem<T>(this IList<T> list) // ë¦¬ìŠ¤íŠ¸ì—ì„œ ëœë¤í•œ ì•„ì´í…œ í•˜ë‚˜ ì–»ê¸°
     {
         return list[Random.Range(0, list.Count)];
     }
 
 
 
-    public static void Shuffle<T>(this IList<T> list) // ¸®½ºÆ® ¼¯±â
+    public static void Shuffle<T>(this IList<T> list) // ë¦¬ìŠ¤íŠ¸ ì„ê¸°
     {
         for (var i = list.Count - 1; i > 0; i--)
         {

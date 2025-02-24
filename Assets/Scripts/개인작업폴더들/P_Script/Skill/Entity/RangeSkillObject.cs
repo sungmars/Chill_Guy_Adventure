@@ -3,18 +3,18 @@ using UnityEngine;
 
 public class RangeSkillObject : MonoBehaviour
 {
-    [SerializeField] private LayerMask wallLayer; // º® Layer
-    [SerializeField] private LayerMask targetLayer; // Àû Layer
+    [SerializeField] private LayerMask wallLayer; // ë²½ Layer
+    [SerializeField] private LayerMask targetLayer; // ì  Layer
 
-    private SpriteRenderer spriteRenderer; // ½ºÇÁ¶óÀÌÆ® »ö»ó
-    private Transform pivot; // ÇÇ¹ş È¸Àü °ª
+    private SpriteRenderer spriteRenderer; // ìŠ¤í”„ë¼ì´íŠ¸ ìƒ‰ìƒ
+    private Transform pivot; // í”¼ë²— íšŒì „ ê°’
 
-    private bool isReady; // Init ½ÇÇà ÈÄ Update ½ÇÇà µÉ ¼ö ÀÖµµ·Ï ÇÔ
-    private float duration; // Åõ»çÃ¼ ÃÖ´ë »ıÁ¸ ½Ã°£
-    private float currentDuration; // ÇöÀç »ıÁ¸ ½Ã°£
-    private Rigidbody2D _rigidbody; // Åõ»çÃ¼ ¹°¸® Àû¿ë velocity
-    private Vector2 direction; // Åõ»çÃ¼°¡ ³¯¾Æ°¥ ¹æÇâ
-    private float speed; // Åõ»çÃ¼ÀÇ ½ºÇÇµå
+    private bool isReady; // Init ì‹¤í–‰ í›„ Update ì‹¤í–‰ ë  ìˆ˜ ìˆë„ë¡ í•¨
+    private float duration; // íˆ¬ì‚¬ì²´ ìµœëŒ€ ìƒì¡´ ì‹œê°„
+    private float currentDuration; // í˜„ì¬ ìƒì¡´ ì‹œê°„
+    private Rigidbody2D _rigidbody; // íˆ¬ì‚¬ì²´ ë¬¼ë¦¬ ì ìš© velocity
+    private Vector2 direction; // íˆ¬ì‚¬ì²´ê°€ ë‚ ì•„ê°ˆ ë°©í–¥
+    private float speed; // íˆ¬ì‚¬ì²´ì˜ ìŠ¤í”¼ë“œ
 
     public bool fxOnDestroy = true;
 
@@ -42,43 +42,43 @@ public class RangeSkillObject : MonoBehaviour
         _rigidbody.velocity = direction * speed;
     }
 
-    // ÃÊ±â ¹æÇâ °ª
+    // ì´ˆê¸° ë°©í–¥ ê°’
     public void Init(Vector2 direction, Color color, float duration, float speed)
     {
-        this.direction = direction; // ³¯¶ó°¥ ¹æÇâ ¼³Á¤
-        currentDuration = 0; // »ıÁ¸ ½Ã°£ 0À¸·Î ÃÊ±âÈ­
+        this.direction = direction; // ë‚ ë¼ê°ˆ ë°©í–¥ ì„¤ì •
+        currentDuration = 0; // ìƒì¡´ ì‹œê°„ 0ìœ¼ë¡œ ì´ˆê¸°í™”
 
-        transform.right = this.direction; // ¹æÇâ ¼³Á¤
+        transform.right = this.direction; // ë°©í–¥ ì„¤ì •
 
-        spriteRenderer.color = color; // ½ºÇÁ¶óÀÌÆ® »ö»ó
+        spriteRenderer.color = color; // ìŠ¤í”„ë¼ì´íŠ¸ ìƒ‰ìƒ
 
-        if (this.direction.x < 0) // ÇÇ¹ş È¸Àü °ª
+        if (this.direction.x < 0) // í”¼ë²— íšŒì „ ê°’
             pivot.localRotation = Quaternion.Euler(180, 0, 0);
         else
             pivot.localRotation = Quaternion.Euler(0, 0, 0);
 
         this.duration = duration;
         this.speed = speed;
-        isReady = true; // Update ½ÇÇà µÉ ¼ö ÀÖµµ·Ï ÇÔ
+        isReady = true; // Update ì‹¤í–‰ ë  ìˆ˜ ìˆë„ë¡ í•¨
     }
 
-    // ¾îµò°¡ÀÇ Trigger¿¡ Ãæµ¹ ½Ã
+    // ì–´ë”˜ê°€ì˜ Triggerì— ì¶©ëŒ ì‹œ
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (wallLayer.Contain(collision.gameObject.layer)) // º®°ú Ãæµ¹ ½Ã ±×³É ÆÄ±«
+        if (wallLayer.Contain(collision.gameObject.layer)) // ë²½ê³¼ ì¶©ëŒ ì‹œ ê·¸ëƒ¥ íŒŒê´´
         {
             DestroyObject(collision.ClosestPoint(transform.position) - direction * .2f, fxOnDestroy);
         }
-        else if (targetLayer.Contain(collision.gameObject.layer)) // Àû°ú Ãæµ¹ ½Ã ±â´É ÀÛµ¿ ÈÄ ÆÄ±« 
+        else if (targetLayer.Contain(collision.gameObject.layer)) // ì ê³¼ ì¶©ëŒ ì‹œ ê¸°ëŠ¥ ì‘ë™ í›„ íŒŒê´´ 
         {
-            // TODO : Àû °ø°İ
+            // TODO : ì  ê³µê²©
 
-            // Àû °ø°İ ÀÌÈÄ ¹°Ã¼ ÆÄ±«
+            // ì  ê³µê²© ì´í›„ ë¬¼ì²´ íŒŒê´´
             DestroyObject(collision.ClosestPoint(transform.position), fxOnDestroy);
         }
     }
 
-    // Destroy Àü ÆÄÆ¼Å¬ »ı¼º
+    // Destroy ì „ íŒŒí‹°í´ ìƒì„±
     private void DestroyObject(Vector3 position, bool createFx)
     {
         if (createFx)

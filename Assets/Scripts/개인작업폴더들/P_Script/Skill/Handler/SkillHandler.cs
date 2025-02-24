@@ -8,25 +8,25 @@ using UnityEngine.SceneManagement;
 public abstract class SkillHandler : MonoBehaviour
 {
     [Header("Skill Info")]
-    public string _name; // ½ºÅ³ ÀÌ¸§
-    public string normalDesc; // ±âº» ½ºÅ³ ¼³¸í
-    public string awakeningDesc; // °¢¼º ½ºÅ³ ¼³¸í
-    public Sprite icon; // ½ºÅ³ ¾ÆÀÌÄÜ
-    public bool isAwakening = false; // °¢¼º ¿©ºÎ
+    public string _name; // ìŠ¤í‚¬ ì´ë¦„
+    public string normalDesc; // ê¸°ë³¸ ìŠ¤í‚¬ ì„¤ëª…
+    public string awakeningDesc; // ê°ì„± ìŠ¤í‚¬ ì„¤ëª…
+    public Sprite icon; // ìŠ¤í‚¬ ì•„ì´ì½˜
+    public bool isAwakening = false; // ê°ì„± ì—¬ë¶€
 
     [Header("Skill CoolTime")]
     public float coolDown = 10f;
     public float currentCoolDown = 10f;
 
     [Header("Skill Duration")]
-    public float duration = 5f; // ÃÖ´ë »ıÁ¸ ½Ã°£
+    public float duration = 5f; // ìµœëŒ€ ìƒì¡´ ì‹œê°„
 
 
 
     [HideInInspector] private SkillUI skillUI;
 
-    public abstract void NormalAction(); // °¢¼º ¾÷±Û ½Ã ¼³¸í°ú È¿°ú°¡ ¹Ù²ñ
-    public abstract void AwakeningAction(); // °¢¼º ¾÷±Û ½Ã ¼³¸í°ú È¿°ú°¡ ¹Ù²ñ
+    public abstract void NormalAction(); // ê°ì„± ì—…ê¸€ ì‹œ ì„¤ëª…ê³¼ íš¨ê³¼ê°€ ë°”ë€œ
+    public abstract void AwakeningAction(); // ê°ì„± ì—…ê¸€ ì‹œ ì„¤ëª…ê³¼ íš¨ê³¼ê°€ ë°”ë€œ
 
     public void Init(SkillUI skillUI)
     {
@@ -57,7 +57,7 @@ public abstract class SkillHandler : MonoBehaviour
         {
             currentCoolDown += Time.deltaTime;
             ImageFillAmount();
-            yield return null;// + Á¶°Ç
+            yield return null;// + ì¡°ê±´
         }
     }
 
