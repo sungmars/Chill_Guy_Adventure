@@ -133,11 +133,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5951954701812978472, guid: e49f8947d8b925f4fb008adbe0542fba, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.52
+      value: -7.88
       objectReference: {fileID: 0}
     - target: {fileID: 5951954701812978472, guid: e49f8947d8b925f4fb008adbe0542fba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.01
+      value: -0.79
       objectReference: {fileID: 0}
     - target: {fileID: 5951954701812978472, guid: e49f8947d8b925f4fb008adbe0542fba, type: 3}
       propertyPath: m_LocalPosition.z
@@ -429,6 +429,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1516900887}
     - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 6979717474196772896}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: _spriteRenderer
+      value: 
+      objectReference: {fileID: 6979717474196772897}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 3897988652471672895, guid: d141f0c053f528a4c97674bf4166ad4f, type: 3}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
       propertyPath: chillAttackPrefab
       value: 
       objectReference: {fileID: 7825977485997545706, guid: cc0b176362b5bdd49bd8ab4d992a7bfe, type: 3}
@@ -441,6 +453,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+--- !u!4 &6979717474196772896 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1211263461736737064, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+  m_PrefabInstance: {fileID: 6979717474196772895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &6979717474196772897 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1381615706124408628, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+  m_PrefabInstance: {fileID: 6979717474196772895}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

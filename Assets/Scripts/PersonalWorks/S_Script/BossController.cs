@@ -9,6 +9,7 @@ public class BossController : MonoBehaviour
     [SerializeField] Transform player;
     [SerializeField] public WeaponHandler WeaponPrefab;
     [SerializeField] private Transform weaponPivot;
+    public GameObject projectilePrefab;
     [SerializeField] private GameObject chillAttackPrefab;
     [SerializeField] private GameObject chillAttackBottomPrefab;
     protected WeaponHandler weaponHandler;
@@ -32,8 +33,8 @@ public class BossController : MonoBehaviour
     }
 
     private void Start()
-    {
-        RandomSkill();
+    {        
+        InvokeRepeating("SkillRepeat", 2f, 5f);
     }
 
     private void Update()
@@ -53,25 +54,23 @@ public class BossController : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void SkillRepeat()
     {
-        //if (!onSkill)
-        //RandomSkill();
+        animator.SetTrigger(isAttack);
+        Invoke("RandomSkill", 1.5f);
     }
 
 
     protected void RandomSkill()
     {
-        //int idxSkill = Random.Range(0, 5);
-        int idxSkill = 2;
-
+        int idxSkill = Random.Range(0, 5);
         switch (idxSkill)
         {
             case 0:
                 StartCoroutine(RushAttack());
                 break;
             case 1:
-                StartCoroutine(SoundWaveAttack());
+                SoundWaveAttack();
                 break;
             case 2:
                 ChillAttack();
@@ -110,11 +109,19 @@ public class BossController : MonoBehaviour
         yield return new WaitForSeconds(3f);
     }
 
-    protected IEnumerator SoundWaveAttack()
+    private void SoundWaveAttack()
     {
-        onSkill = true;
-        onSkill = false;
-        yield return new WaitForSeconds(3f);
+        GameObject projectile = Instantiate(projectilePrefab, weaponPivot.position, weaponPivot.rotation);
+        // 플레이어 방향 계산
+        Vector2 direction = (player.position - weaponPivot.position).normalized;
+        // 발사체의 회전을 플레이어 방향에 맞게 조정
+        projectile.transform.up = direction;
+        // 속도 부여
+        Rigidbody2D arrowRb = projectile.GetComponent<Rigidbody2D>();
+        if (arrowRb != null)
+        {
+            arrowRb.velocity = direction * 3f;
+        }
     }
 
     protected void ChillAttack()
@@ -139,6 +146,5 @@ public class BossController : MonoBehaviour
                 chillAttackBottom.transform.position = new Vector3(x, y - 0.5f, 0f);
             }
         }
-        animator.SetTrigger(isAttack);
     }
 }

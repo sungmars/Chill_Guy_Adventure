@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2778082403335666391}
   - component: {fileID: 2846159665464376845}
+  - component: {fileID: 5927345122670252889}
   m_Layer: 0
   m_Name: WeaponRenderer
   m_TagString: Untagged
@@ -84,6 +85,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5927345122670252889
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718084113740037027}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5f7c048bd102e3d439d9beb5e4b5b19a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3897988652471672895
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +117,7 @@ GameObject:
   - component: {fileID: 7442564654382493568}
   - component: {fileID: 2248820744531305292}
   - component: {fileID: 4962389296311329137}
-  - component: {fileID: -1285789506141388020}
+  - component: {fileID: 1038083570477797835}
   m_Layer: 0
   m_Name: SoundWave
   m_TagString: Untagged
@@ -191,7 +213,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.2}
   m_EdgeRadius: 0
---- !u!114 &-1285789506141388020
+--- !u!114 &1038083570477797835
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,13 +222,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3897988652471672895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 999c8f90f850f6643ba0267bd5136c1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 92e24c9e0f69e1a4bb5d469531c6a68e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelCollisionLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  fxOnDestroy: 1
+  damage: 10
+  lifetime: 5
+  knockbackPower: 5
+  knockbackDuration: 0.2
 --- !u!1 &6846350513511488555
 GameObject:
   m_ObjectHideFlags: 0
