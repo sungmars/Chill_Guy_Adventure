@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BossController : MonoBehaviour
 {
@@ -12,7 +13,11 @@ public class BossController : MonoBehaviour
     public GameObject projectilePrefab;
     [SerializeField] private GameObject chillAttackPrefab;
     [SerializeField] private GameObject chillAttackBottomPrefab;
+    [SerializeField] private GameObject chillDogPrefab;
+    [SerializeField] private GameObject keyBoardAttackPrefab;
     protected WeaponHandler weaponHandler;
+
+    Coroutine coroutine;
 
     Animator animator;
     private static readonly int isAttack = Animator.StringToHash("IsAttack");
@@ -33,7 +38,7 @@ public class BossController : MonoBehaviour
     }
 
     private void Start()
-    {        
+    {
         InvokeRepeating("SkillRepeat", 2f, 5f);
     }
 
@@ -63,7 +68,7 @@ public class BossController : MonoBehaviour
 
     private void RandomSkill()
     {
-        int idxSkill = Random.Range(0, 3);
+        int idxSkill = Random.Range(0, 5);
         switch (idxSkill)
         {
             case 0:
@@ -76,10 +81,10 @@ public class BossController : MonoBehaviour
                 ChillAttack();
                 break;
             case 3:
+                CreateChillDog();
                 break;
             case 4:
-                break;
-            default:
+                coroutine = StartCoroutine(KeyBoardInputAttack());
                 break;
         }
     }
@@ -112,6 +117,8 @@ public class BossController : MonoBehaviour
     private void SoundWaveAttack()
     {
         GameObject projectile = Instantiate(projectilePrefab, weaponPivot.position, weaponPivot.rotation);
+        projectile.transform.SetParent(transform);
+        projectile.name = "SoundWave";
         // 플레이어 방향 계산
         Vector2 direction = (player.position - weaponPivot.position).normalized;
         // 발사체의 회전을 플레이어 방향에 맞게 조정
@@ -122,29 +129,97 @@ public class BossController : MonoBehaviour
         {
             arrowRb.velocity = direction * 3f;
         }
+        coroutine = StartCoroutine(SoundWaveSetSize(projectile));
+    }
+
+    private IEnumerator SoundWaveSetSize(GameObject projectile)
+    {
+        BoxCollider2D boxCollider2D = projectile.GetComponent<BoxCollider2D>();
+        float x = 5;
+        Vector2 objSize = projectile.transform.localScale;
+        Vector2 boxSize = boxCollider2D.size;
+        while (projectile.transform.localScale.x < x)
+        {
+            objSize += objSize * Time.deltaTime;
+            projectile.transform.localScale = new Vector2(objSize.x, objSize.y);
+
+            Vector2 ratio = projectile.transform.localScale / objSize;
+            boxCollider2D.size = boxSize * ratio;
+            yield return null;
+        }
+        yield return null;
+    }
+
+    public void StopSoundWaveCoroutine()
+    {
+        StopCoroutine(coroutine);
     }
 
     private void ChillAttack()
     {
+        GameObject chillAttackParent;
         GameObject chillAttack;
         GameObject chillAttackBottom;
+
         for (int i = 0; i < 10; i++)
         {
-            chillAttack = Instantiate(chillAttackPrefab);
-            chillAttackBottom = Instantiate(chillAttackBottomPrefab);
-            chillAttack.name += $" {i}";
+            chillAttackParent = new GameObject();
+            chillAttack = Instantiate(chillAttackPrefab, chillAttackParent.transform);
+            chillAttackBottom = Instantiate(chillAttackBottomPrefab, chillAttackParent.transform);
+            chillAttackParent.AddComponent<ChillAttackController>();
+            chillAttackParent.name = $"ChillAttackParent {i}";
+            chillAttack.name = $"ChillAttack {i}";
+            chillAttackBottom.name = $"ChillAttackBottom {i}";
             if (i == 0)
             {
-                chillAttack.transform.position = player.transform.position;
-                chillAttackBottom.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 0.5f, 0f);
+                chillAttack.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 3f, 0f);
+                chillAttackBottom.transform.position = new Vector3(player.transform.position.x + 0.06f, player.transform.position.y - 0.6f, 0f);
             }
             else
             {
                 float x = Random.Range(-8f, 9f);
                 float y = Random.Range(-4f, 5f);
-                chillAttack.transform.position = new Vector3(x, y, 0f);
-                chillAttackBottom.transform.position = new Vector3(x, y - 0.5f, 0f);
+                chillAttack.transform.position = new Vector3(x, y + 3f, 0f);
+                chillAttackBottom.transform.position = new Vector3(x + 0.06f, y - 0.6f, 0f);
             }
         }
+    }
+
+    private void CreateChillDog()
+    {
+        GameObject chillDog;
+        for (int i = 0; i < 5; i++)
+        {
+            float x = Random.Range(-8f, 9f);
+            float y = Random.Range(-4f, 5f);
+            chillDog = Instantiate(chillDogPrefab, transform);
+            chillDog.name = $"ChillDog {i}";
+            chillDog.transform.position = new Vector2(x, y);
+        }
+    }
+
+    private IEnumerator KeyBoardInputAttack()
+    {
+        player.GetComponent<PlayerInput>().enabled = false;
+        CancelInvoke("SkillRepeat");
+        float time = 0;
+        GameObject keyBoardAttackObj = Instantiate(keyBoardAttackPrefab, transform);
+        PlayerController playerController = player.GetComponent<PlayerController>();  
+        while (time < 10f)
+        {
+            time += Time.deltaTime;
+            yield return new WaitForSeconds(0);
+        }
+        Destroy(keyBoardAttackObj);
+        InvokeRepeating("SkillRepeat", 3f, 5f);
+        player.GetComponent<PlayerInput>().enabled = true;
+        yield return new WaitForSeconds(2);
+    }
+
+    public void StopKeyBoardInputAttack()
+    {
+        StopCoroutine(coroutine);
+        InvokeRepeating("SkillRepeat", 3f, 5f);
+        player.GetComponent<PlayerInput>().enabled = true;
     }
 }
