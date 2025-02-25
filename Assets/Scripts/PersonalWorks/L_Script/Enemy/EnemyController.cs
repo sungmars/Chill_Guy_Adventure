@@ -78,8 +78,13 @@ public abstract class EnemyController : BaseController
         base.TakeDamage(damage);
         bool isRun = animator.GetBool("IsRun");
         animator.SetBool("IsRun", false);
-        if (!isRun)
-            animator.SetTrigger("KnockbackTrigger");
+        animator.SetBool("IsKnockback",true);
+        StartCoroutine(ResetKnockbackCoroutine());
+    }
+    private IEnumerator ResetKnockbackCoroutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        animator.SetBool("IsKnockback", false);
     }
     public override void Die()
     {
