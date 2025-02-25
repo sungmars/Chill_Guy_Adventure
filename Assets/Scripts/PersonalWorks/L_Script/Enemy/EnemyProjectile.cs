@@ -23,7 +23,7 @@ public class EnemyProjectile : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        else if (!collision.CompareTag("Enemy"))
+        else if (collision.CompareTag("Wall"))
         {
             Destroy(gameObject);
         }

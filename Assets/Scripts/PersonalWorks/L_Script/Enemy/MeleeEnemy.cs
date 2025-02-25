@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MeleeEnemy : EnemyController
 {
-    [SerializeField] private float knockbackPower = 5.0f;
+    [SerializeField] protected float knockbackPower = 5.0f;
 
     
 
