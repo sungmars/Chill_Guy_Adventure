@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BossController : MonoBehaviour
 {
@@ -12,7 +13,11 @@ public class BossController : MonoBehaviour
     public GameObject projectilePrefab;
     [SerializeField] private GameObject chillAttackPrefab;
     [SerializeField] private GameObject chillAttackBottomPrefab;
+    [SerializeField] private GameObject chillDogPrefab;
+    [SerializeField] private GameObject keyBoardAttackPrefab;
     protected WeaponHandler weaponHandler;
+
+    Coroutine coroutine;
 
     Animator animator;
     private static readonly int isAttack = Animator.StringToHash("IsAttack");
@@ -64,7 +69,7 @@ public class BossController : MonoBehaviour
     private void RandomSkill()
     {
         int idxSkill = Random.Range(0, 5);
-        switch (1)
+        switch (idxSkill)
         {
             case 0:
                 StartCoroutine(RushAttack());
@@ -76,10 +81,10 @@ public class BossController : MonoBehaviour
                 ChillAttack();
                 break;
             case 3:
+                CreateChillDog();
                 break;
             case 4:
-                break;
-            default:
+                coroutine = StartCoroutine(KeyBoardInputAttack());
                 break;
         }
     }
@@ -112,6 +117,8 @@ public class BossController : MonoBehaviour
     private void SoundWaveAttack()
     {
         GameObject projectile = Instantiate(projectilePrefab, weaponPivot.position, weaponPivot.rotation);
+        projectile.transform.SetParent(transform);
+        projectile.name = "SoundWave";
         // 플레이어 방향 계산
         Vector2 direction = (player.position - weaponPivot.position).normalized;
         // 발사체의 회전을 플레이어 방향에 맞게 조정
@@ -122,13 +129,13 @@ public class BossController : MonoBehaviour
         {
             arrowRb.velocity = direction * 3f;
         }
-        StartCoroutine(SoundWaveSetSize(projectile));
+        coroutine = StartCoroutine(SoundWaveSetSize(projectile));
     }
 
-    IEnumerator SoundWaveSetSize(GameObject projectile)
+    private IEnumerator SoundWaveSetSize(GameObject projectile)
     {
         BoxCollider2D boxCollider2D = projectile.GetComponent<BoxCollider2D>();
-        float x = 10;
+        float x = 5;
         Vector2 objSize = projectile.transform.localScale;
         Vector2 boxSize = boxCollider2D.size;
         while (projectile.transform.localScale.x < x)
@@ -141,6 +148,11 @@ public class BossController : MonoBehaviour
             yield return null;
         }
         yield return null;
+    }
+
+    public void StopSoundWaveCoroutine()
+    {
+        StopCoroutine(coroutine);
     }
 
     private void ChillAttack()
@@ -171,5 +183,43 @@ public class BossController : MonoBehaviour
                 chillAttackBottom.transform.position = new Vector3(x + 0.06f, y - 0.6f, 0f);
             }
         }
+    }
+
+    private void CreateChillDog()
+    {
+        GameObject chillDog;
+        for (int i = 0; i < 5; i++)
+        {
+            float x = Random.Range(-8f, 9f);
+            float y = Random.Range(-4f, 5f);
+            chillDog = Instantiate(chillDogPrefab, transform);
+            chillDog.name = $"ChillDog {i}";
+            chillDog.transform.position = new Vector2(x, y);
+        }
+    }
+
+    private IEnumerator KeyBoardInputAttack()
+    {
+        player.GetComponent<PlayerInput>().enabled = false;
+        CancelInvoke("SkillRepeat");
+        float time = 0;
+        GameObject keyBoardAttackObj = Instantiate(keyBoardAttackPrefab, transform);
+        PlayerController playerController = player.GetComponent<PlayerController>();  
+        while (time < 10f)
+        {
+            time += Time.deltaTime;
+            yield return new WaitForSeconds(0);
+        }
+        Destroy(keyBoardAttackObj);
+        InvokeRepeating("SkillRepeat", 3f, 5f);
+        player.GetComponent<PlayerInput>().enabled = true;
+        yield return new WaitForSeconds(2);
+    }
+
+    public void StopKeyBoardInputAttack()
+    {
+        StopCoroutine(coroutine);
+        InvokeRepeating("SkillRepeat", 3f, 5f);
+        player.GetComponent<PlayerInput>().enabled = true;
     }
 }

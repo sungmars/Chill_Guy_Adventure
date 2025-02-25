@@ -179,12 +179,13 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9077011534549180203, guid: e49f8947d8b925f4fb008adbe0542fba, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5951954701812978472, guid: e49f8947d8b925f4fb008adbe0542fba, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 588357344}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e49f8947d8b925f4fb008adbe0542fba, type: 3}
 --- !u!1 &268327013
@@ -323,83 +324,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &588357343
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 588357344}
-  - component: {fileID: 588357345}
-  m_Layer: 6
-  m_Name: FootCollier
-  m_TagString: PlayerFoot
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &588357344
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588357343}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1516900887}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &588357345
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588357343}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.4182292}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5593958, y: 0.16354162}
-  m_EdgeRadius: 0
 --- !u!4 &1516900887 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5951954701812978472, guid: e49f8947d8b925f4fb008adbe0542fba, type: 3}
@@ -509,9 +433,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1516900887}
     - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: d6e6641255243554aa7609cf1669aa0c, type: 3}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
       propertyPath: firePoint
       value: 
       objectReference: {fileID: 6979717474196772896}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Id
+      value: b8930f98-9cea-49fd-9587-02db11a11b1a
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Name
+      value: Actions
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: chillDogPrefab
+      value: 
+      objectReference: {fileID: 3433430853607481300, guid: 24781d0f4208d854f956e9a55535b6c8, type: 3}
     - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
       propertyPath: _spriteRenderer
       value: 
@@ -525,9 +465,49 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7825977485997545706, guid: cc0b176362b5bdd49bd8ab4d992a7bfe, type: 3}
     - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: keyBoardAttackPrefab
+      value: 
+      objectReference: {fileID: 461149419535327058, guid: 9c971d595d1ae0b4c922f2d87f1a859a, type: 3}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: keyBoardAttackActions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: d6e6641255243554aa7609cf1669aa0c, type: 3}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
       propertyPath: chillAttackBottomPrefab
       value: 
       objectReference: {fileID: 5087188300551233965, guid: dcc8d5d6260341542b1f0e7098caff60, type: 3}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Actions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Bindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Actions.Array.data[0].m_Id
+      value: ca6c21f0-eebd-4b84-bb14-adeeb3f3a6c4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Bindings.Array.data[0].m_Id
+      value: a2f79ce7-667e-4bd2-acde-b874a4b5f015
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Actions.Array.data[0].m_Name
+      value: New action
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Actions.Array.data[0].m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Bindings.Array.data[0].m_Action
+      value: New action
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Actions.Array.data[0].m_ExpectedControlType
+      value: Button
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
