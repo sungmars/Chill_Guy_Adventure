@@ -21,7 +21,6 @@ public class IntroBossController : MonoBehaviour
         while ((int)transform.position.y != 0)
         {
             y = transform.position.y - speed;
-            Debug.Log(y);
             transform.position = new Vector3(x, y, z);
             speed += 0.005f;
             yield return new WaitForSeconds(0f);

@@ -61,7 +61,6 @@ public class PlayerController : BaseController
     {
         movementDirection = inputValue.Get<Vector2>();
         movementDirection = movementDirection.normalized;
-        Debug.Log("Move");
     }
 
     void OnLook(InputValue inputValue)
