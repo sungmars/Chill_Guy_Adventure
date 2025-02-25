@@ -56,7 +56,7 @@ public class RangeSkillHandler : SkillHandler
             Vector2 worldPos = Camera.main.ScreenToWorldPoint(mousePosition);
             var direction = RotateVector2(worldPos - (Vector2)SkillManager.Instance.player.position, angle);
             direction = direction.normalized;
-            rangeSkillobject.Init(direction, Color.white, duration, speed);
+            rangeSkillobject.Init(SkillManager.Instance.player.gameObject.GetComponent<BaseController>(), direction, Color.white, duration, speed, knockbackPower, knockbackDuration);
         }
     }
 

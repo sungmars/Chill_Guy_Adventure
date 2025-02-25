@@ -11,6 +11,7 @@ public class AreaSkillHandler : SkillHandler
 
     [Header("Skill Stats")]
     public float damage = 1f;
+    public float damageInterval = 1f;
 
 
     public override void AwakeningAction()
@@ -36,6 +37,6 @@ public class AreaSkillHandler : SkillHandler
         GameObject go = Instantiate(areaObject, SkillManager.Instance.player);
         AreaSkillObject areaSkillobject = go.GetComponent<AreaSkillObject>();
 
-        areaSkillobject.Init(Color.white, duration);
+        areaSkillobject.Init(SkillManager.Instance.player.gameObject.GetComponent<BaseController>(), Color.white, duration, damageInterval, knockbackPower, knockbackDuration);
     }
 }

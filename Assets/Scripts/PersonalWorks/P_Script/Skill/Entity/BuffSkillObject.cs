@@ -7,10 +7,15 @@ public class BuffSkillObject : MonoBehaviour
     // [SerializeField] private LayerMask targetLayer; // 적 Layer
 
     private SpriteRenderer spriteRenderer; // 스프라이트 색상
+    private BaseController ownerBase;
 
     private bool isReady; // Init 실행 후 Update 실행 될 수 있도록 함
     private float duration; // 최대 생존 시간
     private float currentDuration; // 현재 생존 시간
+
+
+    private float knockbackPower; // 넉백 파워
+    private float knockbackDuration; // 넉백 시간
 
 
     private void Awake()
@@ -36,12 +41,15 @@ public class BuffSkillObject : MonoBehaviour
     }
 
     // 초기 방향 값
-    public void Init(Color color, float duration)
+    public void Init(BaseController ownerBase, Color color, float duration, float knockbackPower, float knockbackDuration)
     {
+        this.ownerBase = ownerBase;
         currentDuration = 0; // 생존 시간 0으로 초기화
         spriteRenderer.color = color; // 스프라이트 색상
 
         this.duration = duration;
+        this.knockbackPower = knockbackPower;
+        this.knockbackDuration = knockbackDuration;
         isReady = true; // Update 실행 될 수 있도록 함
         // TODO : 버프적용
     }

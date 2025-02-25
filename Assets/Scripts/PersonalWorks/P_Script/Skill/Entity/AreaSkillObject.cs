@@ -7,6 +7,7 @@ public class AreaSkillObject : MonoBehaviour
 {
     // [SerializeField] private LayerMask wallLayer; // 벽 Layer
     [SerializeField] private LayerMask targetLayer; // 적 Layer
+    private BaseController ownerBase;
 
     private SpriteRenderer spriteRenderer; // 스프라이트 색상
 
@@ -15,7 +16,10 @@ public class AreaSkillObject : MonoBehaviour
     private float currentDuration; // 현재 생존 시간
     private float damageInterval; // 데미지 입히는 간격 (0.5초?)
 
-    private Dictionary<Collider, Coroutine> activeCoroutines = new Dictionary<Collider, Coroutine>(); // 장판안에 들어 온 몬스터 목록들
+    private float knockbackPower; // 넉백 파워
+    private float knockbackDuration; // 넉백 시간
+
+    private Dictionary<Collider2D, Coroutine> activeCoroutines = new Dictionary<Collider2D, Coroutine>(); // 장판안에 들어 온 몬스터 목록들
 
 
     private void Awake()
@@ -42,20 +46,25 @@ public class AreaSkillObject : MonoBehaviour
     }
 
     // 초기 방향 값
-    public void Init(Color color, float duration)
+    public void Init(BaseController ownerBase, Color color, float duration, float damageInterval, float knockbackPower, float knockbackDuration)
     {
+        this.ownerBase = ownerBase;
         currentDuration = 0; // 생존 시간 0으로 초기화
         spriteRenderer.color = color; // 스프라이트 색상
 
         this.duration = duration;
+        this.damageInterval = damageInterval;
+
+        this.knockbackPower = knockbackPower;
+        this.knockbackDuration = knockbackDuration;
+
         isReady = true; // Update 실행 될 수 있도록 함
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (targetLayer.Contain(collision.gameObject.layer)) // 적과 충돌 시 기능 작동 후 파괴 
+        if (targetLayer.Contain(collision.gameObject.layer)) // 지역에 들어옴 (Coroutine을 통해 damageInterval간격마다 데미지를 입힘)
         {
-
             if (!activeCoroutines.ContainsKey(collision))
             {
                 Coroutine damageCoroutine = StartCoroutine(ApplyDamage(collision));
@@ -64,11 +73,10 @@ public class AreaSkillObject : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (targetLayer.Contain(collision.gameObject.layer)) // 적과 충돌 시 기능 작동 후 파괴 
+        if (targetLayer.Contain(collision.gameObject.layer)) // 지역에서 나감
         {
-
             if (activeCoroutines.TryGetValue(collision, out Coroutine coroutine))
             {
                 StopCoroutine(coroutine);
@@ -77,12 +85,17 @@ public class AreaSkillObject : MonoBehaviour
         }
     }
 
-    private IEnumerator ApplyDamage(Collider target)
+    private IEnumerator ApplyDamage(Collider2D collision)
     {
         while (true)
         {
             // TODO : 적 공격
-            Debug.Log($"Todo: {damageInterval}초 마다 적 공격!");
+            BaseController enemy = collision.GetComponent<BaseController>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage((int)ownerBase.attack);
+                enemy.ApplyKnockback(transform, knockbackPower, knockbackDuration);
+            }
             yield return new WaitForSeconds(damageInterval);
         }
     }

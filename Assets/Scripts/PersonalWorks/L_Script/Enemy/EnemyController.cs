@@ -74,10 +74,17 @@ public abstract class EnemyController : BaseController
     }
     public override void TakeDamage(int damage)
     {
-        Debug.Log("아파요 주인님 ㅠㅠ");
+        Debug.Log("플레이어에게 공격당함");
         base.TakeDamage(damage);
-        animator.SetTrigger("KnockbackTrigger");
+        bool isRun = animator.GetBool("IsRun");
         animator.SetBool("IsRun", false);
+        animator.SetBool("IsKnockback",true);
+        StartCoroutine(ResetKnockbackCoroutine());
+    }
+    private IEnumerator ResetKnockbackCoroutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        animator.SetBool("IsKnockback", false);
     }
     public override void Die()
     {
