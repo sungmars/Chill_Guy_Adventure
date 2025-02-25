@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4798200853982415864}
+  - component: {fileID: 1896954737428725544}
   - component: {fileID: 3711937015487857}
   - component: {fileID: 6399516651971653719}
   m_Layer: 0
@@ -34,6 +35,22 @@ Transform:
   - {fileID: 1570039790964494111}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1896954737428725544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433473818575191088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92e24c9e0f69e1a4bb5d469531c6a68e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  lifetime: 5
+  knockbackPower: 5
+  knockbackDuration: 0.2
 --- !u!50 &3711937015487857
 Rigidbody2D:
   serializedVersion: 4
