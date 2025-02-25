@@ -21,6 +21,10 @@ public abstract class SkillHandler : MonoBehaviour
     [Header("Skill Duration")]
     public float duration = 5f; // 최대 생존 시간
 
+    [Header("Skill Knockback")]
+    public float knockbackPower = 0.1f; // 넉백 파워
+    public float knockbackDuration = 0.5f; // 넉백 시간
+
 
 
     [HideInInspector] private SkillUI skillUI;
