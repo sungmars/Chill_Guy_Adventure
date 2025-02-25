@@ -24,7 +24,14 @@ public class MeleeWeaponHandler : WeaponHandler
                 RaycastHit2D hit = Physics2D.BoxCast(transform.position + (Vector3)Controller.LookDirection * collideBoxSize.x,
             collideBoxSize, 0, playerController.PlayerToEnemyVectors[j], 0, target);
             }
-        }
-        
+        }        
+    }
+
+    public override void Rotate(bool isLeft)
+    {
+        if (isLeft)
+            transform.eulerAngles = new Vector3(0, 180, 0);
+        else
+            transform.eulerAngles = new Vector3(0, 0, 0);
     }
 }
