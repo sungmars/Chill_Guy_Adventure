@@ -61,9 +61,9 @@ public class BossController : MonoBehaviour
     }
 
 
-    protected void RandomSkill()
+    private void RandomSkill()
     {
-        int idxSkill = Random.Range(0, 5);
+        int idxSkill = Random.Range(0, 3);
         switch (idxSkill)
         {
             case 0:
@@ -84,7 +84,7 @@ public class BossController : MonoBehaviour
         }
     }
 
-    protected IEnumerator RushAttack()
+    private IEnumerator RushAttack()
     {
         onSkill = true;
         Vector2 targetPos = new Vector2(player.transform.position.x, player.transform.position.y);
@@ -124,7 +124,7 @@ public class BossController : MonoBehaviour
         }
     }
 
-    protected void ChillAttack()
+    private void ChillAttack()
     {
         GameObject chillAttack;
         GameObject chillAttackBottom;
