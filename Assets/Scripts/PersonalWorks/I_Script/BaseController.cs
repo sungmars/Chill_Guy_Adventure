@@ -7,7 +7,7 @@ public class BaseController : MonoBehaviour
     // 컴포넌트 참조들
     protected Rigidbody2D _rigidbody2D;
     protected AnimationHandler _animationHandler;
-    protected WeaponHandler weaponHandler;
+    protected WeaponHandler weaponHandler;    
 
     // 이동 및 바라보는 방향
     protected Vector2 movementDirection = Vector2.zero;

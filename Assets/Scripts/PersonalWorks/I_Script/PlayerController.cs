@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,20 +11,30 @@ public class PlayerController : BaseController
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Transform weaponPivot;
     [SerializeField] public WeaponHandler WeaponPrefab;
+
     private float timeSinceLastAttack = float.MaxValue;
     private float maxExp;
 
-    private float longAttackRange = 3f;
-    public float LongAttackRange { get { return longAttackRange; } }
+    [SerializeField] public List<GameObject> spawnedEnemies;
 
-    public List<GameObject> spawnedEnemies;
-        
-    private List<Vector2> playerToEnemyVectors;
+    [SerializeField] private List<Vector2> playerToEnemyVectors;
     public List<Vector2> PlayerToEnemyVectors { get { return playerToEnemyVectors; } }
 
-    private List<bool> isInLongRange;
+    [SerializeField] private List<bool> isInLongRange;
     public List<bool> IsInLongRange { get { return isInLongRange; } }
-    
+
+    [SerializeField] private List<bool> isInClosedRange;
+    public List<bool> IsInClosedRange { get { return isInLongRange; } }
+
+    [SerializeField] private List<bool> isAttackingEnemyIndex;
+    public List<bool> IsAttackingEnemyIndex { get { return isAttackingEnemyIndex; } }
+
+    [SerializeField] private float longAttackRange = 5f;
+    public float LongAttackRange { get { return longAttackRange; } }
+
+    [SerializeField] private float meleeAttackRange = 1f;
+    public float MeleeAttackRange { get { return longAttackRange; } }
+
     protected virtual void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -32,13 +43,13 @@ public class PlayerController : BaseController
         if (WeaponPrefab != null)
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
         else
-            weaponHandler = GetComponentInChildren<WeaponHandler>();
+            weaponHandler = GetComponentInChildren<WeaponHandler>();                
     }
 
     protected override void Start()
     {
         base.Start();
-        m_Camera = Camera.main;        
+        m_Camera = Camera.main;
     }
 
     protected void Update()
@@ -60,13 +71,18 @@ public class PlayerController : BaseController
 
         playerToEnemyVectors = new List<Vector2>();
         isInLongRange = new List<bool>();
+        isInClosedRange = new List<bool>();
         for (int i = 0; i < spawnedEnemies.Count; i++)
         {
-            playerToEnemyVectors.Add(spawnedEnemies[i].transform.position - _rigidbody2D.transform.position);
-            isInLongRange.Add(Mathf.Abs(playerToEnemyVectors[i].magnitude) <= longAttackRange);
+            playerToEnemyVectors.Insert(i, spawnedEnemies[i].transform.position - _rigidbody2D.transform.position);
+
+            if (Mathf.Abs(playerToEnemyVectors[i].magnitude) <= longAttackRange) isInLongRange.Insert(i, true);
+            else if (Mathf.Abs(playerToEnemyVectors[i].magnitude) > longAttackRange) isInLongRange.Insert(i, false);           
         }
 
         OnFire();
+
+        Debug.Log(isAttacking.ToString());
     }
 
     private void HandleAttackDelay()
@@ -113,12 +129,29 @@ public class PlayerController : BaseController
 
     void OnFire()
     {
+        isAttackingEnemyIndex = new List<bool>();
         for (int i = 0; i < spawnedEnemies.Count; i++)
         {
-            if (isInLongRange[i]) isAttacking = true;            
+            if (isInLongRange[i] == true) isAttackingEnemyIndex.Insert(i, true);
+            else if (isInLongRange[i] == false) isAttackingEnemyIndex.Insert(i, false);
         }
 
-        bool isAllFalse = isInLongRange.All(item => false);
+        for (int j = 0; j < spawnedEnemies.Count; j++)
+        {
+            if (isAttackingEnemyIndex[j] == true) isAttacking = true;
+        }        
+                
+        if (isAttackingEnemyIndex.All(temp => temp.Equals(false))) isAttacking = false;
+    }
+
+    void OnMeleeAttack()
+    {
+        for (int i = 0; i < spawnedEnemies.Count; i++)
+        {
+            if (isInClosedRange[i] == true) isAttacking = true;
+        }
+
+        bool isAllFalse = isInClosedRange.All(item => item = false);
         if (isAllFalse) isAttacking = false;
     }
 
