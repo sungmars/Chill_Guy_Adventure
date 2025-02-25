@@ -33,7 +33,7 @@ public class BossController : MonoBehaviour
     }
 
     private void Start()
-    {        
+    {
         InvokeRepeating("SkillRepeat", 2f, 5f);
     }
 
@@ -63,8 +63,8 @@ public class BossController : MonoBehaviour
 
     private void RandomSkill()
     {
-        int idxSkill = Random.Range(0, 3);
-        switch (idxSkill)
+        int idxSkill = Random.Range(0, 5);
+        switch (1)
         {
             case 0:
                 StartCoroutine(RushAttack());
@@ -122,28 +122,53 @@ public class BossController : MonoBehaviour
         {
             arrowRb.velocity = direction * 3f;
         }
+        StartCoroutine(SoundWaveSetSize(projectile));
+    }
+
+    IEnumerator SoundWaveSetSize(GameObject projectile)
+    {
+        BoxCollider2D boxCollider2D = projectile.GetComponent<BoxCollider2D>();
+        float x = 10;
+        Vector2 objSize = projectile.transform.localScale;
+        Vector2 boxSize = boxCollider2D.size;
+        while (projectile.transform.localScale.x < x)
+        {
+            objSize += objSize * Time.deltaTime;
+            projectile.transform.localScale = new Vector2(objSize.x, objSize.y);
+
+            Vector2 ratio = projectile.transform.localScale / objSize;
+            boxCollider2D.size = boxSize * ratio;
+            yield return null;
+        }
+        yield return null;
     }
 
     private void ChillAttack()
     {
+        GameObject chillAttackParent;
         GameObject chillAttack;
         GameObject chillAttackBottom;
+
         for (int i = 0; i < 10; i++)
         {
-            chillAttack = Instantiate(chillAttackPrefab);
-            chillAttackBottom = Instantiate(chillAttackBottomPrefab);
-            chillAttack.name += $" {i}";
+            chillAttackParent = new GameObject();
+            chillAttack = Instantiate(chillAttackPrefab, chillAttackParent.transform);
+            chillAttackBottom = Instantiate(chillAttackBottomPrefab, chillAttackParent.transform);
+            chillAttackParent.AddComponent<ChillAttackController>();
+            chillAttackParent.name = $"ChillAttackParent {i}";
+            chillAttack.name = $"ChillAttack {i}";
+            chillAttackBottom.name = $"ChillAttackBottom {i}";
             if (i == 0)
             {
-                chillAttack.transform.position = player.transform.position;
-                chillAttackBottom.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 0.5f, 0f);
+                chillAttack.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 3f, 0f);
+                chillAttackBottom.transform.position = new Vector3(player.transform.position.x + 0.06f, player.transform.position.y - 0.6f, 0f);
             }
             else
             {
                 float x = Random.Range(-8f, 9f);
                 float y = Random.Range(-4f, 5f);
-                chillAttack.transform.position = new Vector3(x, y, 0f);
-                chillAttackBottom.transform.position = new Vector3(x, y - 0.5f, 0f);
+                chillAttack.transform.position = new Vector3(x, y + 3f, 0f);
+                chillAttackBottom.transform.position = new Vector3(x + 0.06f, y - 0.6f, 0f);
             }
         }
     }
