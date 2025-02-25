@@ -39,6 +39,6 @@ public class BuffSkillHandler : SkillHandler
         GameObject go = Instantiate(buffObject, SkillManager.Instance.player.transform);
         BuffSkillObject buffSkillobject = go.GetComponent<BuffSkillObject>();
 
-        buffSkillobject.Init(Color.blue, duration);
+        buffSkillobject.Init(SkillManager.Instance.player.gameObject.GetComponent<BaseController>(), Color.blue, duration, knockbackPower, knockbackDuration);
     }
 }

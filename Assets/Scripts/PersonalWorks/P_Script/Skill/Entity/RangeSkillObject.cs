@@ -5,6 +5,7 @@ public class RangeSkillObject : MonoBehaviour
 {
     [SerializeField] private LayerMask wallLayer; // 벽 Layer
     [SerializeField] private LayerMask targetLayer; // 적 Layer
+    private BaseController ownerBase;
 
     private SpriteRenderer spriteRenderer; // 스프라이트 색상
     private Transform pivot; // 피벗 회전 값
@@ -15,6 +16,11 @@ public class RangeSkillObject : MonoBehaviour
     private Rigidbody2D _rigidbody; // 투사체 물리 적용 velocity
     private Vector2 direction; // 투사체가 날아갈 방향
     private float speed; // 투사체의 스피드
+
+
+    private float knockbackPower; // 넉백 파워
+    private float knockbackDuration; // 넉백 시간
+
 
     public bool fxOnDestroy = true;
 
@@ -43,8 +49,9 @@ public class RangeSkillObject : MonoBehaviour
     }
 
     // 초기 방향 값
-    public void Init(Vector2 direction, Color color, float duration, float speed)
+    public void Init(BaseController ownerBase, Vector2 direction, Color color, float duration, float speed, float knockbackPower, float knockbackDuration)
     {
+        this.ownerBase = ownerBase;
         this.direction = direction; // 날라갈 방향 설정
         currentDuration = 0; // 생존 시간 0으로 초기화
 
@@ -58,6 +65,8 @@ public class RangeSkillObject : MonoBehaviour
             pivot.localRotation = Quaternion.Euler(0, 0, 0);
 
         this.duration = duration;
+        this.knockbackPower = knockbackPower;
+        this.knockbackDuration = knockbackDuration;
         this.speed = speed;
         isReady = true; // Update 실행 될 수 있도록 함
     }
@@ -73,6 +82,12 @@ public class RangeSkillObject : MonoBehaviour
         {
             // TODO : 적 공격
 
+            BaseController enemy = collision.GetComponent<BaseController>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage((int)ownerBase.attack);
+                enemy.ApplyKnockback(transform, knockbackPower, knockbackDuration);
+            }
             // 적 공격 이후 물체 파괴
             DestroyObject(collision.ClosestPoint(transform.position), fxOnDestroy);
         }
