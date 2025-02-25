@@ -106,6 +106,8 @@ public class BaseController : MonoBehaviour
             isgameOver = true;
             Debug.Log("플레이어 사망");
         }
+        else if (gameObject.CompareTag("Enemy"))
+            Destroy(gameObject);
         else
             Destroy(gameObject);
     }

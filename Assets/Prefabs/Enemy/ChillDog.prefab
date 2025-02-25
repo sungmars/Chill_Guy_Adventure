@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3184295396031939815}
   - component: {fileID: 3858551496379634971}
   - component: {fileID: 5964744247428719497}
-  - component: {fileID: 824564831284025184}
   - component: {fileID: 928147945423051997}
-  m_Layer: 0
+  - component: {fileID: 7689657380816262018}
+  m_Layer: 7
   m_Name: ChillDog
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ MonoBehaviour:
   characterName: ChilDog
   level: 1
   attack: 1
-  defense: 0
+  defense: 1
   equipItem: 
   speed: 3
   attackSpeed: 1
@@ -140,8 +140,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &824564831284025184
-BoxCollider2D:
+--- !u!95 &928147945423051997
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3433430853607481300}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 598ed53c51090ca4db6a1ba3b0c90886, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!60 &7689657380816262018
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -172,7 +193,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.12722969, y: -0.34145808}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -182,27 +203,19 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.1665344, y: 0.7476258}
-  m_EdgeRadius: 0
---- !u!95 &928147945423051997
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3433430853607481300}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 598ed53c51090ca4db6a1ba3b0c90886, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.94251156, y: 0.17279053}
+      - {x: 0.9456148, y: 0.57976675}
+      - {x: 0.38415146, y: 0.7436137}
+      - {x: 0.014155388, y: 0.9300766}
+      - {x: -0.04126644, y: 0.10342026}
+      - {x: -0.7895384, y: 0.042303562}
+      - {x: -0.805768, y: -0.5329695}
+      - {x: -0.75915146, y: -0.7881551}
+      - {x: -0.7588062, y: -0.8442688}
+      - {x: 0.55507565, y: -0.7821145}
+      - {x: 0.570961, y: -0.75}
+      - {x: 0.57942104, y: -0.5547304}
+      - {x: 0.50276566, y: 0.02296257}
+  m_UseDelaunayMesh: 0
