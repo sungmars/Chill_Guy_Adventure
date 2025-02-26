@@ -12,6 +12,7 @@ public class SkillManager : MonoSingleton<SkillManager>
     public List<SkillHandler> rangeSkillHandlerList;
     public List<SkillHandler> areaSkillHandlerList;
     public List<SkillHandler> buffSkillHandlerList;
+    public List<SkillHandler> allSkillHandlerList;
 
     [Header("Skill UI")]
     public Transform currentSkillPivot;
@@ -29,12 +30,19 @@ public class SkillManager : MonoSingleton<SkillManager>
     {
         base.Awake();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        allSkillHandlerList = new List<SkillHandler>();
+        allSkillHandlerList.AddRange(rangeSkillHandlerList);
+        allSkillHandlerList.AddRange(areaSkillHandlerList);
+        allSkillHandlerList.AddRange(buffSkillHandlerList);
     }
 
     void Start()
     {
-        OnClickSetRandomSkill();
+        // OnClickSetRandomSkill();
         GetSkillSetting();
+        // 왼쪽 오른쪽 스킬 등록
+        SetSkillSettingLeftRight(GameManager.Instance.mouseSkill.left, GameManager.Instance.mouseSkill.right);
     }
 
     public void OpenGetSkillPannel()
@@ -48,10 +56,29 @@ public class SkillManager : MonoSingleton<SkillManager>
         if (getSkillUIGroup.GetMouseOrder() == 3)
         {
             SetSkill(0, getSkillHandlerUIs[skillOrder]);
+
+            // 최적화 망했지만 머리와 손은 편해지는 마법
+            for (int i = 0; i < allSkillHandlerList.Count; i++)
+            {
+                if (allSkillHandlerList[i]._name == getSkillHandlerUIs[skillOrder]._name)
+                {
+                    GameManager.Instance.mouseSkill.left = i;
+                    break;
+                }
+            }
         }
         else
         {
             SetSkill(1, getSkillHandlerUIs[skillOrder]);
+            // 최적화 망했지만 머리와 손은 편해지는 마법
+            for (int i = 0; i < allSkillHandlerList.Count; i++)
+            {
+                if (allSkillHandlerList[i]._name == getSkillHandlerUIs[skillOrder]._name)
+                {
+                    GameManager.Instance.mouseSkill.left = i;
+                    break;
+                }
+            }
         }
         OnClickNextStage();
     }
@@ -62,6 +89,12 @@ public class SkillManager : MonoSingleton<SkillManager>
         GameManager.Instance.NextRound();
     }
 
+
+    public void SetSkillSettingLeftRight(int left, int right)
+    {
+        SetSkill(0, allSkillHandlerList[left]);
+        SetSkill(1, allSkillHandlerList[right]);
+    }
 
     public void GetSkillSetting()
     {
@@ -77,22 +110,13 @@ public class SkillManager : MonoSingleton<SkillManager>
 
     public List<SkillHandler> GetRandomSkillThree()
     {
-        return GetAllSkillHandlerList().GetRandomItems(3);
+        return allSkillHandlerList.GetRandomItems(3);
     }
 
     public void OnClickSetRandomSkill()
     {
         SetSkill(0, GetRandomSkillHandlerList().GetRandomItem());
         SetSkill(1, GetRandomSkillHandlerList().GetRandomItem());
-    }
-
-    public List<SkillHandler> GetAllSkillHandlerList()
-    {
-        List<SkillHandler> temp = new List<SkillHandler>();
-        temp.AddRange(rangeSkillHandlerList);
-        temp.AddRange(areaSkillHandlerList);
-        temp.AddRange(buffSkillHandlerList);
-        return temp;
     }
 
     public List<SkillHandler> GetRandomSkillHandlerList()

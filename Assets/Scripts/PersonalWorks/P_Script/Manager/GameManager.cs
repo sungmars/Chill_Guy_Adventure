@@ -12,9 +12,10 @@ public class GameManager : MonoSingletonDontDestroy<GameManager>
 
     private int currentRoundIndex = 0;
 
+    public (int left, int right) mouseSkill = (0, 1);
+
     public void Start()
     {
-
     }
 
     public void NextRound()
