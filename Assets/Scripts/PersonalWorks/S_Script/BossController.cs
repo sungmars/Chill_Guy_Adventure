@@ -69,7 +69,7 @@ public class BossController : MonoBehaviour
     private void RandomSkill()
     {
         int idxSkill = Random.Range(0, 5);
-        switch (idxSkill)
+        switch (4)
         {
             case 0:
                 StartCoroutine(RushAttack());
