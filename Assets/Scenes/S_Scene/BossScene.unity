@@ -654,6 +654,7 @@ MonoBehaviour:
   boss: {fileID: 1920032163}
   animator: {fileID: 6979717474196772902}
   player: {fileID: 1516900887}
+  bossEye: {fileID: 8300000, guid: 85294c0f9afcf3844a87afe608974d68, type: 3}
 --- !u!4 &1568906202
 Transform:
   m_ObjectHideFlags: 0
@@ -663,7 +664,7 @@ Transform:
   m_GameObject: {fileID: 1568906200}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.5658894, y: 3.947738, z: -0.07508871}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -681,6 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 797c04dcc31dc8f4ca05ee4079e0528b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rushClip: {fileID: 8300000, guid: 2c50e470abad3dd449449a992797e7de, type: 3}
 --- !u!114 &1568906204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -729,6 +731,9 @@ MonoBehaviour:
   lifetime: 5
   knockbackPower: 5
   knockbackDuration: 0.2
+  keyBoardAttackPressed: {fileID: 8300000, guid: 6b48cf8b74181304b8d91d68d66f317d, type: 3}
+  keyBoardAttackSuccess: {fileID: 8300000, guid: 2f466c5d60650b847b7db77d2cdd8dcd, type: 3}
+  keyBoardAttackFail: {fileID: 8300000, guid: 82f2cdea4f2e57f46a9cc64eb1d8baae, type: 3}
 --- !u!114 &1568906207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1134,6 +1139,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -944628639613478452, guid: d6e6641255243554aa7609cf1669aa0c, type: 3}
     - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: bossBgm
+      value: 
+      objectReference: {fileID: 8300000, guid: b0a661acf251c1248bcb92926b7e4cc5, type: 3}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
       propertyPath: bossAudio
       value: 
       objectReference: {fileID: 8300000, guid: d1c03f24936579e44b417c201a36cc74, type: 3}
@@ -1141,6 +1150,10 @@ PrefabInstance:
       propertyPath: firePoint
       value: 
       objectReference: {fileID: 6979717474196772896}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: lookAround
+      value: 
+      objectReference: {fileID: 8300000, guid: 41702e34931061f46beb71a79e93cc1b, type: 3}
     - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
       propertyPath: boxCollider
       value: 

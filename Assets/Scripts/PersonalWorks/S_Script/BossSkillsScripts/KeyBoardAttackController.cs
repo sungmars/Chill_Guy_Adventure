@@ -20,6 +20,11 @@ public class KeyBoardAttackController : MonoBehaviour
 
     private bool onSkill = false;
 
+    [SerializeField] private AudioClip keyBoardAttackPressed;
+    [SerializeField] private AudioClip keyBoardAttackSuccess;
+    [SerializeField] private AudioClip keyBoardAttackFail;
+    
+
     Coroutine coroutine;
     void Start()
     {
@@ -32,9 +37,13 @@ public class KeyBoardAttackController : MonoBehaviour
         {
             if (Input.inputString == keyCodes.Peek())
             {
-                Debug.Log(Input.inputString);
+                AudioManager.Instance.PlayBossSound(keyBoardAttackPressed);
                 keyCodes.Dequeue();
                 Destroy(keyCodesObj.Dequeue());
+                if (keyCodes.Count == 0) 
+                {
+                    AudioManager.Instance.PlayBossSound(keyBoardAttackSuccess);
+                }
             }
         }
         else
@@ -89,6 +98,7 @@ public class KeyBoardAttackController : MonoBehaviour
             time += Time.deltaTime;
             yield return new WaitForSeconds(0);
         }
+        AudioManager.Instance.PlayBossSound(keyBoardAttackFail);
         playerController.TakeDamage((int)damage);
         playerController.ApplyKnockback(transform, knockbackPower, knockbackDuration);
         player.GetComponent<PlayerInput>().enabled = true;

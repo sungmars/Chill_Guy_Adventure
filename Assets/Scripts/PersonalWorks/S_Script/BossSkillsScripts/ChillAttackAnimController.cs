@@ -8,6 +8,8 @@ public class ChillAttackAnimController : MonoBehaviour
     Transform bottom;
     Transform bottomPivot;
 
+    [SerializeField] private AudioClip dropStone;
+
     private void Awake()
     {
         chill = transform.GetChild(0);
@@ -32,7 +34,6 @@ public class ChillAttackAnimController : MonoBehaviour
         float y = chill.position.y;
         while (Vector2.Distance(chill.position, bottomPivot.position) > 0.15f)
         {
-            Debug.Log(Vector2.Distance(chill.position, bottomPivot.position));
             if (Vector2.Distance(chill.position, bottomPivot.position) < 2f)
             {
                 bottom.GetComponent<BoxCollider2D>().enabled = true;
@@ -41,6 +42,8 @@ public class ChillAttackAnimController : MonoBehaviour
             chill.position = new Vector2(chill.position.x, y);
             yield return null;
         }
+        if (transform.name == "ChillAttackParent 0")
+            AudioManager.Instance.PlayBossSound(dropStone);
         yield return new WaitForSeconds(1f);
         Destroy(this.gameObject);
     }

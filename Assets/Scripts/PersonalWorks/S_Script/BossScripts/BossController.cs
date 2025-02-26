@@ -13,9 +13,10 @@ public class BossController : MonoBehaviour
     public float knockbackDuration = 0.2f;
     public float hp = 100f;
 
-    public AudioClip bossAudio;
+    [SerializeField] private AudioClip bossBgm;
+    [SerializeField] private AudioClip lookAround;    
 
-    private bool onSkill = false;
+    private bool filp = false;
 
     private void Awake()
     {
@@ -24,18 +25,28 @@ public class BossController : MonoBehaviour
 
     private void Start()
     {
-        AudioManager.Instance.PlayBossSound(bossAudio);
+        AudioManager.Instance.PlayBGM(bossBgm);
     }
 
     private void Update()
     {
         if (player.transform.position.x < transform.position.x)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            if (filp)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+                AudioManager.Instance.PlayBossSound(lookAround);
+                filp = false;
+            }
         }
         else
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            if (!filp)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+                AudioManager.Instance.PlayBossSound(lookAround);
+                filp = true;
+            }
         }
     }
 }

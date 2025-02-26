@@ -18,6 +18,8 @@ public class BossManager : MonoBehaviour
 
     [SerializeField] Transform player;
 
+    public AudioClip bossEye;   
+
     private void Awake()
     {
         if (Instance == null)
@@ -39,13 +41,14 @@ public class BossManager : MonoBehaviour
     private void SkillRepeat()
     {
         animator.SetTrigger(isAttack);
+        AudioManager.Instance.PlayBossSound(bossEye);
         Invoke("RandomSkill", 1.5f);
     }
 
     private void RandomSkill()
     {
         int idxSkill = Random.Range(0, 5);
-        switch (3)
+        switch (idxSkill)
         {
             case 0:
                 rushAttack.PublicRushAttack(boss, player);

@@ -5,7 +5,7 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class RushAttackScripts : MonoBehaviour
 {
-
+    [SerializeField] private AudioClip rushClip;
     public void PublicRushAttack(Transform boss,Transform player)
     {
         RushAttack(boss,player);
@@ -22,14 +22,14 @@ public class RushAttackScripts : MonoBehaviour
         Vector2 curPos = boss.transform.position;
         Vector2 backDir = (curPos - targetPos).normalized;
         Vector2 backPos = curPos + backDir * 1f;
-        Vector2 movePos;
+        Vector2 movePos;        
         while (Vector2.Distance(backPos, boss.transform.position) > 0.1f)
         {
             movePos = Vector2.Lerp(boss.transform.position, backPos, Time.deltaTime * 1.5f);
             boss.transform.position = movePos;
             yield return new WaitForSeconds(0f);
         }
-
+        AudioManager.Instance.PlayBossSound(rushClip);
         while (Vector2.Distance(targetPos, boss.transform.position) > 0.1f)
         {
             movePos = Vector2.Lerp(boss.transform.position, targetPos, Time.deltaTime * 2f);

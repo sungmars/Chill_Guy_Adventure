@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5be8c56e459157d43ad79e82fcbb6627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropStone: {fileID: 8300000, guid: 1cc29a786820f574fac1a18b05003329, type: 3}
 --- !u!1 &6401301660152896765
 GameObject:
   m_ObjectHideFlags: 0

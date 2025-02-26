@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ChillAttackController : MonoBehaviour
 {
-    [SerializeField] private GameObject chillAttackObjPrefab;
+    [SerializeField] private GameObject chillAttackObjPrefab;  
 
     public void PublicChillAttack(Transform player)
     {
