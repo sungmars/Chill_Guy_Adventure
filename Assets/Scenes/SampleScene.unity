@@ -2080,14 +2080,8 @@ MonoBehaviour:
   hp: 0
   _spriteRenderer: {fileID: 8975847794942697215}
   weaponPivot: {fileID: 3862946688179748616}
-  WeaponPrefab: {fileID: 4545203917568145110, guid: e7981907aa993e24f8000f4a3f56e72b, type: 3}
+  WeaponPrefab: {fileID: 2789462198808765568, guid: f81434a3f5a40b74bb15ef6f8d59aa62, type: 3}
   spawnedEnemies: []
-  playerToEnemyVectors: []
-  isInLongRange: 
-  isInClosedRange: 
-  isAttackingEnemyIndex: 
-  longAttackRange: 5
-  meleeAttackRange: 1.5
 --- !u!61 &8336218724293084763
 BoxCollider2D:
   m_ObjectHideFlags: 0

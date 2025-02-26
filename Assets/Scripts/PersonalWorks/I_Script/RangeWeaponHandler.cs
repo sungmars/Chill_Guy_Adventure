@@ -30,33 +30,51 @@ public class RangeWeaponHandler : WeaponHandler
 
     private ProjectileManager projectileManager;
 
+    public Vector2 collideBoxSize = Vector2.one;
+
     protected override void Start()
     {
         base.Start();
         projectileManager = ProjectileManager.Instance;
+
+        collideBoxSize = collideBoxSize * WeaponSize;
     }
 
     public override void Attack()
     {
         base.Attack();
 
-        float projectileAngleSpace = multipleProjectileAngle;
-        int numberOfProjectielPerShot = numberofProjectilesPerShot;
-
-        float minAngle = -(numberOfProjectielPerShot / 2f) * projectileAngleSpace;
-
-        for(int i = 0; i < numberOfProjectielPerShot; i++)
+        if (playerController.AttackModeChange == false)
         {
-            float angle = minAngle + projectileAngleSpace * i;
-            float randomSpread = Random.Range(-spread, spread);
-            angle += randomSpread;
-
             for (int j = 0; j < playerController.spawnedEnemies.Count; j++)
             {
-                if (playerController.IsInLongRange[j])
-                    CreateProjectile(playerController.PlayerToEnemyVectors[j], angle);
+                if (playerController.IsInClosedRange[j])
+                {
+                    RaycastHit2D hit = Physics2D.BoxCast(transform.position + (Vector3)Controller.LookDirection * collideBoxSize.x,
+                collideBoxSize, 0, playerController.PlayerToEnemyVectors[j], 0, target);
+                }
             }
         }
+        else if (playerController.AttackModeChange == true)
+        {
+            float projectileAngleSpace = multipleProjectileAngle;
+            int numberOfProjectielPerShot = numberofProjectilesPerShot;
+
+            float minAngle = -(numberOfProjectielPerShot / 2f) * projectileAngleSpace;
+
+            for (int i = 0; i < numberOfProjectielPerShot; i++)
+            {
+                float angle = minAngle + projectileAngleSpace * i;
+                float randomSpread = Random.Range(-spread, spread);
+                angle += randomSpread;
+
+                for (int j = 0; j < playerController.spawnedEnemies.Count; j++)
+                {
+                    if (playerController.IsInLongRange[j])
+                        CreateProjectile(playerController.PlayerToEnemyVectors[j], angle);
+                }
+            }
+        }        
     }
 
     private void CreateProjectile(Vector2 _attackDirection, float angle)
@@ -71,5 +89,16 @@ public class RangeWeaponHandler : WeaponHandler
     private static Vector2 RotateVector2(Vector2 v, float degree)
     {
         return Quaternion.Euler(0, 0, degree) * v;
+    }
+
+    public override void Rotate(bool isLeft)
+    {
+        if (playerController.AttackModeChange == false)
+        {
+            if (isLeft)
+                transform.eulerAngles = new Vector3(0, 180, 0);
+            else
+                transform.eulerAngles = new Vector3(0, 0, 0);
+        }
     }
 }

@@ -32,12 +32,13 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private float knockbackTime = 0.5f;
     public float KnockbackTime { get => knockbackTime;  set => knockbackTime = value; }
 
-    private static readonly int isAttack = Animator.StringToHash("isAttack");
+    private static readonly int isMeleeAttack = Animator.StringToHash("isMeleeAttack");
+    private static readonly int isRangeAttack = Animator.StringToHash("isRangeAttack");
 
     public BaseController Controller { get; private set; }
     public PlayerController playerController { get; private set; }
 
-    private Animator animator;
+    public Animator animator;
     private SpriteRenderer weaponRenderer;
 
     protected virtual void Awake()
@@ -63,7 +64,10 @@ public class WeaponHandler : MonoBehaviour
 
     public void AttackAnimation()
     {
-        animator.SetTrigger(isAttack);
+        if (playerController.AttackModeChange == false)
+            animator.SetTrigger(isMeleeAttack);
+        else 
+            animator.SetTrigger(isRangeAttack);
     }
 
     public virtual void Rotate(bool isLeft)
