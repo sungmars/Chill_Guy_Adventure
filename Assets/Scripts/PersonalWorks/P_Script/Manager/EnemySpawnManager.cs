@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnManager : MonoBehaviour
+public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
 {
+    public PlayerController player;
+
     [SerializeField]
     private List<GameObject> enemyPrefabs; // 생성할 적 프리팹 리스트
 
@@ -18,55 +20,52 @@ public class EnemySpawnManager : MonoBehaviour
 
     private List<EnemyController> activeEnemies = new List<EnemyController>(); // 현재 활성화된 적들
 
-    private bool enemySpawnComplite;
+    public bool enemySpawnComplite;
+
+    [SerializeField] private EnemySpawnData enemySpawnData;
+    private bool isWaveEnd = false;
 
     [SerializeField] private float timeBetweenSpawns = 0.2f;
     [SerializeField] private float timeBetweenWaves = 1f;
 
-    GameManager gameManager;
-
-    public void Init(GameManager gameManager)
-    {
-        this.gameManager = gameManager;
-    }
-
     public void Start()
     {
-        SpawnRandomEnemy();
+        StartWave();
     }
 
-    public void StartWave(int waveCount)
+    public void StartWave()
     {
-        if (waveCount <= 0)
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
+        StartCoroutine(SpawnWave(enemySpawnData));
+    }
+
+    private IEnumerator SpawnWave(EnemySpawnData spawnData)
+    {
+        var waveDatas = spawnData.waveDatas;
+
+        // 웨이브 하나하나 생성
+        foreach (var waveData in waveDatas)
         {
-            // gameManager.EndOfWave();
-            return;
+            isWaveEnd = false;
+            // 모든 몹 생성
+            for (int i = 0; i < waveData.enemyCount; i++)
+            {
+                int randomMob = Random.Range(waveData.MobRange.x, waveData.MobRange.y);
+                SpawnRandomEnemy(randomMob);
+            }
+
+            // 웨이브가 끝날 때 까지 대기
+            while (!isWaveEnd)
+            {
+                yield return new WaitForSeconds(1f);
+            }
         }
 
-        // if (waveRoutine != null)
-        //     StopCoroutine(waveRoutine);
-        // waveRoutine = StartCoroutine(SpawnWave(waveCount));
+        // TODO 모든 웨이브가 끝났을 때 다음 스테이지로
     }
 
-    public void StopWave()
-    {
-        StopAllCoroutines();
-    }
-
-    private IEnumerator SpawnWave(int waveCount)
-    {
-        enemySpawnComplite = false;
-        yield return new WaitForSeconds(timeBetweenWaves);
-        for (int i = 0; i < waveCount; i++)
-        {
-            yield return new WaitForSeconds(timeBetweenSpawns);
-            SpawnRandomEnemy();
-        }
-
-        enemySpawnComplite = true;
-    }
-
-    private void SpawnRandomEnemy()
+    private void SpawnRandomEnemy(int _mobNum)
     {
         if (enemyPrefabs.Count == 0 || spawnAreas.Count == 0)
         {
@@ -75,7 +74,7 @@ public class EnemySpawnManager : MonoBehaviour
         }
 
         // 랜덤한 적 프리팹 선택
-        GameObject randomPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
+        GameObject randomPrefab = enemyPrefabs[_mobNum];
 
         // 랜덤한 영역 선택
         Rect randomArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
@@ -89,10 +88,6 @@ public class EnemySpawnManager : MonoBehaviour
         // 적 생성 및 리스트에 추가
         EnemySpawnObject spawnObject = Instantiate(enemySpawnObject, new Vector3(randomPosition.x, randomPosition.y), Quaternion.identity).GetComponent<EnemySpawnObject>();
         spawnObject.Init(randomPrefab, 2f);
-        // EnemyController enemyController = spawnedEnemy.GetComponent<EnemyController>();
-        // enemyController.Init(this, gameManager.player.transform);
-
-        // activeEnemies.Add(enemyController);
     }
 
     // 기즈모를 그려 영역을 시각화 (선택된 경우에만 표시)
@@ -109,10 +104,17 @@ public class EnemySpawnManager : MonoBehaviour
         }
     }
 
+    // 적이 생성 될 때 무조건 실행
+    public void CreateEnemyOnInit(EnemyController enemy)
+    {
+        activeEnemies.Add(enemy);
+    }
+
+    // 적이 죽을 때 무조건 실행
     public void RemoveEnemyOnDeath(EnemyController enemy)
     {
-        // activeEnemies.Remove(enemy);
-        // if (enemySpawnComplite && activeEnemies.Count == 0)
-        // gameManager.EndOfWave();
+        activeEnemies.Remove(enemy);
+        if (activeEnemies.Count == 0)
+            isWaveEnd = true; // 라운드가 끝났다고 알림(새 라운드 시작)
     }
 }
