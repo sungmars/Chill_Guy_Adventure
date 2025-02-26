@@ -22,6 +22,7 @@ public class SkillManager : MonoSingleton<SkillManager>
     public List<SkillUI> getSkillUIs; // 1, 2, 3 UI
     public List<SkillHandler> getSkillHandlerUIs; // 1, 2, 3 UI에 대한 정보
 
+    public GetSkillUI getSkillUIGroup;
 
 
     new void Awake()
@@ -36,6 +37,32 @@ public class SkillManager : MonoSingleton<SkillManager>
         GetSkillSetting();
     }
 
+    public void OpenGetSkillPannel()
+    {
+        getSkillUIGroup.gameObject.SetActive(true);
+    }
+
+    public void OnClickSetSkill()
+    {
+        int skillOrder = getSkillUIGroup.GetSkillOrder();
+        if (getSkillUIGroup.GetMouseOrder() == 3)
+        {
+            SetSkill(0, getSkillHandlerUIs[skillOrder]);
+        }
+        else
+        {
+            SetSkill(1, getSkillHandlerUIs[skillOrder]);
+        }
+        OnClickNextStage();
+    }
+
+    public void OnClickNextStage()
+    {
+        Debug.Log("스킬 선택 후 라운드 넘어가기");
+        GameManager.Instance.NextRound();
+    }
+
+
     public void GetSkillSetting()
     {
         var temp = GetRandomSkillThree();
@@ -44,6 +71,7 @@ public class SkillManager : MonoSingleton<SkillManager>
             getSkillUIs[i].iconImage.sprite = temp[i].icon;
             getSkillUIs[i].tooltipTitle.text = temp[i]._name;
             getSkillUIs[i].tooltipDesc.text = temp[i].normalDesc;
+            getSkillHandlerUIs.Add(temp[i]);
         }
     }
 

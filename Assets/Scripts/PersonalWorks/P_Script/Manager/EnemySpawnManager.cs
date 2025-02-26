@@ -79,8 +79,8 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         }
 
         Debug.Log("라운드 종료?");
-        GameManager.Instance.NextRound();
-
+        // GameManager.Instance.NextRound();
+        SkillManager.Instance.OpenGetSkillPannel();
         // TODO 모든 웨이브가 끝났을 때 다음 스테이지로
     }
 

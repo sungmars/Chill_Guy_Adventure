@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AreaSkillObject : MonoBehaviour
@@ -90,8 +91,13 @@ public class AreaSkillObject : MonoBehaviour
         while (true)
         {
             // TODO : 적 공격
-            BaseController enemy = collision.GetComponent<BaseController>();
-            if (enemy != null)
+
+            if (collision == null || collision.gameObject == null)
+            {
+                yield break;
+            }
+
+            if (collision.TryGetComponent(out BaseController enemy))
             {
                 enemy.TakeDamage((int)ownerBase.attack);
                 enemy.ApplyKnockback(transform, knockbackPower, knockbackDuration);

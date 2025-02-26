@@ -1,18 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GetSkillUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public ToggleGroup skillToggle;
+    public ToggleGroup mouseToggle;
+    public List<Toggle> toggles; // Toggle 리스트 (Inspector에서 할당)
+
+    public int GetSkillOrder()
     {
-        
+        Toggle selectedToggle = skillToggle.GetFirstActiveToggle();
+
+        if (selectedToggle != null)
+        {
+            int selectedIndex = toggles.IndexOf(selectedToggle);
+            return selectedIndex;
+        }
+        return -1;
     }
 
-    // Update is called once per frame
-    void Update()
+    public int GetMouseOrder()
     {
-        
+        Toggle selectedToggle = mouseToggle.GetFirstActiveToggle();
+
+        if (selectedToggle != null)
+        {
+            int selectedIndex = toggles.IndexOf(selectedToggle);
+            return selectedIndex;
+        }
+        return -1;
     }
+
+
 }
