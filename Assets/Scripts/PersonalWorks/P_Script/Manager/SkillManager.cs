@@ -75,7 +75,7 @@ public class SkillManager : MonoSingleton<SkillManager>
             {
                 if (allSkillHandlerList[i]._name == getSkillHandlerUIs[skillOrder]._name)
                 {
-                    GameManager.Instance.mouseSkill.left = i;
+                    GameManager.Instance.mouseSkill.right = i;
                     break;
                 }
             }
