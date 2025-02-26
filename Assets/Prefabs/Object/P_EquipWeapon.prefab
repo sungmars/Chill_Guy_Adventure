@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 2789462198808765568}
   m_Layer: 0
   m_Name: P_EquipWeapon
-  m_TagString: EquipWeapon
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,6 +194,7 @@ MonoBehaviour:
   isOnKnockback: 0
   knockbackPower: 0.1
   knockbackTime: 0.5
+  animator: {fileID: 0}
   projectileSpawnPosition: {fileID: 4410437314180567123}
   bulletIndex: 0
   bulletSize: 0.7

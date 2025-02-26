@@ -2081,7 +2081,9 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 8975847794942697215}
   weaponPivot: {fileID: 3862946688179748616}
   WeaponPrefab: {fileID: 2789462198808765568, guid: f81434a3f5a40b74bb15ef6f8d59aa62, type: 3}
+  weaponanimator: {fileID: 0}
   spawnedEnemies: []
+  AttackModeChange: 0
 --- !u!61 &8336218724293084763
 BoxCollider2D:
   m_ObjectHideFlags: 0
