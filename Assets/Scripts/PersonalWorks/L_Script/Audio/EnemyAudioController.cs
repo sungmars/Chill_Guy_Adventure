@@ -25,7 +25,7 @@ public class EnemyAudioController : MonoBehaviour
             if (!source.isPlaying)
                 return source;
         }
-        GameObject obj = new GameObject("MobAudio");
+        GameObject obj = new GameObject("EnemyAudio");
         AudioSource newSource = obj.AddComponent<AudioSource>();
         audioSources.Add(newSource);
         return newSource;

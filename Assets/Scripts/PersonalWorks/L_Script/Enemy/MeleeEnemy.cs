@@ -4,8 +4,8 @@ using UnityEngine;
 public class MeleeEnemy : EnemyController
 {
     [SerializeField] protected float knockbackPower = 5.0f;
+    public AudioClip attackaudio;
 
-    
 
     protected override void Attack()
     {
@@ -13,6 +13,7 @@ public class MeleeEnemy : EnemyController
         if (Vector2.Distance(transform.position, player.position) <= attackRange)
         {
             Debug.Log("때림 " + attack + " 의 데미지");
+            AudioManager.Instance.PlayEnemySound(attackaudio);
             animator.SetTrigger("AttackTrigger");
             animator.SetBool("IsRun", false);
             BaseController playerController = player.GetComponent<BaseController>();

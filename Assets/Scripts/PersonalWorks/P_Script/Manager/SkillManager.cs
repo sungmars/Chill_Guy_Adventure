@@ -19,6 +19,7 @@ public class SkillManager : MonoSingleton<SkillManager>
     new void Awake()
     {
         base.Awake();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Start()
