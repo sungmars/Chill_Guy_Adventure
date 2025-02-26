@@ -10,6 +10,7 @@ public class BossManager : MonoBehaviour
     SoundWaveAttackController soundWaveAttackController;
     ChillAttackController chillAttackController;
     KeyBoardAttackController keyBoardAttackController;
+    ChillDogAttackController chillDogAttackController;
 
     [SerializeField] Transform boss;
     [SerializeField] Animator animator;
@@ -26,6 +27,7 @@ public class BossManager : MonoBehaviour
             soundWaveAttackController = GetComponent<SoundWaveAttackController>();
             chillAttackController = GetComponent<ChillAttackController>();
             keyBoardAttackController = GetComponent<KeyBoardAttackController>();
+            chillDogAttackController = GetComponent<ChillDogAttackController>();
         }
     }
 
@@ -55,6 +57,7 @@ public class BossManager : MonoBehaviour
                 chillAttackController.PublicChillAttack(player);
                 break;
             case 3:
+                chillDogAttackController.PublicCreateChillDog();
                 break;
             case 4:
                 CancelInvoke("SkillRepeat");

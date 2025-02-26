@@ -631,6 +631,7 @@ GameObject:
   - component: {fileID: 1568906204}
   - component: {fileID: 1568906205}
   - component: {fileID: 1568906206}
+  - component: {fileID: 1568906207}
   m_Layer: 0
   m_Name: BossManager
   m_TagString: Untagged
@@ -728,6 +729,20 @@ MonoBehaviour:
   lifetime: 5
   knockbackPower: 5
   knockbackDuration: 0.2
+--- !u!114 &1568906207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568906200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c6e0632c20688241a6757ecc7b56e63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chillDogPrefab: {fileID: 3433430853607481300, guid: 24781d0f4208d854f956e9a55535b6c8, type: 3}
+  enemySpawnObject: {fileID: 810985626050244369, guid: 5dfd00037d6a2e8478c8639bec4b0204, type: 3}
 --- !u!1 &1575407179 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7046825589746878699, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
@@ -1343,7 +1358,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 396923979}
-  - {fileID: 1568906202}
   - {fileID: 6979717474196772895}
   - {fileID: 268327015}
   - {fileID: 138580212}
@@ -1351,3 +1365,4 @@ SceneRoots:
   - {fileID: 2065746777}
   - {fileID: 1768714055}
   - {fileID: 1721051244}
+  - {fileID: 1568906202}
