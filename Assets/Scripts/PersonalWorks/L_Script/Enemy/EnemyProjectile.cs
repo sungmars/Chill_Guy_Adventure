@@ -4,11 +4,15 @@ public class EnemyProjectile : MonoBehaviour
 {
     public float damage = 10f;
     public float lifetime = 5f;
-    public float knockbackPower = 5f;
-    public float knockbackDuration = 0.2f;
+    BaseController baseController;
     private void Start()
     {
         Destroy(gameObject, lifetime);
+    }
+
+    public void Init(BaseController baseController)
+    {
+        this.baseController = baseController;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,9 +23,9 @@ public class EnemyProjectile : MonoBehaviour
             if (player != null)
             {
                 player.TakeDamage((int)damage);
-                player.ApplyKnockback(transform, knockbackPower, knockbackDuration);
+                player.ApplyKnockback(transform, baseController.knockbackPower, baseController.knockbackTime);
             }
-            if(transform.name == "SoundWave")
+            if (transform.name == "SoundWave")
             {
                 SoundWaveAttackController soundWaveAttackController = GetComponentInParent<SoundWaveAttackController>();
                 soundWaveAttackController.StopSoundWaveCoroutine();

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ProjectileManager : MonoBehaviour
 {
     private static ProjectileManager instance;
-    public static ProjectileManager Instance {  get { return instance; } }
+    public static ProjectileManager Instance { get { return instance; } }
 
     [SerializeField] private GameObject[] projectilePrefabs;
 
@@ -14,12 +14,12 @@ public class ProjectileManager : MonoBehaviour
         instance = this;
     }
 
-    public void ShootBullet(RangeWeaponHandler rangeWeaponHandler, Vector2 startPosition, Vector2 direction)
+    public void ShootBullet(RangeWeaponHandler rangeWeaponHandler, Vector2 startPosition, Vector2 direction, BaseController baseController)
     {
         GameObject origin = projectilePrefabs[rangeWeaponHandler.BulletIndex];
         GameObject obj = Instantiate(origin, startPosition, Quaternion.identity);
 
         ProjectileController projectileController = obj.GetComponent<ProjectileController>();
-        projectileController.Init(direction, rangeWeaponHandler);
+        projectileController.Init(direction, rangeWeaponHandler, baseController);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class EnemyController : BaseController
 {
@@ -7,34 +8,62 @@ public abstract class EnemyController : BaseController
     protected Animator animator;
     protected Transform player;
     protected bool isChasing;
-    protected Rigidbody2D rb;
     private float lastAttackTime;
     protected bool isStopped = false;
     // 스프라이트 뒤집기를 위한 SpriteRenderer 추가
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
+    // 맞았을 때
+    private float timeSinceLastChange = float.MaxValue;
+    private float healthChangeDelay = .5f; // 맞았을 때 0.5초 동안 빨간색
+
     protected override void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         if (_spriteRenderer == null)
             _spriteRenderer = GetComponent<SpriteRenderer>();
         base.Start();
     }
 
+    public void Update()
+    {
+        // 맞았을 때 빨간색
+        if (timeSinceLastChange < healthChangeDelay)
+        {
+            timeSinceLastChange += Time.deltaTime;
+            if (timeSinceLastChange >= healthChangeDelay)
+            {
+                animator.SetBool("isDamage", false);
+            }
+        }
+    }
+
     protected override void FixedUpdate()
     {
-        if (!isStopped && player != null)
+        // base.FixedUpdate();
+        if (knockbackDuration > 0.0f)
+        {
+            knockbackDuration -= Time.fixedDeltaTime;
+            KnockbackMovement();
+        }
+        else if (!isStopped && player != null)
         {
             Move();
             TryAttack();
         }
     }
 
+
+    private void KnockbackMovement()
+    {
+        Vector2 direction = knockback;
+        _rigidbody2D.velocity = direction;
+    }
+
     protected virtual void Move()
     {
-        animator.SetBool("IsRun",true);
+        animator.SetBool("IsRun", true);
         //플레이어 바라보기
         if (player.position.x < transform.position.x)
             _spriteRenderer.flipX = true;
@@ -43,16 +72,19 @@ public abstract class EnemyController : BaseController
 
         if (isStopped)
         {
-            rb.velocity = Vector2.zero;
+            _rigidbody2D.velocity = Vector2.zero;
             return;
         }
         else if (Vector2.Distance(transform.position, player.position) > attackRange)
         {
             Vector2 direction = (player.position - transform.position).normalized;
-            rb.velocity = direction * speed;
+            _rigidbody2D.velocity = direction * speed;
         }
         else
-            rb.velocity = Vector2.zero;
+        {
+            _rigidbody2D.velocity = Vector2.zero;
+        }
+
 
     }
 
@@ -78,14 +110,18 @@ public abstract class EnemyController : BaseController
         base.TakeDamage(damage);
         bool isRun = animator.GetBool("IsRun");
         animator.SetBool("IsRun", false);
-        animator.SetBool("IsKnockback",true);
-        StartCoroutine(ResetKnockbackCoroutine());
+        // animator.SetBool("IsKnockback", true);
+        // StartCoroutine(ResetKnockbackCoroutine());
+
+        timeSinceLastChange = 0f;
+        animator.SetBool("isDamage", true);
     }
-    private IEnumerator ResetKnockbackCoroutine()
-    {
-        yield return new WaitForSeconds(0.5f);
-        animator.SetBool("IsKnockback", false);
-    }
+
+    // private IEnumerator ResetKnockbackCoroutine()
+    // {
+    //     yield return new WaitForSeconds(0.5f);
+    //     // animator.SetBool("IsKnockback", false);
+    // }
     public override void Die()
     {
         // 플레이어에게 경험치와 골드 주기

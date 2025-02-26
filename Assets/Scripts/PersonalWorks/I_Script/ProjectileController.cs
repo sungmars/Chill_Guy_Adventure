@@ -16,7 +16,8 @@ public class ProjectileController : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
     private SpriteRenderer spriteRenderer;
-    
+    BaseController baseController;
+
     public bool fxOnDestroy = true;
 
     private void Awake()
@@ -39,18 +40,25 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer)))
+        if (levelCollisionLayer.Contain(collision.gameObject.layer))
         {
             DestroyProjectile(collision.ClosestPoint(transform.position) - direction * 0.2f, fxOnDestroy);
         }
-        else if (rangeWeaponHandler.target.value == (rangeWeaponHandler.target.value | (1 << collision.gameObject.layer)))
+        else if (rangeWeaponHandler.target.Contain(collision.gameObject.layer))
         {
+            var enemyController = collision.GetComponent<BaseController>();
+            if (enemyController != null)
+            {
+                enemyController.TakeDamage((int)baseController.attack);
+                enemyController.ApplyKnockback(transform, baseController.knockbackPower, baseController.knockbackTime);
+            }
             DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestroy);
         }
     }
 
-    public void Init(Vector2 direction, RangeWeaponHandler weaponHandler)
+    public void Init(Vector2 direction, RangeWeaponHandler weaponHandler, BaseController baseController)
     {
+        this.baseController = baseController;
         rangeWeaponHandler = weaponHandler;
 
         this.direction = direction;

@@ -52,6 +52,16 @@ public class RangeWeaponHandler : WeaponHandler
                 {
                     RaycastHit2D hit = Physics2D.BoxCast(transform.position + (Vector3)Controller.LookDirection * collideBoxSize.x,
                 collideBoxSize, 0, playerController.PlayerToEnemyVectors[j], 0, target);
+
+                    if (hit.collider != null)
+                    {
+                        var enemyController = hit.collider.GetComponent<BaseController>();
+                        if (enemyController != null)
+                        {
+                            enemyController.TakeDamage((int)playerController.attack);
+                            enemyController.ApplyKnockback(transform, playerController.knockbackPower, playerController.knockbackTime);
+                        }
+                    }
                 }
             }
         }
@@ -74,7 +84,7 @@ public class RangeWeaponHandler : WeaponHandler
                         CreateProjectile(playerController.PlayerToEnemyVectors[j], angle);
                 }
             }
-        }        
+        }
     }
 
     private void CreateProjectile(Vector2 _attackDirection, float angle)
@@ -82,7 +92,8 @@ public class RangeWeaponHandler : WeaponHandler
         projectileManager.ShootBullet(
             this,
             projectileSpawnPosition.position,
-            RotateVector2(_attackDirection, angle)
+            RotateVector2(_attackDirection, angle),
+            playerController
             );
     }
 
