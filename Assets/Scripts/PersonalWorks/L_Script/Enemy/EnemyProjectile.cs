@@ -23,8 +23,8 @@ public class EnemyProjectile : MonoBehaviour
             }
             if(transform.name == "SoundWave")
             {
-                BossController boss = transform.GetComponentInParent<BossController>();
-                boss.StopSoundWaveCoroutine();
+                SoundWaveAttackController soundWaveAttackController = GetComponentInParent<SoundWaveAttackController>();
+                soundWaveAttackController.StopSoundWaveCoroutine();
             }
             Destroy(gameObject);
         }
