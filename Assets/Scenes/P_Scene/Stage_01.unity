@@ -371,6 +371,13 @@ MonoBehaviour:
   startScene: Stage_01
   gameOverScene: Stage_01
   endingScene: Stage_01
+  currentRoundIndex: 0
+  enemySpawnDatas:
+  - {fileID: 11400000, guid: 2dcc211fe7122be4b8b0c0f21056e92a, type: 2}
+  - {fileID: 11400000, guid: b1c00dd15c8e02d43ad79346e11b4a67, type: 2}
+  - {fileID: 11400000, guid: fe1d9c1bc56039c4b940ebb65ff2a584, type: 2}
+  - {fileID: 11400000, guid: 433acbee7c7da52498072338947b684e, type: 2}
+  - {fileID: 11400000, guid: a858a895c1323354db63ca706795e484, type: 2}
 --- !u!1 &946575998
 GameObject:
   m_ObjectHideFlags: 0

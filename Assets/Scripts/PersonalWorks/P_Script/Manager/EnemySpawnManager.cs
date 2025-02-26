@@ -21,7 +21,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
 
     public List<EnemyController> activeEnemies = new List<EnemyController>(); // 현재 활성화된 적들
 
-    [SerializeField] private EnemySpawnData enemySpawnData;
+    private EnemySpawnData enemySpawnData;
     private bool isWaveEnd = false;
 
     [SerializeField] private float timeBetweenSpawns = 0.2f;
@@ -32,6 +32,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
 
     public void Start()
     {
+        enemySpawnData = GameManager.Instance.enemySpawnDatas[GameManager.Instance.currentRoundIndex]; // 현재 스테이지 스폰 데이터 불러오기
         StartWave();
     }
 

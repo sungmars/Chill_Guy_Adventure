@@ -10,8 +10,9 @@ public class GameManager : MonoSingletonDontDestroy<GameManager>
     public string gameOverScene;
     public string endingScene;
 
-    private int currentRoundIndex = 0;
+    public int currentRoundIndex = 0;
 
+    public List<EnemySpawnData> enemySpawnDatas;
     public (int left, int right) mouseSkill = (4, 1);
 
     public void Start()
