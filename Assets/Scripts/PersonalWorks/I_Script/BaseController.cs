@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BaseController : MonoBehaviour
 {
     // 컴포넌트 참조들
     protected Rigidbody2D _rigidbody2D;
     protected AnimationHandler _animationHandler;
-    protected WeaponHandler weaponHandler;    
+    protected WeaponHandler weaponHandler;
 
     // 이동 및 바라보는 방향
     protected Vector2 movementDirection = Vector2.zero;
@@ -16,39 +17,46 @@ public class BaseController : MonoBehaviour
     public Vector2 LookDirection { get { return lookDirection; } }
 
     // 넉백
-    private Vector2 knockback = Vector2.zero;
-    protected float knockbackDuration = 0.1f;
+    [HideInInspector] public Vector2 knockback = Vector2.zero;
+    [HideInInspector] public float knockbackDuration = 0.1f;
+    public float knockbackPower = 5f;
+    public float knockbackTime = 1f;
 
     // 공격
     protected bool isAttacking;
-    
+
 
     // 스탯
-    public string characterName;    
-    public int level = 1;          
-    public float attack;            
-    public float defense;           
-    public string equipItem;        
-    public float speed;             
-    public float attackSpeed;       
-    public float exp;               
-    public int gold;                
-    public float hp;                  
+    public string characterName;
+    public int level = 1;
+    public float attack;
+    public float defense;
+    public string equipItem;
+    public float speed;
+    public float attackSpeed;
+    public float exp;
+    public int gold;
+    public float hp;
+    public float maxHp;
 
-    // 기존 코드에 있던 스탯 필드들 
-    protected int maxHp;
-    protected int damage;
     //사망시 불값
     public static bool isgameOver;
 
-    
+
+    public Image hpBarimage; // 맞았을 때 0.5초 동안 빨간색
+
+
+    public void Awake()
+    {
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+    }
 
     protected virtual void Start()
     {
         isgameOver = false;
     }
 
-    
+
 
     protected virtual void FixedUpdate()
     {
@@ -72,7 +80,7 @@ public class BaseController : MonoBehaviour
         _rigidbody2D.velocity = direction;
     }
 
-    
+
 
     public void ApplyKnockback(Transform other, float power, float duration)
     {
@@ -81,7 +89,7 @@ public class BaseController : MonoBehaviour
         Debug.Log("넉백");
     }
 
-    
+
 
     protected virtual void Attack()
     {
@@ -96,9 +104,14 @@ public class BaseController : MonoBehaviour
         hp -= actualDamage;
         if (hp <= 0)
             Die();
+
+        if (hpBarimage != null)
+        {
+            hpBarimage.fillAmount = hp / maxHp;
+        }
     }
 
-    
+
     public virtual void Die()
     {
         if (gameObject.CompareTag("Player"))

@@ -7,8 +7,9 @@ public class RangedEnemy : EnemyController
     private float nextFireTime;
     [SerializeField] private float projectileSpeed = 10f; // 발사체 속도
 
-    void Update()
+    new void Update()
     {
+        base.Update();
         if (player != null)
         {
             Vector2 direction = player.position - firePoint.position;
@@ -30,6 +31,8 @@ public class RangedEnemy : EnemyController
     private void ShootProjectile()
     {
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        var projectileController = projectile.GetComponent<EnemyProjectile>();
+        projectileController.Init(GetComponent<BaseController>());
         // 플레이어 방향 계산
         Vector2 direction = (player.position - firePoint.position).normalized;
         // 발사체의 회전을 플레이어 방향에 맞게 조정

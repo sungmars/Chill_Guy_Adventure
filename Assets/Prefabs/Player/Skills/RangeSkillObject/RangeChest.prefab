@@ -237,7 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   targetLayer:
     serializedVersion: 2
     m_Bits: 128

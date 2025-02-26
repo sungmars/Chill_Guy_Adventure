@@ -22,7 +22,7 @@ public class PlayerController : BaseController
 
     private List<Vector2> playerToEnemyVectors;
     public List<Vector2> PlayerToEnemyVectors { get { return playerToEnemyVectors; } }
-    
+
     private List<bool> isInClosedRange;
     public List<bool> IsInClosedRange { get { return isInClosedRange; } }
 
@@ -31,11 +31,18 @@ public class PlayerController : BaseController
 
     private List<bool> isAttackingEnemyIndex;
 
-    private float meleeAttackRange = 1.5f;
+    private float meleeAttackRange = 1f;
     private float longAttackRange = 5f;
 
-    public bool AttackModeChange = false;   
-    
+    public bool AttackModeChange = false; // false가 근접공격, true가 원거리공격
+    public bool WeaponUpgrade01 = false;
+    public bool WeaponUpgrade02 = false;
+
+    // 맞았을 때
+    private float timeSinceLastChange = float.MaxValue;
+    private float healthChangeDelay = .5f; // 맞았을 때 0.5초 동안 빨간색
+
+
     protected virtual void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -61,16 +68,29 @@ public class PlayerController : BaseController
         Rotate(lookDirection);
         HandleAttackDelay();
 
-        if (AttackModeChange == false && Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.F)) ToMeleeWeapon(true, false, false);
+        if (Input.GetKeyDown(KeyCode.G)) ToRangeWeapon(false, false, false);
+
+        if (Input.GetKeyDown(KeyCode.Z)) UpGradeMeleeWeaponToVer01(false);
+        if (Input.GetKeyDown(KeyCode.X)) UpGradeMeleeWeaponToVer02(false, true);
+
+        if (timeSinceLastChange < healthChangeDelay)
         {
-            AttackModeChange = true;
-            weaponanimator.SetBool("WeaponChange", true);
+            Debug.Log("호복중?");
+            timeSinceLastChange += Time.deltaTime;
+            if (timeSinceLastChange >= healthChangeDelay)
+            {
+                _animationHandler.InvincibilityEnd();
+            }
         }
-        else if (AttackModeChange == true && Input.GetKeyDown(KeyCode.Space))
-        {
-            AttackModeChange = false;
-            weaponanimator.SetBool("WeaponChange", false);
-        }
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+
+        timeSinceLastChange = 0f;
+        _animationHandler.Damage();
     }
 
     protected override void FixedUpdate()
@@ -109,7 +129,7 @@ public class PlayerController : BaseController
         for (int i = 0; i < spawnedEnemies.Count; i++)
         {
             if (lookDirection.magnitude < 0.9f) lookDirection = Vector2.zero;
-            else if (isInClosedRange[i] == true) lookDirection = playerToEnemyVectors[i].normalized;                        
+            else if (isInClosedRange[i] == true) lookDirection = playerToEnemyVectors[i].normalized;
         }
     }
 
@@ -185,10 +205,59 @@ public class PlayerController : BaseController
         for (int j = 0; j < spawnedEnemies.Count; j++)
         {
             if (isAttackingEnemyIndex[j] == true) isAttacking = true;
-        }        
-                
+        }
+
         if (isAttackingEnemyIndex.All(temp => temp.Equals(false))) isAttacking = false;
-    }    
+    }
+
+    protected void ToRangeWeapon(bool mode, bool up1, bool up2)
+    {
+        mode = AttackModeChange;
+        up1 = WeaponUpgrade01;
+        up2 = WeaponUpgrade02;
+
+        if (!mode && !up1 && !up2)
+        {
+            AttackModeChange = true;
+            weaponanimator.SetBool("WeaponChange", true);
+        }
+    }
+
+    protected void ToMeleeWeapon(bool mode, bool up1, bool up2)
+    {
+        mode = AttackModeChange;
+        up1 = WeaponUpgrade01;
+        up2 = WeaponUpgrade02;
+
+        if (mode && !up1 && !up2)
+        {
+            AttackModeChange = false;
+            weaponanimator.SetBool("WeaponChange", false);
+        }
+    }
+
+    protected void UpGradeMeleeWeaponToVer01(bool mode)
+    {
+        mode = AttackModeChange;
+        if (!mode)
+        {
+            WeaponUpgrade01 = true;
+            meleeAttackRange = 1.3f;
+        }
+    }
+
+    protected void UpGradeMeleeWeaponToVer02(bool mode, bool up1)
+    {
+        mode = AttackModeChange;
+        up1 = WeaponUpgrade01;
+
+        if (!mode && up1)
+        {
+            WeaponUpgrade01 = false;
+            WeaponUpgrade02 = true;
+            meleeAttackRange = 1.6f;
+        }
+    }
 
     private void PlusExp(float exp)
     {
@@ -205,7 +274,7 @@ public class PlayerController : BaseController
 
     private void SetMaxExp()
     {
-        maxExp *= 1.2f; 
+        maxExp *= 1.2f;
     }
 
     private void SetGold(int gold)
