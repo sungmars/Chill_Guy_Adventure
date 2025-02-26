@@ -30,7 +30,7 @@ public class ChillAttackController : MonoBehaviour
         Vector2 targetPos = new Vector2(bottom.position.x, bottom.position.y + 0.55f);
         while (Vector2.Distance(chill.position, targetPos) > 0.1f)
         {            
-            if (Vector2.Distance(chill.position, targetPos) < 1.5f)
+            if (Vector2.Distance(chill.position, targetPos) < 2f)
             {
                 bottom.GetComponent<BoxCollider2D>().enabled = true;
             }
@@ -38,9 +38,7 @@ public class ChillAttackController : MonoBehaviour
             chill.position = new Vector2(chill.position.x, y);
             yield return null;
         }
-        bottom.GetComponent<BoxCollider2D>().enabled = false;
         yield return new WaitForSeconds(1f);
         Destroy(this.gameObject);
     }
-
 }

@@ -10,13 +10,13 @@ public class ChillAttackCollisonController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("PlayerFoot") || collision.CompareTag("Enemy"))
+        if (collision.CompareTag("PlayerFoot"))
         {
-            BaseController baseController = collision.GetComponent<BaseController>();
-            if (baseController != null)
+            BaseController player = collision.GetComponentInParent<BaseController>();
+            if (player != null)
             {
-                baseController.TakeDamage((int)damage);
-                baseController.ApplyKnockback(transform, knockbackPower, knockbackDuration);
+                player.TakeDamage((int)damage);
+                player.ApplyKnockback(transform, knockbackPower, knockbackDuration);
             }
         }
     }

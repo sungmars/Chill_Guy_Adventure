@@ -8,6 +8,7 @@ public class BossController : MonoBehaviour
     [SerializeField] SpriteRenderer bossSR;
 
     [SerializeField] Transform player;
+    [SerializeField] BaseController playerController;
     [SerializeField] public WeaponHandler WeaponPrefab;
     [SerializeField] private Transform weaponPivot;
     public GameObject projectilePrefab;
@@ -15,7 +16,14 @@ public class BossController : MonoBehaviour
     [SerializeField] private GameObject chillAttackBottomPrefab;
     [SerializeField] private GameObject chillDogPrefab;
     [SerializeField] private GameObject keyBoardAttackPrefab;
+    [SerializeField] private BoxCollider2D boxCollider;
     protected WeaponHandler weaponHandler;
+
+    public float damage = 10f;
+    public float lifetime = 5f;
+    public float knockbackPower = 5f;
+    public float knockbackDuration = 0.2f;
+    public float hp = 100f;
 
     Coroutine coroutine;
 
@@ -28,6 +36,7 @@ public class BossController : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerController = player.GetComponent<BaseController>();
 
         if (WeaponPrefab != null)
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
@@ -69,7 +78,7 @@ public class BossController : MonoBehaviour
     private void RandomSkill()
     {
         int idxSkill = Random.Range(0, 5);
-        switch (4)
+        switch (idxSkill)
         {
             case 0:
                 StartCoroutine(RushAttack());
@@ -205,11 +214,13 @@ public class BossController : MonoBehaviour
         float time = 0;
         GameObject keyBoardAttackObj = Instantiate(keyBoardAttackPrefab, transform);
         PlayerController playerController = player.GetComponent<PlayerController>();  
-        while (time < 10f)
+        while (time < 6f)
         {
             time += Time.deltaTime;
             yield return new WaitForSeconds(0);
         }
+        playerController.TakeDamage((int)damage);
+        playerController.ApplyKnockback(transform, knockbackPower, knockbackDuration);
         Destroy(keyBoardAttackObj);
         InvokeRepeating("SkillRepeat", 3f, 5f);
         player.GetComponent<PlayerInput>().enabled = true;
@@ -221,5 +232,17 @@ public class BossController : MonoBehaviour
         StopCoroutine(coroutine);
         InvokeRepeating("SkillRepeat", 3f, 5f);
         player.GetComponent<PlayerInput>().enabled = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            if (playerController != null)
+            {
+                playerController.TakeDamage((int)damage);
+                playerController.ApplyKnockback(transform, knockbackPower, knockbackDuration);
+            }
+        }
     }
 }
