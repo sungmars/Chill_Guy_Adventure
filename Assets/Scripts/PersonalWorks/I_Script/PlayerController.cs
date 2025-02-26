@@ -142,7 +142,8 @@ public class PlayerController : BaseController
     void OnMove(InputValue inputValue)
     {
         movementDirection = inputValue.Get<Vector2>();
-        movementDirection = movementDirection.normalized;        
+
+        movementDirection = movementDirection.normalized;
     }
 
     void OnLook(InputValue inputValue)

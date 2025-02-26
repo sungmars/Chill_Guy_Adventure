@@ -17,7 +17,7 @@ public class BaseController : MonoBehaviour
 
     // 넉백
     private Vector2 knockback = Vector2.zero;
-    private float knockbackDuration = 0.0f;
+    protected float knockbackDuration = 0.1f;
 
     // 공격
     protected bool isAttacking;
@@ -78,6 +78,7 @@ public class BaseController : MonoBehaviour
     {
         knockbackDuration = duration;
         knockback = -(other.position - transform.position).normalized * power;
+        Debug.Log("넉백");
     }
 
     
@@ -105,6 +106,8 @@ public class BaseController : MonoBehaviour
             isgameOver = true;
             Debug.Log("플레이어 사망");
         }
+        else if (gameObject.CompareTag("Enemy"))
+            Destroy(gameObject);
         else
             Destroy(gameObject);
     }
