@@ -31,10 +31,12 @@ public class PlayerController : BaseController
 
     private List<bool> isAttackingEnemyIndex;
 
-    private float meleeAttackRange = 1.5f;
+    private float meleeAttackRange = 1f;
     private float longAttackRange = 5f;
 
-    public bool AttackModeChange = false;   
+    public bool AttackModeChange = false; // false가 근접공격, true가 원거리공격
+    public bool WeaponUpgrade01 = false;
+    public bool WeaponUpgrade02 = false;
     
     protected virtual void Awake()
     {
@@ -60,17 +62,12 @@ public class PlayerController : BaseController
         _animationHandler.UpdateState(movementDirection);
         Rotate(lookDirection);
         HandleAttackDelay();
+                
+        if (Input.GetKeyDown(KeyCode.F)) ToMeleeWeapon(true, false, false);
+        if (Input.GetKeyDown(KeyCode.G)) ToRangeWeapon(false, false, false);
 
-        if (AttackModeChange == false && Input.GetKeyDown(KeyCode.Space))
-        {
-            AttackModeChange = true;
-            weaponanimator.SetBool("WeaponChange", true);
-        }
-        else if (AttackModeChange == true && Input.GetKeyDown(KeyCode.Space))
-        {
-            AttackModeChange = false;
-            weaponanimator.SetBool("WeaponChange", false);
-        }
+        if (Input.GetKeyDown(KeyCode.Z)) UpGradeMeleeWeaponToVer01(false);
+        if (Input.GetKeyDown(KeyCode.X)) UpGradeMeleeWeaponToVer02(false, true);        
     }
 
     protected override void FixedUpdate()
@@ -188,7 +185,56 @@ public class PlayerController : BaseController
         }        
                 
         if (isAttackingEnemyIndex.All(temp => temp.Equals(false))) isAttacking = false;
-    }    
+    }
+
+    protected void ToRangeWeapon(bool mode, bool up1, bool up2)
+    {
+        mode = AttackModeChange;
+        up1 = WeaponUpgrade01;
+        up2 = WeaponUpgrade02;
+
+        if (!mode && !up1 && !up2)
+        {
+            AttackModeChange = true;
+            weaponanimator.SetBool("WeaponChange", true);
+        }
+    }
+
+    protected void ToMeleeWeapon(bool mode, bool up1, bool up2)
+    {
+        mode = AttackModeChange;
+        up1 = WeaponUpgrade01;
+        up2 = WeaponUpgrade02;
+
+        if (mode && !up1 && !up2)
+        {
+            AttackModeChange = false;
+            weaponanimator.SetBool("WeaponChange", false);
+        }
+    }
+
+    protected void UpGradeMeleeWeaponToVer01(bool mode)
+    {
+        mode = AttackModeChange;
+        if (!mode)
+        {
+            WeaponUpgrade01 = true;
+            meleeAttackRange = 1.3f;
+        }
+    }
+
+    protected void UpGradeMeleeWeaponToVer02(bool mode, bool up1)
+    {
+        mode = AttackModeChange;
+        up1 = WeaponUpgrade01;
+
+        if (!mode && up1)
+        {
+            WeaponUpgrade01 = false;
+            WeaponUpgrade02 = true;
+            meleeAttackRange = 1.6f;
+        }
+    }
 
     private void PlusExp(float exp)
     {
