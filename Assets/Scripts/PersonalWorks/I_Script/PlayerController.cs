@@ -43,7 +43,7 @@ public class PlayerController : BaseController
     private float healthChangeDelay = .5f; // 맞았을 때 0.5초 동안 빨간색
 
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animationHandler = GetComponent<AnimationHandler>();
@@ -136,10 +136,10 @@ public class PlayerController : BaseController
     private void HandleAttackDelay()
     {
         if (weaponHandler == null) return;
-        if (timeSinceLastAttack <= weaponHandler.Delay)
+        if (timeSinceLastAttack <= weaponHandler.delay)
             timeSinceLastAttack += Time.deltaTime;
 
-        if (isAttacking && timeSinceLastAttack > weaponHandler.Delay)
+        if (isAttacking && timeSinceLastAttack > weaponHandler.delay)
         {
             timeSinceLastAttack = 0;
             Attack();
