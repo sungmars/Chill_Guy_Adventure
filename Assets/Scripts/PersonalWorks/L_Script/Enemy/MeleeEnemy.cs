@@ -3,13 +3,12 @@ using UnityEngine;
 
 public class MeleeEnemy : EnemyController
 {
-    [SerializeField] protected float knockbackPower = 5.0f;
     public AudioClip attackaudio;
 
 
     protected override void Attack()
     {
-        
+
         if (Vector2.Distance(transform.position, player.position) <= attackRange)
         {
             Debug.Log("때림 " + attack + " 의 데미지");
