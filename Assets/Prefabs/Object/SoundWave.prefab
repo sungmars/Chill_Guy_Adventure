@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2778082403335666391}
   - component: {fileID: 2846159665464376845}
   - component: {fileID: 5927345122670252889}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WeaponRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 4962389296311329137}
   - component: {fileID: 1038083570477797835}
   - component: {fileID: -3389414748477656677}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SoundWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1642365265176952000}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -8,15 +8,14 @@ public class BossController : MonoBehaviour
     [SerializeField] SpriteRenderer bossSR;
 
     [SerializeField] Transform player;
-    [SerializeField] BaseController playerController;
     [SerializeField] public WeaponHandler WeaponPrefab;
     [SerializeField] private Transform weaponPivot;
     public GameObject projectilePrefab;
     [SerializeField] private GameObject chillAttackPrefab;
     [SerializeField] private GameObject chillAttackBottomPrefab;
     [SerializeField] private GameObject chillDogPrefab;
-    [SerializeField] private GameObject keyBoardAttackPrefab;
-    [SerializeField] private BoxCollider2D boxCollider;
+    [SerializeField] private GameObject enemySpawnObject;
+    [SerializeField] private GameObject keyBoardAttackPrefab;    
     protected WeaponHandler weaponHandler;
 
     public float damage = 10f;
@@ -25,18 +24,18 @@ public class BossController : MonoBehaviour
     public float knockbackDuration = 0.2f;
     public float hp = 100f;
 
+    public AudioClip bossAudio;
+
     Coroutine coroutine;
 
     Animator animator;
     private static readonly int isAttack = Animator.StringToHash("IsAttack");
 
-    private bool flipX = false;
     private bool onSkill = false;
 
     private void Awake()
-    {
+    {       
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        playerController = player.GetComponent<BaseController>();
 
         if (WeaponPrefab != null)
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
@@ -48,6 +47,7 @@ public class BossController : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.Instance.PlayBossSound(bossAudio);
         InvokeRepeating("SkillRepeat", 2f, 5f);
     }
 
@@ -57,13 +57,11 @@ public class BossController : MonoBehaviour
         {
             if (player.transform.position.x < transform.position.x)
             {
-                flipX = false;
-                bossSR.flipX = flipX;
+                transform.localScale = new Vector3(1, 1, 1);
             }
             else
             {
-                flipX = true;
-                bossSR.flipX = flipX;
+                transform.localScale = new Vector3(-1, 1, 1);
             }
         }
     }
@@ -78,7 +76,7 @@ public class BossController : MonoBehaviour
     private void RandomSkill()
     {
         int idxSkill = Random.Range(0, 5);
-        switch (idxSkill)
+        switch (3)
         {
             case 0:
                 StartCoroutine(RushAttack());
@@ -143,6 +141,8 @@ public class BossController : MonoBehaviour
 
     private IEnumerator SoundWaveSetSize(GameObject projectile)
     {
+        onSkill = true; 
+
         BoxCollider2D boxCollider2D = projectile.GetComponent<BoxCollider2D>();
         float x = 5;
         Vector2 objSize = projectile.transform.localScale;
@@ -156,6 +156,8 @@ public class BossController : MonoBehaviour
             boxCollider2D.size = boxSize * ratio;
             yield return null;
         }
+        onSkill = false;
+
         yield return null;
     }
 
@@ -196,11 +198,13 @@ public class BossController : MonoBehaviour
 
     private void CreateChillDog()
     {
+        EnemySpawnObject spawnObject;
         GameObject chillDog;
         for (int i = 0; i < 5; i++)
         {
             float x = Random.Range(-8f, 9f);
             float y = Random.Range(-4f, 5f);
+            spawnObject = spawnObject = Instantiate(enemySpawnObject, new Vector3(x, y), Quaternion.identity).GetComponent<EnemySpawnObject>();
             chillDog = Instantiate(chillDogPrefab, transform);
             chillDog.name = $"ChillDog {i}";
             chillDog.transform.position = new Vector2(x, y);
@@ -213,7 +217,7 @@ public class BossController : MonoBehaviour
         CancelInvoke("SkillRepeat");
         float time = 0;
         GameObject keyBoardAttackObj = Instantiate(keyBoardAttackPrefab, transform);
-        PlayerController playerController = player.GetComponent<PlayerController>();  
+        PlayerController playerController = player.GetComponent<PlayerController>();
         while (time < 6f)
         {
             time += Time.deltaTime;
@@ -232,17 +236,5 @@ public class BossController : MonoBehaviour
         StopCoroutine(coroutine);
         InvokeRepeating("SkillRepeat", 3f, 5f);
         player.GetComponent<PlayerInput>().enabled = true;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            if (playerController != null)
-            {
-                playerController.TakeDamage((int)damage);
-                playerController.ApplyKnockback(transform, knockbackPower, knockbackDuration);
-            }
-        }
     }
 }
