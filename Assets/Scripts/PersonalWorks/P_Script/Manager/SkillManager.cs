@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -16,6 +17,13 @@ public class SkillManager : MonoSingleton<SkillManager>
     public Transform currentSkillPivot;
     public List<SkillHandler> mouseSkillHandlers; // 왼쪽 0, 오른쪽 1
     public List<SkillUI> mouseSkillUIs; // 왼쪽 0, 오른쪽 1
+
+
+    public List<SkillUI> getSkillUIs; // 1, 2, 3 UI
+    public List<SkillHandler> getSkillHandlerUIs; // 1, 2, 3 UI에 대한 정보
+
+
+
     new void Awake()
     {
         base.Awake();
@@ -25,13 +33,38 @@ public class SkillManager : MonoSingleton<SkillManager>
     void Start()
     {
         OnClickSetRandomSkill();
+        GetSkillSetting();
+    }
+
+    public void GetSkillSetting()
+    {
+        var temp = GetRandomSkillThree();
+        for (int i = 0; i < getSkillUIs.Count; i++)
+        {
+            getSkillUIs[i].iconImage.sprite = temp[i].icon;
+            getSkillUIs[i].tooltipTitle.text = temp[i]._name;
+            getSkillUIs[i].tooltipDesc.text = temp[i].normalDesc;
+        }
+    }
+
+    public List<SkillHandler> GetRandomSkillThree()
+    {
+        return GetAllSkillHandlerList().GetRandomItems(3);
     }
 
     public void OnClickSetRandomSkill()
     {
-
         SetSkill(0, GetRandomSkillHandlerList().GetRandomItem());
         SetSkill(1, GetRandomSkillHandlerList().GetRandomItem());
+    }
+
+    public List<SkillHandler> GetAllSkillHandlerList()
+    {
+        List<SkillHandler> temp = new List<SkillHandler>();
+        temp.AddRange(rangeSkillHandlerList);
+        temp.AddRange(areaSkillHandlerList);
+        temp.AddRange(buffSkillHandlerList);
+        return temp;
     }
 
     public List<SkillHandler> GetRandomSkillHandlerList()

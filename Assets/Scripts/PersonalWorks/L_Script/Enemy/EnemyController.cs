@@ -131,6 +131,8 @@ public abstract class EnemyController : BaseController
             playerController.ReceiveExp(exp);
             playerController.ReceiveGold(gold);
         }
+
+        EnemySpawnManager.Instance.RemoveEnemyOnDeath(this); // 적의 죽음을 알림
         base.Die();
     }
 }

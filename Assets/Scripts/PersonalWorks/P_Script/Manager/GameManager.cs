@@ -25,7 +25,11 @@ public class GameManager : MonoSingletonDontDestroy<GameManager>
 
     public void StartRound(int _round)
     {
-        if (RoundSceneList.Count < _round)
+        currentRoundIndex = _round;
+        Debug.Log(currentRoundIndex);
+        Debug.Log(RoundSceneList.Count);
+        Debug.Log(RoundSceneList[_round]);
+        if (RoundSceneList.Count > currentRoundIndex)
         {
             SceneManager.LoadScene(RoundSceneList[_round]);
         }
