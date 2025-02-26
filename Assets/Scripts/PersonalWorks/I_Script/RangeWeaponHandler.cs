@@ -17,13 +17,7 @@ public class RangeWeaponHandler : WeaponHandler
     public float Duration { get { return duration; } }
 
     [SerializeField] private float spread;
-    public float Spread { get { return spread; } }
-
-    [SerializeField] private int numberofProjectilesPerShot;
-    public int NumberofProjectilesPerShot { get { return numberofProjectilesPerShot; } }
-
-    [SerializeField] private float multipleProjectileAngle;
-    public float MultipleProjectileAngle { get { return multipleProjectileAngle; } }
+    public float Spread { get { return spread; } }    
 
     [SerializeField] private Color projectileColor;
     public Color ProjectileColor { get { return projectileColor; } }

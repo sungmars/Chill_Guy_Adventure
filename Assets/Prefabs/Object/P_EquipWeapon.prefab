@@ -183,11 +183,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca8fdc24ae7759c46a7d2362a253f5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.5
   weaponSize: 0.7
   power: 5
   speed: 2
   attackRange: 5
+  delay: 0.7
+  numberofProjectilesPerShot: 1
+  multipleProjectileAngle: 1
   target:
     serializedVersion: 2
     m_Bits: 128
@@ -197,10 +199,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   projectileSpawnPosition: {fileID: 4410437314180567123}
   bulletIndex: 0
-  bulletSize: 0.7
+  bulletSize: 0.5
   duration: 10
   spread: 1
-  numberofProjectilesPerShot: 1
-  multipleProjectileAngle: 1
   projectileColor: {r: 1, g: 1, b: 1, a: 1}
   collideBoxSize: {x: 1, y: 1}

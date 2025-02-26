@@ -5,9 +5,7 @@ using UnityEngine;
 public class WeaponHandler : MonoBehaviour
 {
     [Header("Attack Info")]
-    [SerializeField] private float delay = 1f;
-    public float Delay {  get => delay; set => delay = value; }
-
+    
     [SerializeField] private float weaponSize = 1f;
     public float WeaponSize { get => weaponSize; set => weaponSize = value; }
 
@@ -19,6 +17,12 @@ public class WeaponHandler : MonoBehaviour
 
     [SerializeField] private float attackRange = 5f;
     public float AttackRange { get => attackRange; set => attackRange = value; }
+
+    public float delay = 0.7f;
+
+    public int numberofProjectilesPerShot = 1;
+
+    public float multipleProjectileAngle = 1f;
 
     public LayerMask target;
 
@@ -68,16 +72,10 @@ public class WeaponHandler : MonoBehaviour
     public void AttackAnimation()
     {
         MeleeBasic(false, false, false);
-        RangeBasic(true, false, false);        
+        MeleeUpgrade01(false, true, false);
+        MeleeUpgrade02(false, false, true);
 
-        if (playerController.AttackModeChange == false && playerController.WeaponUpgrade01 == true && playerController.WeaponUpgrade02 == false)
-        {            
-            animator.SetTrigger(SwordUp01);
-        }
-        else if (playerController.AttackModeChange == false && playerController.WeaponUpgrade01 == false && playerController.WeaponUpgrade02 == true)
-        {            
-            animator.SetTrigger(SwordUp02);
-        }
+        RangeBasic(true, false, false);                
     }
 
     public virtual void Rotate(bool isLeft)
@@ -101,5 +99,23 @@ public class WeaponHandler : MonoBehaviour
         up2 = playerController.WeaponUpgrade02;
 
         if (mode && !up1 && !up2) animator.SetTrigger(isRangeAttack);
+    }
+
+    public void MeleeUpgrade01(bool mode, bool up1, bool up2)
+    {
+        mode = playerController.AttackModeChange;
+        up1 = playerController.WeaponUpgrade01;
+        up2 = playerController.WeaponUpgrade02;
+
+        if (!mode && up1 && !up2) animator.SetTrigger(SwordUp01);
+    }
+
+    public void MeleeUpgrade02(bool mode, bool up1, bool up2)
+    {
+        mode = playerController.AttackModeChange;
+        up1 = playerController.WeaponUpgrade01;
+        up2 = playerController.WeaponUpgrade02;
+
+        if (!mode && !up1 && up2) animator.SetTrigger(SwordUp02);
     }
 }
