@@ -133,11 +133,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5951954701812978472, guid: e49f8947d8b925f4fb008adbe0542fba, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.88
+      value: -7.524
       objectReference: {fileID: 0}
     - target: {fileID: 5951954701812978472, guid: e49f8947d8b925f4fb008adbe0542fba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.79
+      value: -0.889
       objectReference: {fileID: 0}
     - target: {fileID: 5951954701812978472, guid: e49f8947d8b925f4fb008adbe0542fba, type: 3}
       propertyPath: m_LocalPosition.z
@@ -178,6 +178,10 @@ PrefabInstance:
     - target: {fileID: 7738807029180407621, guid: e49f8947d8b925f4fb008adbe0542fba, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077011534549180203, guid: e49f8947d8b925f4fb008adbe0542fba, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -429,9 +433,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1516900887}
     - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: d6e6641255243554aa7609cf1669aa0c, type: 3}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
       propertyPath: firePoint
       value: 
       objectReference: {fileID: 6979717474196772896}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Id
+      value: b8930f98-9cea-49fd-9587-02db11a11b1a
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Name
+      value: Actions
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: chillDogPrefab
+      value: 
+      objectReference: {fileID: 3433430853607481300, guid: 24781d0f4208d854f956e9a55535b6c8, type: 3}
     - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
       propertyPath: _spriteRenderer
       value: 
@@ -445,9 +465,49 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7825977485997545706, guid: cc0b176362b5bdd49bd8ab4d992a7bfe, type: 3}
     - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: keyBoardAttackPrefab
+      value: 
+      objectReference: {fileID: 461149419535327058, guid: 9c971d595d1ae0b4c922f2d87f1a859a, type: 3}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: keyBoardAttackActions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: d6e6641255243554aa7609cf1669aa0c, type: 3}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
       propertyPath: chillAttackBottomPrefab
       value: 
       objectReference: {fileID: 5087188300551233965, guid: dcc8d5d6260341542b1f0e7098caff60, type: 3}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Actions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Bindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Actions.Array.data[0].m_Id
+      value: ca6c21f0-eebd-4b84-bb14-adeeb3f3a6c4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Bindings.Array.data[0].m_Id
+      value: a2f79ce7-667e-4bd2-acde-b874a4b5f015
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Actions.Array.data[0].m_Name
+      value: New action
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Actions.Array.data[0].m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Bindings.Array.data[0].m_Action
+      value: New action
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579291308885769929, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: actions.m_Actions.Array.data[0].m_ExpectedControlType
+      value: Button
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

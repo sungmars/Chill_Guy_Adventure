@@ -21,6 +21,11 @@ public class EnemyProjectile : MonoBehaviour
                 player.TakeDamage((int)damage);
                 player.ApplyKnockback(transform, knockbackPower, knockbackDuration);
             }
+            if(transform.name == "SoundWave")
+            {
+                BossController boss = transform.GetComponentInParent<BossController>();
+                boss.StopSoundWaveCoroutine();
+            }
             Destroy(gameObject);
         }
         else if (collision.CompareTag("Wall"))
