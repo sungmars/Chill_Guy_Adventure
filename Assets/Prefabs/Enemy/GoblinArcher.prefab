@@ -108,7 +108,7 @@ MonoBehaviour:
   knockbackTime: 0.2
   characterName: 
   level: 1
-  attack: 10
+  attack: 15
   defense: 0
   equipItem: 
   speed: 1

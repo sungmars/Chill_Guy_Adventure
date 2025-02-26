@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
-    public float damage = 10f;
+    // public float damage = 10f;
     public float lifetime = 5f;
     BaseController baseController;
     private void Start()
@@ -22,7 +22,7 @@ public class EnemyProjectile : MonoBehaviour
             BaseController player = collision.GetComponent<BaseController>();
             if (player != null)
             {
-                player.TakeDamage((int)damage);
+                player.TakeDamage((int)baseController.attack);
                 player.ApplyKnockback(transform, baseController.knockbackPower, baseController.knockbackTime);
             }
             if (transform.name == "SoundWave")

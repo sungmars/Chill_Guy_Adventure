@@ -285,7 +285,7 @@ MonoBehaviour:
   knockbackTime: 0.2
   characterName: ChilDog
   level: 1
-  attack: 1
+  attack: 10
   defense: 0
   equipItem: 
   speed: 3

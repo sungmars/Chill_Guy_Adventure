@@ -4828,6 +4828,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1329484251}
   m_CullTransparentMesh: 1
+--- !u!1001 &1337821214
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2805922890099091300, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_Name
+      value: GoblinArcher (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
 --- !u!1 &1343103234
 GameObject:
   m_ObjectHideFlags: 0
@@ -5637,6 +5694,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8952796697f80846beed2c4c8a1d084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1597826926
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773404982742394271, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2805922890099091300, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
+      propertyPath: m_Name
+      value: GoblinArcher
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1bfa5bb4a2e04b94a9d117f6a32484eb, type: 3}
 --- !u!1 &1704608531
 GameObject:
   m_ObjectHideFlags: 0
@@ -7056,6 +7170,22 @@ PrefabInstance:
       value: Player_SoJaeCheol_Tutor
       objectReference: {fileID: 0}
     - target: {fileID: 4345247795806087699, guid: 6d8bdbbf8faf5a84081e269b02f2e6f9, type: 3}
+      propertyPath: hp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345247795806087699, guid: 6d8bdbbf8faf5a84081e269b02f2e6f9, type: 3}
+      propertyPath: maxHp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345247795806087699, guid: 6d8bdbbf8faf5a84081e269b02f2e6f9, type: 3}
+      propertyPath: defense
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345247795806087699, guid: 6d8bdbbf8faf5a84081e269b02f2e6f9, type: 3}
+      propertyPath: hpBarimage
+      value: 
+      objectReference: {fileID: 1292177452}
+    - target: {fileID: 4345247795806087699, guid: 6d8bdbbf8faf5a84081e269b02f2e6f9, type: 3}
       propertyPath: knockbackTime
       value: 0.2
       objectReference: {fileID: 0}
@@ -7125,3 +7255,5 @@ SceneRoots:
   - {fileID: 340806997}
   - {fileID: 2085092755}
   - {fileID: 2037776925}
+  - {fileID: 1597826926}
+  - {fileID: 1337821214}
