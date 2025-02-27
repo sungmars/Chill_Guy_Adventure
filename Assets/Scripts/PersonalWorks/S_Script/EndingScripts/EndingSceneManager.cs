@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
@@ -11,7 +12,7 @@ public class EndingSceneManager : MonoBehaviour
 {
     [SerializeField] private AudioClip endingBgm;
     [SerializeField] SpriteRenderer endingBgImage;
-    [SerializeField] GameObject player;
+    GameObject player;
     [SerializeField] Sprite chill;
     [SerializeField] SpriteRenderer boss;
     [SerializeField] Transform LeftPosition;
@@ -26,6 +27,11 @@ public class EndingSceneManager : MonoBehaviour
 
     [SerializeField]
     TextMeshProUGUI endingScript;
+
+    private void Awake()
+    {
+        player = GameManager.Instance.GetPlayer().gameObject;
+    }
 
     private void Start()
     {
@@ -52,8 +58,10 @@ public class EndingSceneManager : MonoBehaviour
 
     IEnumerator PlayerJump()
     {
+        player.GetComponent<PlayerInput>().enabled = false;
+        player.GetComponentInChildren<Animator>().enabled = false;
         float firstY = player.transform.position.y;
-        float tartgetY = firstY + 3f;
+        float tartgetY = firstY + 2f;
         float speed = 0.05f;
         while (player.transform.position.y < tartgetY)
         {
@@ -91,7 +99,7 @@ public class EndingSceneManager : MonoBehaviour
 
     IEnumerator PlayerFilp()
     {
-        SpriteRenderer playerSr = player.GetComponent<SpriteRenderer>();
+        SpriteRenderer playerSr = player.GetComponentInChildren<SpriteRenderer>();
         bool flip = false;
         for (int i = 0; i < 5; i++)
         {
