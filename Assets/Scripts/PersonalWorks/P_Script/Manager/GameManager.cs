@@ -15,9 +15,21 @@ public class GameManager : MonoSingletonDontDestroy<GameManager>
 
     public List<EnemySpawnData> enemySpawnDatas;
     public (int left, int right) mouseSkill = (4, 1);
+    public List<PlayerController> playerControllers;
+    public int selectPlayer = 0;
+    public int playerGold = 0;
 
     public void Start()
     {
+        if (PlayerPrefs.HasKey("Gold"))
+        {
+            playerGold = 0;
+        }
+    }
+
+    public void CreatePlayer()
+    {
+
     }
 
     public void NextRound()
