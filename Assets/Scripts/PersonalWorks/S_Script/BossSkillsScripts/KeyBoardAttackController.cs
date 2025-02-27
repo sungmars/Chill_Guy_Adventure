@@ -12,6 +12,7 @@ public class KeyBoardAttackController : MonoBehaviour
     [SerializeField] GameObject[] keyPrefabs;
     GameObject player;
     GameObject keyObj;
+    [SerializeField] GameObject boss;
 
     public float damage = 10f;
     public float lifetime = 5f;
@@ -91,6 +92,7 @@ public class KeyBoardAttackController : MonoBehaviour
     {
         onSkill = true;
         player.GetComponent<PlayerInput>().enabled = false;
+        boss.tag = "Untagged";
         float time = 0;
         PlayerController playerController = player.GetComponent<PlayerController>();
         while (time < 6f)
@@ -102,6 +104,7 @@ public class KeyBoardAttackController : MonoBehaviour
         playerController.TakeDamage((int)damage);
         playerController.ApplyKnockback(transform, knockbackPower, knockbackDuration);
         player.GetComponent<PlayerInput>().enabled = true;
+        boss.tag = "Enemy";
         ClearData();
         onSkill = false;
         yield return new WaitForSeconds(2);
@@ -113,6 +116,7 @@ public class KeyBoardAttackController : MonoBehaviour
         {
             StopCoroutine(coroutine);
         }
+        boss.tag = "Enemy";
         player.GetComponent<PlayerInput>().enabled = true;
     }
 
