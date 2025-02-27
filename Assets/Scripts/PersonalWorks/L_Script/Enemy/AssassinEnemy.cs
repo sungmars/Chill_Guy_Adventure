@@ -4,9 +4,20 @@ using UnityEngine;
 public class AssassinEnemy : EnemyController
 {
     public AudioClip attackaudio;
+    public AudioClip damageAudio; // 데미지 받을 때 소리
+    public AudioClip deathAudio; // 죽을 때 소리
     public Collider2D teleportCollider;
     private bool hasTeleported = false;
-    
+
+    protected override void FixedUpdate()
+    {
+        if (isStopped)
+        {
+            _rigidbody2D.velocity = Vector2.zero;
+        }
+        base.FixedUpdate();
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !hasTeleported)
@@ -16,6 +27,7 @@ public class AssassinEnemy : EnemyController
             StartCoroutine(TeleportReady());
         }
     }
+
     private IEnumerator TeleportReady()
     {
         animator.SetBool("IsTeleportReady", true);
@@ -33,7 +45,7 @@ public class AssassinEnemy : EnemyController
         if (Vector2.Distance(transform.position, player.position) > attackRange)
         {
             Vector2 direction = (player.position - transform.position).normalized;
-            transform.position = (Vector2)player.position - direction * (attackRange+1f);
+            transform.position = (Vector2)player.position - direction * (attackRange + 1f);
             Debug.Log("순간이동 완료");
         }
     }
@@ -56,5 +68,16 @@ public class AssassinEnemy : EnemyController
             }
         }
     }
-    
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        AudioManager.Instance.PlayEnemySound(damageAudio); // 데미지 받을 때 소리 재생
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        AudioManager.Instance.PlayEnemySound(deathAudio); // 죽을 때 소리 재생
+    }
 }

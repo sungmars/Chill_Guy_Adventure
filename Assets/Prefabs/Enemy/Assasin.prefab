@@ -291,7 +291,7 @@ MonoBehaviour:
   defense: 0
   equipItem: 
   speed: 2
-  attackSpeed: 1
+  attackSpeed: 0.8
   exp: 0
   gold: 0
   hp: 30
@@ -299,7 +299,9 @@ MonoBehaviour:
   hpBarimage: {fileID: 8197282554365827260}
   attackRange: 1
   _spriteRenderer: {fileID: 3377484213992504556}
-  attackaudio: {fileID: 8300000, guid: 6b429969021b1a14da0689954e41e74e, type: 3}
+  attackaudio: {fileID: 8300000, guid: ce7373b7b4dafa3408c7557c327cd1d4, type: 3}
+  damageAudio: {fileID: 8300000, guid: dcbc845387190d147ad0c9afe5408893, type: 3}
+  deathAudio: {fileID: 8300000, guid: d267015d442954240b22083d24d18919, type: 3}
   teleportCollider: {fileID: 1907714891007573494}
 --- !u!50 &7362611929521153279
 Rigidbody2D:

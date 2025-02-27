@@ -299,6 +299,8 @@ MonoBehaviour:
   attackRange: 1
   _spriteRenderer: {fileID: 3184295396031939815}
   attackaudio: {fileID: 8300000, guid: d8758e080da216f4e9192cd87d8b2eb4, type: 3}
+  damageAudio: {fileID: 8300000, guid: ffb2becf77d83ea4bbd2313461b8ea4c, type: 3}
+  deathAudio: {fileID: 8300000, guid: d267015d442954240b22083d24d18919, type: 3}
 --- !u!50 &5964744247428719497
 Rigidbody2D:
   serializedVersion: 4

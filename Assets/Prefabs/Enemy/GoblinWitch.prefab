@@ -155,6 +155,9 @@ MonoBehaviour:
   projectilePrefab: {fileID: 3108637263897302212, guid: 5262adaeed88d1b4c8e0170d3720376d, type: 3}
   firePoint: {fileID: 7041493397712584093}
   projectileSpeed: 7
+  attackaudio: {fileID: 8300000, guid: c6fbbde3bfeec664c92458aba1dcb7be, type: 3}
+  damageAudio: {fileID: 8300000, guid: dcbc845387190d147ad0c9afe5408893, type: 3}
+  deathAudio: {fileID: 8300000, guid: d267015d442954240b22083d24d18919, type: 3}
 --- !u!50 &5331849873551966149
 Rigidbody2D:
   serializedVersion: 4
