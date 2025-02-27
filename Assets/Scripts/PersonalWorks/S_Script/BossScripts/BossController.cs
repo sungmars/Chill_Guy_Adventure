@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class BossController : BaseController
 {
@@ -48,5 +49,10 @@ public class BossController : BaseController
                 filp = true;
             }
         }
+    }
+
+    public override void Die()
+    {
+        SceneManager.LoadScene("EndingScene");
     }
 }
