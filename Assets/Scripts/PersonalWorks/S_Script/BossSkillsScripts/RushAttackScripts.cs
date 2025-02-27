@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class RushAttackScripts : MonoBehaviour
 {
     [SerializeField] private AudioClip rushClip;
-    public void PublicRushAttack(Transform boss,Transform player)
+    public void PublicRushAttack(Transform boss, Transform player)
     {
-        RushAttack(boss,player);
+        RushAttack(boss, player);
     }
 
     private void RushAttack(Transform boss, Transform player)
@@ -22,7 +21,7 @@ public class RushAttackScripts : MonoBehaviour
         Vector2 curPos = boss.transform.position;
         Vector2 backDir = (curPos - targetPos).normalized;
         Vector2 backPos = curPos + backDir * 1f;
-        Vector2 movePos;        
+        Vector2 movePos;
         while (Vector2.Distance(backPos, boss.transform.position) > 0.1f)
         {
             movePos = Vector2.Lerp(boss.transform.position, backPos, Time.deltaTime * 1.5f);
