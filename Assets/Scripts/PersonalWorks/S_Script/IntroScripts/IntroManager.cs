@@ -15,7 +15,7 @@ public class IntroManager : MonoBehaviour
     [SerializeField]
     GameObject boss;
 
-
+   
     private void Awake()
     {
         introBossController = GameObject.FindObjectOfType<IntroBossController>(true);

@@ -6,19 +6,31 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/P_Scene/Stage_01.unity
+    path: Assets/Scenes/FinalScene/Start_Scene.unity
+    guid: 451f02a4509f42d45a588ed6ea2437a5
+  - enabled: 1
+    path: Assets/Scenes/FinalScene/Stage_01.unity
     guid: d69a8ab1ae10a524fbf731a067c5bab2
   - enabled: 1
-    path: Assets/Scenes/P_Scene/Stage_02.unity
-    guid: b735aa6e8ef900c46b68b5b95b7b0ba4
+    path: Assets/Scenes/FinalScene/Stage_02.unity
+    guid: f3e67dff4ea364c45aa72dc19c5f45fe
   - enabled: 1
-    path: Assets/Scenes/P_Scene/Stage_03.unity
-    guid: 92777390331888c4d8daba63b70987ee
+    path: Assets/Scenes/FinalScene/Stage_03.unity
+    guid: a1632ec1ea4d2b847beb996eb11392d5
   - enabled: 1
-    path: Assets/Scenes/P_Scene/Stage_04.unity
-    guid: e801e98a1de03f44984b7d21d157d5eb
+    path: Assets/Scenes/FinalScene/Stage_04.unity
+    guid: 3c8c3ee4ca15ecf49b32a0f396ae8065
   - enabled: 1
-    path: Assets/Scenes/P_Scene/Stage_05.unity
-    guid: 6ab74cdb666d2c649a8cb1a51403a351
+    path: Assets/Scenes/FinalScene/Stage_05.unity
+    guid: 3aec897b073e0224a9f0f90419ce4d77
+  - enabled: 1
+    path: Assets/Scenes/FinalScene/BossIntroScene.unity
+    guid: 4960da15d49d06d49a8c379abdab7f9c
+  - enabled: 1
+    path: Assets/Scenes/FinalScene/BossScene.unity
+    guid: 1ff0001efab07244b8a461e65e1ca5de
+  - enabled: 1
+    path: Assets/Scenes/FinalScene/EndingScene.unity
+    guid: 57fcef71f263a4046983fefe200be322
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: fb1e126e54b21de46b5dfc64e9a4e221, type: 2}

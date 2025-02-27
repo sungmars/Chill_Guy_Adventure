@@ -46,7 +46,7 @@ public class BaseController : MonoBehaviour
     public Image hpBarimage; // 맞았을 때 0.5초 동안 빨간색
 
 
-    public void Awake()
+    protected virtual void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }

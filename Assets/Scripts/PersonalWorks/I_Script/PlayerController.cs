@@ -43,7 +43,7 @@ public class PlayerController : BaseController
     private float healthChangeDelay = .5f; // 맞았을 때 0.5초 동안 빨간색
 
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animationHandler = GetComponent<AnimationHandler>();
@@ -71,8 +71,17 @@ public class PlayerController : BaseController
         if (Input.GetKeyDown(KeyCode.F)) ToMeleeWeapon(true, false, false);
         if (Input.GetKeyDown(KeyCode.G)) ToRangeWeapon(false, false, false);
 
-        if (Input.GetKeyDown(KeyCode.Z)) UpGradeMeleeWeaponToVer01(false);
-        if (Input.GetKeyDown(KeyCode.X)) UpGradeMeleeWeaponToVer02(false, true);
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if (!AttackModeChange) UpgradeMeleeWeaponToVer01(false);
+            else UpgradeRangeWeaponToVer01(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            if (!AttackModeChange && WeaponUpgrade01) UpgradeMeleeWeaponToVer02(false, true);
+            else if (AttackModeChange && WeaponUpgrade01) UpgradeRangeWeaponToVer02(true, true);
+        }
 
         if (timeSinceLastChange < healthChangeDelay)
         {
@@ -136,10 +145,10 @@ public class PlayerController : BaseController
     private void HandleAttackDelay()
     {
         if (weaponHandler == null) return;
-        if (timeSinceLastAttack <= weaponHandler.Delay)
+        if (timeSinceLastAttack <= weaponHandler.delay)
             timeSinceLastAttack += Time.deltaTime;
 
-        if (isAttacking && timeSinceLastAttack > weaponHandler.Delay)
+        if (isAttacking && timeSinceLastAttack > weaponHandler.delay)
         {
             timeSinceLastAttack = 0;
             Attack();
@@ -236,17 +245,17 @@ public class PlayerController : BaseController
         }
     }
 
-    protected void UpGradeMeleeWeaponToVer01(bool mode)
+    protected void UpgradeMeleeWeaponToVer01(bool mode)
     {
         mode = AttackModeChange;
         if (!mode)
         {
             WeaponUpgrade01 = true;
-            meleeAttackRange = 1.3f;
+            meleeAttackRange = 1.5f;
         }
     }
 
-    protected void UpGradeMeleeWeaponToVer02(bool mode, bool up1)
+    protected void UpgradeMeleeWeaponToVer02(bool mode, bool up1)
     {
         mode = AttackModeChange;
         up1 = WeaponUpgrade01;
@@ -255,7 +264,35 @@ public class PlayerController : BaseController
         {
             WeaponUpgrade01 = false;
             WeaponUpgrade02 = true;
-            meleeAttackRange = 1.6f;
+            meleeAttackRange = 2f;
+        }
+    }
+
+    protected void UpgradeRangeWeaponToVer01(bool mode)
+    {
+        mode = AttackModeChange;
+        if (mode)
+        {
+            WeaponUpgrade01 = true;
+            longAttackRange = 4f;
+            weaponHandler.delay = 0.4f;
+            weaponHandler.numberofProjectilesPerShot = 2;
+            weaponHandler.multipleProjectileAngle = 8f;
+        }
+    }
+
+    protected void UpgradeRangeWeaponToVer02(bool mode, bool up1)
+    {
+        mode = AttackModeChange;
+        up1 = WeaponUpgrade01;
+
+        if (mode && up1)
+        {
+            WeaponUpgrade01 = false;
+            WeaponUpgrade02 = true;
+            longAttackRange = 4.8f;
+            weaponHandler.numberofProjectilesPerShot = 3;
+            weaponHandler.multipleProjectileAngle = 10f;
         }
     }
 

@@ -8,7 +8,8 @@ public class GameManager : MonoSingletonDontDestroy<GameManager>
     public List<string> RoundSceneList;
     public string startScene;
     public string gameOverScene;
-    public string endingScene;
+    public string bossIntroScene;
+    // public string endingScene;
 
     public int currentRoundIndex = 0;
 
@@ -28,16 +29,13 @@ public class GameManager : MonoSingletonDontDestroy<GameManager>
     public void StartRound(int _round)
     {
         currentRoundIndex = _round;
-        Debug.Log(currentRoundIndex);
-        Debug.Log(RoundSceneList.Count);
-        Debug.Log(RoundSceneList[_round]);
         if (RoundSceneList.Count > currentRoundIndex)
         {
             SceneManager.LoadScene(RoundSceneList[_round]);
         }
         else
         {
-            SceneManager.LoadScene(endingScene);
+            SceneManager.LoadScene(bossIntroScene);
         }
     }
 
