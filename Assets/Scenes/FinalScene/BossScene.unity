@@ -2908,6 +2908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyPrefabs:
+  - {fileID: 4431675729375819334, guid: 560260dbda920a84fac3786798d00563, type: 3}
   - {fileID: 1098957495771783037, guid: 3b708c388ba74274c87d854aaff944e5, type: 3}
   - {fileID: 6799346516419807455, guid: d7afb2bb1d21067478da83ff234acddb, type: 3}
   - {fileID: 188499618255424384, guid: 349323ff64c6eea4fa4e205c4bd86549, type: 3}
