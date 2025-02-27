@@ -226,10 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92e24c9e0f69e1a4bb5d469531c6a68e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
   lifetime: 5
-  knockbackPower: 5
-  knockbackDuration: 0.2
 --- !u!82 &-3389414748477656677
 AudioSource:
   m_ObjectHideFlags: 0
