@@ -57,7 +57,7 @@ public abstract class SkillHandler : MonoBehaviour
 
     protected IEnumerator CoolDownTimer()
     {
-        while (currentCoolDown < coolDown)
+        while (skillUI != null && currentCoolDown < coolDown)
         {
             currentCoolDown += Time.deltaTime;
             ImageFillAmount();
