@@ -42,6 +42,8 @@ public class PlayerController : BaseController
     private float timeSinceLastChange = float.MaxValue;
     private float healthChangeDelay = .5f; // 맞았을 때 0.5초 동안 빨간색
 
+    // 플레이어 이미지 추가
+    public Sprite playerImg;
 
     protected override void Awake()
     {

@@ -12,18 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/FinalScene/Stage_01.unity
     guid: d69a8ab1ae10a524fbf731a067c5bab2
   - enabled: 1
-    path: Assets/Scenes/FinalScene/Stage_02.unity
-    guid: f3e67dff4ea364c45aa72dc19c5f45fe
-  - enabled: 1
-    path: Assets/Scenes/FinalScene/Stage_03.unity
-    guid: a1632ec1ea4d2b847beb996eb11392d5
-  - enabled: 1
-    path: Assets/Scenes/FinalScene/Stage_04.unity
-    guid: 3c8c3ee4ca15ecf49b32a0f396ae8065
-  - enabled: 1
-    path: Assets/Scenes/FinalScene/Stage_05.unity
-    guid: 3aec897b073e0224a9f0f90419ce4d77
-  - enabled: 1
     path: Assets/Scenes/FinalScene/BossIntroScene.unity
     guid: 4960da15d49d06d49a8c379abdab7f9c
   - enabled: 1

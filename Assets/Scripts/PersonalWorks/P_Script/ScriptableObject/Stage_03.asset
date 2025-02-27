@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveDatas:
   - name: 1 Wave
-    MobRange: {x: 0, y: 0}
-    enemyCount: 2
+    MobRange: {x: 1, y: 2}
+    enemyCount: 6
   - name: 2 Wave
-    MobRange: {x: 0, y: 0}
-    enemyCount: 3
+    MobRange: {x: 1, y: 2}
+    enemyCount: 8
   - name: 3 Wave
-    MobRange: {x: 0, y: 0}
-    enemyCount: 4
+    MobRange: {x: 1, y: 3}
+    enemyCount: 10

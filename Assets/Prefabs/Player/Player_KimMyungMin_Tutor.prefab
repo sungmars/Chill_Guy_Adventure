@@ -220,7 +220,7 @@ MonoBehaviour:
   knockbackTime: 0
   characterName: 
   level: 1
-  attack: 0
+  attack: 99
   defense: 0
   equipItem: 
   speed: 0
