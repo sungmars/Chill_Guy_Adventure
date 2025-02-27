@@ -187,19 +187,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockback: {x: 0, y: 0}
   knockbackDuration: 0.1
-  knockbackPower: 5
-  knockbackTime: 1
+  knockbackPower: 1
+  knockbackTime: 0.2
   characterName: 
   level: 1
-  attack: 4
-  defense: 10000
+  attack: 5
+  defense: 0
   equipItem: 
   speed: 0
   attackSpeed: 0
   exp: 0
   gold: 0
-  hp: 10000
-  maxHp: 10000
+  hp: 100
+  maxHp: 100
   hpBarimage: {fileID: 0}
   _spriteRenderer: {fileID: 3339996772237626995}
   weaponPivot: {fileID: 20972998845198855}

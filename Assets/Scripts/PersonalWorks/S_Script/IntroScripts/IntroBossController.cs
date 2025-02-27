@@ -30,7 +30,7 @@ public class IntroBossController : MonoBehaviour
             speed += 0.005f;
             yield return new WaitForSeconds(0f);
         }
-        AudioManager.Instance.PlayBossSound(dropClip);        
+        AudioManager.Instance.PlayBossSound(dropClip);
 
         animator.SetBool(findbool, true);
         yield return new WaitForSeconds(0.2f);
@@ -48,6 +48,6 @@ public class IntroBossController : MonoBehaviour
         yield return new WaitForSeconds(0.7f);
         AudioManager.Instance.PlayBossSound(bossEye);
         yield return new WaitForSeconds(1f);
-        //SceneManager.LoadScene("BossScene");
+        SceneManager.LoadScene("BossScene");
     }
 }

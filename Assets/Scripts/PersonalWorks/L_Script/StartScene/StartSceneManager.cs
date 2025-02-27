@@ -13,7 +13,7 @@ public class StartSceneManager : MonoBehaviour
     //새로하기버튼
     public void NewGame()
     {
-        SceneManager.LoadScene("GameScene");//게임 씬 로드
+        SceneManager.LoadScene("Stage_01");//게임 씬 로드
     }
     //이어하기버튼
     public void Custom()
