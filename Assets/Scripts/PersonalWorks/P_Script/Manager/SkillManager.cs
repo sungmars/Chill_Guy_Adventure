@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SkillManager : MonoSingleton<SkillManager>
 {
@@ -24,12 +25,13 @@ public class SkillManager : MonoSingleton<SkillManager>
     public List<SkillHandler> getSkillHandlerUIs; // 1, 2, 3 UI에 대한 정보
 
     public GetSkillUI getSkillUIGroup;
+    public GetSkillUI upgradeGroup;
+    public Image playerImage;
 
 
-    new void Awake()
+    void Awake()
     {
-        base.Awake();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameManager.Instance.GetPlayer().transform;//GameObject.FindGameObjectWithTag("Player").transform;
 
         allSkillHandlerList = new List<SkillHandler>();
         allSkillHandlerList.AddRange(rangeSkillHandlerList);
@@ -44,10 +46,29 @@ public class SkillManager : MonoSingleton<SkillManager>
         // 왼쪽 오른쪽 스킬 등록
         SetSkillSettingLeftRight(GameManager.Instance.mouseSkill.left, GameManager.Instance.mouseSkill.right);
     }
+    public void OpenGetUpgradePannel()
+    {
+        upgradeGroup.gameObject.SetActive(true);
+    }
 
     public void OpenGetSkillPannel()
     {
         getSkillUIGroup.gameObject.SetActive(true);
+    }
+    public void OnClickSetUpgrade()
+    {
+        int upgradeOrder = upgradeGroup.GetSkillOrder();
+        // TODO 업그레이드 0은 근접 1은 원거리
+        if (upgradeOrder == 0)
+        {
+
+        }
+        else
+        {
+
+        }
+        // 다음 라운드로
+        OnClickNextStage();
     }
 
     public void OnClickSetSkill()
@@ -80,12 +101,22 @@ public class SkillManager : MonoSingleton<SkillManager>
                 }
             }
         }
-        OnClickNextStage();
+
+        Debug.Log($"현재 라운드{GameManager.Instance.currentRoundIndex}");
+        if (GameManager.Instance.currentRoundIndex == 2 || GameManager.Instance.currentRoundIndex == 4)
+        {
+            // 2나 4라면 업그레이드 창으로 띄우기
+            getSkillUIGroup.gameObject.SetActive(false);
+            OpenGetUpgradePannel();
+        }
+        else
+        {
+            OnClickNextStage();
+        }
     }
 
     public void OnClickNextStage()
     {
-        Debug.Log("스킬 선택 후 라운드 넘어가기");
         GameManager.Instance.NextRound();
     }
 

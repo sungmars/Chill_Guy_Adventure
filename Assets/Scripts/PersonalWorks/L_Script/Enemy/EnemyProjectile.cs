@@ -34,6 +34,11 @@ public class EnemyProjectile : MonoBehaviour
         }
         else if (collision.CompareTag("Wall"))
         {
+            if (transform.name == "SoundWave")
+            {
+                SoundWaveAttackController soundWaveAttackController = GetComponentInParent<SoundWaveAttackController>();
+                soundWaveAttackController.StopSoundWaveCoroutine();
+            }
             Destroy(gameObject);
         }
     }

@@ -2,31 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-public class BossController : MonoBehaviour
+public class BossController : BaseController
 {
     Transform player;
-
-    public float damage = 10f;
-    public float lifetime = 5f;
-    public float knockbackPower = 5f;
-    public float knockbackDuration = 0.2f;
-    public float hp = 100f;
-
     [SerializeField] private AudioClip bossBgm;
     [SerializeField] private AudioClip lookAround;    
 
     private bool filp = false;
 
-    private void Awake()
+    protected override void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    private void Start()
+    protected override void Start()
     {
         AudioManager.Instance.PlayBGM(bossBgm);
     }
+
+    protected override void FixedUpdate()
+    {
+
+    }
+
+
 
     private void Update()
     {
@@ -48,5 +49,10 @@ public class BossController : MonoBehaviour
                 filp = true;
             }
         }
+    }
+
+    public override void Die()
+    {
+        SceneManager.LoadScene("EndingScene");
     }
 }

@@ -30,6 +30,11 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
     public CanvasGroup waveUI;
     public TextMeshProUGUI waveText;
 
+    public void Awake()
+    {
+
+    }
+
     public void Start()
     {
         enemySpawnData = GameManager.Instance.enemySpawnDatas[GameManager.Instance.currentRoundIndex]; // 현재 스테이지 스폰 데이터 불러오기
@@ -38,7 +43,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
 
     public void StartWave()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        player = GameManager.Instance.GetPlayer();//GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
         StartCoroutine(SpawnWave(enemySpawnData));
     }

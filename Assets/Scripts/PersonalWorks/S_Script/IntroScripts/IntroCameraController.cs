@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class IntroCameraController : MonoBehaviour
 {
@@ -11,12 +12,13 @@ public class IntroCameraController : MonoBehaviour
         float y = transform.position.y;
         float z = -10f;
 
-        while ((int)transform.position.x != 0)
+        while (Vector2.Distance(transform.position, Vector2.zero) > 0.1f)
         {
             x = Mathf.Lerp(transform.position.x, boss.transform.position.x, Time.deltaTime);
             transform.position = new Vector3(x, y, z);
             yield return new WaitForSeconds(0f);
         }
+        transform.position = new Vector3(0, 0, -10);
         StartCoroutine(next);
     }
 }

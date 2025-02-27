@@ -8,6 +8,8 @@ public class BossColliderController : MonoBehaviour
     public float lifetime = 5f;
     public float knockbackPower = 5f;
     public float knockbackDuration = 0.2f;
+    [SerializeField] Transform boss;
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -17,7 +19,7 @@ public class BossColliderController : MonoBehaviour
             if (player != null)
             {
                 player.TakeDamage((int)rushAttackDamage);
-                player.ApplyKnockback(transform, knockbackPower, knockbackDuration);
+                player.ApplyKnockback(boss.transform, knockbackPower, knockbackDuration);
             }
         }
     }

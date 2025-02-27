@@ -15,9 +15,36 @@ public class GameManager : MonoSingletonDontDestroy<GameManager>
 
     public List<EnemySpawnData> enemySpawnDatas;
     public (int left, int right) mouseSkill = (4, 1);
+    public List<GameObject> playerControllers;
+    public int playerOrder = 1;
+    public int playerGold = 0;
+    private PlayerController feildPlayer = null;
 
     public void Start()
     {
+        if (PlayerPrefs.HasKey("PlayerGold"))
+        {
+            playerGold = PlayerPrefs.GetInt("PlayerGold");
+        }
+        if (PlayerPrefs.HasKey("PlayerOrder"))
+        {
+            playerOrder = PlayerPrefs.GetInt("PlayerOrder");
+        }
+    }
+
+    public PlayerController GetPlayer()
+    {
+        if (feildPlayer == null)
+        {
+            feildPlayer = CreatePlayer().GetComponent<PlayerController>();
+        }
+        return feildPlayer;
+    }
+    private GameObject CreatePlayer()
+    {
+        Debug.Log($"{playerOrder}");
+        var playerController = Instantiate(playerControllers[playerOrder], new Vector2(0, 0), Quaternion.identity);
+        return playerController;
     }
 
     public void NextRound()
