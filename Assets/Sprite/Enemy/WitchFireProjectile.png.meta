@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 65e4cd5bee4bf5240806076083786cef
+guid: 116187c148a8b5e44a07da09aa62a883
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,49 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GoblinOccultist_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 909a0d3ca767cef49b904a05737ed49e
-      internalID: -1177148923
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GoblinOccultist_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5704f7f3bef0ba74f873803400951fc3
-      internalID: 46850617
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GoblinOccultist_2
+      name: WitchFireProjectile_0
       rect:
         serializedVersion: 2
         x: 0
@@ -179,35 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18ab7ba9b61f6ba41b71a9d9d681b27b
-      internalID: -679333634
+      spriteID: ac0d2c761e5ba4e49af2777e361d676c
+      internalID: 860468469
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GoblinOccultist_3
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 67b958fe3374ef8409f93072179bfbe5
-      internalID: 250342100
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GoblinOccultist_4
+      name: WitchFireProjectile_1
       rect:
         serializedVersion: 2
         x: 0
@@ -221,29 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7781b97530d7d74d8b564f97ea7ce34
-      internalID: -2033770311
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GoblinOccultist_5
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ceeee8d6f07a0ef4d9972ff86a746656
-      internalID: 1236264036
+      spriteID: 617d798c71598a64fb9edc44adcb09bc
+      internalID: 1840484888
       vertices: []
       indices: 
       edges: []
@@ -259,12 +175,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      GoblinOccultist_0: -1177148923
-      GoblinOccultist_1: 46850617
-      GoblinOccultist_2: -679333634
-      GoblinOccultist_3: 250342100
-      GoblinOccultist_4: -2033770311
-      GoblinOccultist_5: 1236264036
+      WitchFireProjectile_0: 860468469
+      WitchFireProjectile_1: 1840484888
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
