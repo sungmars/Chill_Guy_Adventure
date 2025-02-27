@@ -1317,7 +1317,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uCE60 \uAC00\uC774\uC758 \uBAA8\uD5D8\n\n\n\n\uC81C\uC791 : \uBC15\uC9C4\uC6B0(\uD300\uC7A5)
     \n\n       \uAE40\uD6A8\uC900\n\n       \uC1A1\uC6D0\uC11D\n\n       \uC774\uC131\uC7AC
-    \n\n       \uC784\uC11D\uC900  "
+    \n\n       \uC784\uC11D\uC900  \n\n\n\n\n\n\n\n     \uAC10\uC0AC\uD569\uB2C8\uB2E4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 57b03be6162b69f428e12b254b5a4022, type: 2}
   m_sharedMaterial: {fileID: -6199532692575778774, guid: 57b03be6162b69f428e12b254b5a4022, type: 2}

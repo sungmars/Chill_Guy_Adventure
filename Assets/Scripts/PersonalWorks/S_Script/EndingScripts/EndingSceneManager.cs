@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
@@ -34,6 +35,7 @@ public class EndingSceneManager : MonoBehaviour
 
     IEnumerator MainCorotuine()
     {
+        yield return new WaitForSeconds(1f);
         StartCoroutine(CameaSetTop());
         StartCoroutine(CameaSetBottom());
         yield return new WaitForSeconds(2f);
@@ -187,13 +189,14 @@ public class EndingSceneManager : MonoBehaviour
 
     IEnumerator EndingScript()
     {
-        float y = 1500f;
+        float y = 930f;
         float speed = 0.1f;
         while (endingScript.rectTransform.position.y < y)
         {
             endingScript.rectTransform.position = new Vector2(endingScript.rectTransform.position.x, endingScript.rectTransform.position.y + speed);
             yield return new WaitForSeconds(0f);
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("Start_Scene");
     }
 }
