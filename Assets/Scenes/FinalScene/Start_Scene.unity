@@ -506,7 +506,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &787414484
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1338,6 +1338,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5590693974502033772, guid: 07a520abf12dca043a2cbd66b9d5da5f, type: 3}
+      propertyPath: playerOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5590693974502033772, guid: 07a520abf12dca043a2cbd66b9d5da5f, type: 3}
       propertyPath: RoundSceneList.Array.size
       value: 1
