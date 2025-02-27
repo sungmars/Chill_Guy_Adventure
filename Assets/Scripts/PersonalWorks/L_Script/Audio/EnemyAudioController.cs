@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using UnityEngine;
 
 public class EnemyAudioController : MonoBehaviour
@@ -9,36 +8,41 @@ public class EnemyAudioController : MonoBehaviour
     private void Awake()
     {
         audioSources = new List<AudioSource>();
+        for (int i = 0; i < 10; i++)
+        {
+            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            audioSources.Add(audioSource);
+        }
+        float sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
+        SetVolume(sfxVolume);
     }
-        
+
     public void PlaySound(AudioClip clip)
     {
-        AudioSource source = GetAvailableAudioSource();
-        if(source != null)
+        AudioSource audioSource = GetAvailableAudioSource();
+        if (audioSource != null)
         {
-            source.PlayOneShot(clip);
+            audioSource.PlayOneShot(clip);
         }
     }
+
     private AudioSource GetAvailableAudioSource()
     {
-        foreach(var source in audioSources)
+        foreach (AudioSource audioSource in audioSources)
         {
-            if (!source.isPlaying)
-                return source;
+            if (!audioSource.isPlaying)
+            {
+                return audioSource;
+            }
         }
-        GameObject obj = new GameObject("EnemyAudio");
-        obj.transform.parent = this.transform;
-        AudioSource newSource = obj.AddComponent<AudioSource>();
-        audioSources.Add(newSource);
-        return newSource;
+        return null;
     }
+
     public void SetVolume(float volume)
     {
-        // 리스트의 각 AudioSource에 대해 볼륨 설정
-        foreach (var source in audioSources)
+        foreach (AudioSource audioSource in audioSources)
         {
-            if (source != null)
-                source.volume = volume;
+            audioSource.volume = volume;
         }
     }
 }
