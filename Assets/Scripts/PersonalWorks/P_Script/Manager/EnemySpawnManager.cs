@@ -48,8 +48,10 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
     public void StartWave()
     {
         player = GameManager.Instance.GetPlayer();//GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-
-        StartCoroutine(SpawnWave(enemySpawnData));
+        if (enemySpawnData != null)
+        {
+            StartCoroutine(SpawnWave(enemySpawnData));
+        }
     }
 
     private IEnumerator SpawnWave(EnemySpawnData spawnData)
