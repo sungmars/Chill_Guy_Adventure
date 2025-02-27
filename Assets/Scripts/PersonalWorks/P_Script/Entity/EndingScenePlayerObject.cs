@@ -11,5 +11,7 @@ public class EndingScenePlayerObject : MonoBehaviour
     void Start()
     {
         spriteRenderer.sprite = playerImgs[GameManager.Instance.playerOrder];
+
+        PlayerPrefs.SetInt("Clear", 1);
     }
 }
