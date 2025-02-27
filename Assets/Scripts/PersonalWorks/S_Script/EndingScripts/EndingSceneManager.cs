@@ -108,7 +108,7 @@ public class EndingSceneManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         yield return new WaitForSeconds(1f);
-        playerSr.flipX = flip;
+        //playerSr.flipX = flip;
         playerSr.sprite = chill;
         playerSr.sortingOrder = 101;
     }
@@ -197,7 +197,7 @@ public class EndingSceneManager : MonoBehaviour
 
     IEnumerator EndingScript()
     {
-        float y = 930f;
+        float y = 1500f;
         float speed = 0.1f;
         while (endingScript.rectTransform.position.y < y)
         {
