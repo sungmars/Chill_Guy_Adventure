@@ -394,6 +394,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Assasin
       objectReference: {fileID: 0}
+    - target: {fileID: 5534743891396957593, guid: 2e53fad93800fd549bb192d20223086f, type: 3}
+      propertyPath: attackSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7226648424794892326, guid: 2e53fad93800fd549bb192d20223086f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.74
