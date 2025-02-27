@@ -15,7 +15,7 @@ public class BuffSkillHandler : SkillHandler
     public float buffDamage = 1.5f;
     public float buffDefense = 1.5f;
     public float buffSpeed = 1.5f;
-
+    public AudioClip buffAudio;
 
     public override void AwakeningAction()
     {
@@ -36,6 +36,7 @@ public class BuffSkillHandler : SkillHandler
     }
     public void CreateBuff()
     {
+        AudioManager.Instance.PlayPlayerSound(buffAudio);
         GameObject go = Instantiate(buffObject, SkillManager.Instance.player.transform);
         BuffSkillObject buffSkillobject = go.GetComponent<BuffSkillObject>();
 

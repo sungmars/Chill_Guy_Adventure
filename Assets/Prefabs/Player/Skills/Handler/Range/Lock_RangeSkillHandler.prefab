@@ -51,8 +51,13 @@ MonoBehaviour:
   isAwakening: 0
   coolDown: 1
   currentCoolDown: 1
+  duration: 5
+  knockbackPower: 0.1
+  knockbackDuration: 0.5
   rangeObject: {fileID: 5377139531162746639, guid: f487d50337eac7347ad80204d19489ff, type: 3}
   damage: 1
+  speed: 10
   rangeCount: 5
   rangeAngel: 10
   angelSpread: 1
+  skillAudio: {fileID: 8300000, guid: 02e5255b0926f5d4c8aab7816d7cd4de, type: 3}
