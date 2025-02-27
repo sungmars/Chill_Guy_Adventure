@@ -44,7 +44,8 @@ public class BaseController : MonoBehaviour
 
 
     public Image hpBarimage; // 맞았을 때 0.5초 동안 빨간색
-
+    //오디오클립선언
+    public AudioClip attackAudio;
 
     protected virtual void Awake()
     {
@@ -95,6 +96,7 @@ public class BaseController : MonoBehaviour
     {
         if (lookDirection != Vector2.zero)
             weaponHandler?.Attack();
+        AudioManager.Instance.PlayPlayerSound(attackAudio);
     }
 
 

@@ -322,6 +322,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65a3dbdd8c72d1a41a058458c16d2af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockback: {x: 0, y: 0}
+  knockbackDuration: 0.1
+  knockbackPower: 5
+  knockbackTime: 1
   characterName: 
   level: 1
   attack: 0
@@ -332,9 +336,21 @@ MonoBehaviour:
   exp: 0
   gold: 0
   hp: 10000
+  maxHp: 0
+  hpBarimage: {fileID: 0}
+  attackAudio: {fileID: 8300000, guid: 6b429969021b1a14da0689954e41e74e, type: 3}
   _spriteRenderer: {fileID: 4333628374106676394}
   weaponPivot: {fileID: 8444050852684987741}
   WeaponPrefab: {fileID: 2789462198808765568, guid: f81434a3f5a40b74bb15ef6f8d59aa62, type: 3}
+  weaponanimator: {fileID: 0}
+  spawnedEnemies: []
+  AttackModeChange: 0
+  WeaponUpgrade01: 0
+  WeaponUpgrade02: 0
+  playerImg: {fileID: 0}
+  damagedAudio: {fileID: 8300000, guid: ef1ab9fc9e7f8f24588e3f197937cd5d, type: 3}
+  dieAudio: {fileID: 8300000, guid: 3e8ec2f6128833e44ae0305d66c55a36, type: 3}
+  switchAudio: {fileID: 8300000, guid: 02e5255b0926f5d4c8aab7816d7cd4de, type: 3}
 --- !u!114 &6450311778555598802
 MonoBehaviour:
   m_ObjectHideFlags: 0

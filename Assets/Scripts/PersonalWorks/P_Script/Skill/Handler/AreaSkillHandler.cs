@@ -12,7 +12,8 @@ public class AreaSkillHandler : SkillHandler
     [Header("Skill Stats")]
     public float damage = 1f;
     public float damageInterval = 1f;
-
+    //오디오 선언
+    public AudioClip skillAudio;
 
     public override void AwakeningAction()
     {
@@ -34,6 +35,7 @@ public class AreaSkillHandler : SkillHandler
 
     public void CreateArea()
     {
+        AudioManager.Instance.PlayPlayerSound(skillAudio);
         GameObject go = Instantiate(areaObject, SkillManager.Instance.player);
         AreaSkillObject areaSkillobject = go.GetComponent<AreaSkillObject>();
 

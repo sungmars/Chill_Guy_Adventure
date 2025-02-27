@@ -59,3 +59,4 @@ MonoBehaviour:
   areaObject: {fileID: 5377139531162746639, guid: b20ad53c99212ee498cef54ad35dfabb, type: 3}
   damage: 2
   damageInterval: 1
+  skillAudio: {fileID: 8300000, guid: a94f8a94a5d910942ba2d3c844d3eb53, type: 3}

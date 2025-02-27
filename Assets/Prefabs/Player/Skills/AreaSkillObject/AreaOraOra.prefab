@@ -260,3 +260,4 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  skillAudio: {fileID: 8300000, guid: d6a25a7480b941f4bbca1097c579905a, type: 3}

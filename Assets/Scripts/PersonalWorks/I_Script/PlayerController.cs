@@ -44,7 +44,10 @@ public class PlayerController : BaseController
 
     // 플레이어 이미지 추가
     public Sprite playerImg;
-
+    //오디오 클립 선언
+    public AudioClip damagedAudio;
+    public AudioClip dieAudio;
+    public AudioClip switchAudio;
     protected override void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -99,7 +102,7 @@ public class PlayerController : BaseController
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
-
+        AudioManager.Instance.PlayPlayerSound(damagedAudio);
         timeSinceLastChange = 0f;
         _animationHandler.Damage();
     }
@@ -223,6 +226,7 @@ public class PlayerController : BaseController
 
     protected void ToRangeWeapon(bool mode, bool up1, bool up2)
     {
+        AudioManager.Instance.PlayPlayerSound(switchAudio);
         mode = AttackModeChange;
         up1 = WeaponUpgrade01;
         up2 = WeaponUpgrade02;
@@ -236,6 +240,7 @@ public class PlayerController : BaseController
 
     protected void ToMeleeWeapon(bool mode, bool up1, bool up2)
     {
+        AudioManager.Instance.PlayPlayerSound(switchAudio);
         mode = AttackModeChange;
         up1 = WeaponUpgrade01;
         up2 = WeaponUpgrade02;

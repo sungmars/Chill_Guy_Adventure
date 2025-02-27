@@ -14,7 +14,7 @@ public class GameManager : MonoSingletonDontDestroy<GameManager>
     public int currentRoundIndex = 0;
 
     public List<EnemySpawnData> enemySpawnDatas;
-    public (int left, int right) mouseSkill = (4, 1);
+    public (int left, int right) mouseSkill = (3, 1);
     public List<GameObject> playerControllers;
     public int playerOrder = 1;
     public int playerGold = 0;

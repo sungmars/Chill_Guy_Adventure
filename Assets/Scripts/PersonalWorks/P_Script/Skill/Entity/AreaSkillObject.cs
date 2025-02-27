@@ -21,6 +21,7 @@ public class AreaSkillObject : MonoBehaviour
     private float knockbackDuration; // 넉백 시간
 
     private Dictionary<Collider2D, Coroutine> activeCoroutines = new Dictionary<Collider2D, Coroutine>(); // 장판안에 들어 온 몬스터 목록들
+    
 
 
     private void Awake()
@@ -91,7 +92,6 @@ public class AreaSkillObject : MonoBehaviour
         while (true)
         {
             // TODO : 적 공격
-
             if (collision == null || collision.gameObject == null)
             {
                 yield break;
