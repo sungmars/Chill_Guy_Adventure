@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,16 @@ public class EndingSceneManager : MonoBehaviour
     [SerializeField] Transform LeftPosition;
     [SerializeField] Transform RightPosition;
 
+
+    [SerializeField]
+    SpriteRenderer top;
+
+    [SerializeField]
+    SpriteRenderer bottom;
+
+    [SerializeField]
+    TextMeshProUGUI endingScript;
+
     private void Start()
     {
         AudioManager.Instance.PlayBGM(endingBgm);
@@ -23,6 +34,9 @@ public class EndingSceneManager : MonoBehaviour
 
     IEnumerator MainCorotuine()
     {
+        StartCoroutine(CameaSetTop());
+        StartCoroutine(CameaSetBottom());
+        yield return new WaitForSeconds(2f);
         StartCoroutine(PlayerJump());
         StartCoroutine(BossFadeOut());
         yield return new WaitForSeconds(3f);
@@ -86,7 +100,7 @@ public class EndingSceneManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         playerSr.flipX = flip;
         playerSr.sprite = chill;
-        playerSr.sortingOrder = 20;
+        playerSr.sortingOrder = 101;
     }
 
     IEnumerator PlayerScaleSetting()
@@ -144,5 +158,42 @@ public class EndingSceneManager : MonoBehaviour
             endingBgImage.color = new Color(255f, 255f, 255f, endingBgImage.color.a + speed);
             yield return new WaitForSeconds(0f);
         }
+        StartCoroutine(EndingScript());
+    }
+
+    public IEnumerator CameaSetTop()
+    {
+        float y = 4.3f;
+        float tempY;
+        while (top.transform.position.y > y)
+        {
+            tempY = Mathf.Lerp(top.transform.position.y, y, Time.deltaTime);
+            top.transform.position = new Vector2(top.transform.position.x, tempY);
+            yield return new WaitForSeconds(0f);
+        }
+    }
+
+    public IEnumerator CameaSetBottom()
+    {
+        float y = -4.3f;
+        float tempY;
+        while (bottom.transform.position.y < y)
+        {
+            tempY = Mathf.Lerp(bottom.transform.position.y, y, Time.deltaTime);
+            bottom.transform.position = new Vector2(bottom.transform.position.x, tempY);
+            yield return new WaitForSeconds(0f);
+        }
+    }
+
+    IEnumerator EndingScript()
+    {
+        float y = 1500f;
+        float speed = 0.1f;
+        while (endingScript.rectTransform.position.y < y)
+        {
+            endingScript.rectTransform.position = new Vector2(endingScript.rectTransform.position.x, endingScript.rectTransform.position.y + speed);
+            yield return new WaitForSeconds(0f);
+        }
+        yield return new WaitForSeconds(1f);
     }
 }
