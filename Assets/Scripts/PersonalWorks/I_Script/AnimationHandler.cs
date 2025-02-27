@@ -7,15 +7,15 @@ public class AnimationHandler : MonoBehaviour
     protected Animator _animator;
 
     private static readonly int isDamage = Animator.StringToHash("isDamage");
-    
+
     protected void Awake()
     {
         _animator = GetComponentInChildren<Animator>();
     }
-        
+
     void Update()
     {
-        
+
     }
 
     public void UpdateState(Vector2 moveVector)

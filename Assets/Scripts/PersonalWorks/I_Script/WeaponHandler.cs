@@ -5,9 +5,7 @@ using UnityEngine;
 public class WeaponHandler : MonoBehaviour
 {
     [Header("Attack Info")]
-    [SerializeField] private float delay = 1f;
-    public float Delay {  get => delay; set => delay = value; }
-
+    
     [SerializeField] private float weaponSize = 1f;
     public float WeaponSize { get => weaponSize; set => weaponSize = value; }
 
@@ -19,6 +17,12 @@ public class WeaponHandler : MonoBehaviour
 
     [SerializeField] private float attackRange = 5f;
     public float AttackRange { get => attackRange; set => attackRange = value; }
+
+    public float delay = 0.7f;
+
+    public int numberofProjectilesPerShot = 1;
+
+    public float multipleProjectileAngle = 1f;
 
     public LayerMask target;
 
@@ -33,6 +37,9 @@ public class WeaponHandler : MonoBehaviour
     public float KnockbackTime { get => knockbackTime;  set => knockbackTime = value; }
 
     private static readonly int isMeleeAttack = Animator.StringToHash("isMeleeAttack");
+    private static readonly int SwordUp01 = Animator.StringToHash("SwordUp01");
+    private static readonly int SwordUp02 = Animator.StringToHash("SwordUp02");
+
     private static readonly int isRangeAttack = Animator.StringToHash("isRangeAttack");
 
     public BaseController Controller { get; private set; }
@@ -64,14 +71,51 @@ public class WeaponHandler : MonoBehaviour
 
     public void AttackAnimation()
     {
-        if (playerController.AttackModeChange == false)
-            animator.SetTrigger(isMeleeAttack);
-        else 
-            animator.SetTrigger(isRangeAttack);
+        MeleeBasic(false, false, false);
+        MeleeUpgrade01(false, true, false);
+        MeleeUpgrade02(false, false, true);
+
+        RangeBasic(true, false, false);                
     }
 
     public virtual void Rotate(bool isLeft)
     {
         weaponRenderer.flipY = isLeft;
+    }
+
+    public void MeleeBasic(bool mode, bool up1, bool up2)
+    {
+        mode = playerController.AttackModeChange;
+        up1 = playerController.WeaponUpgrade01;
+        up2 = playerController.WeaponUpgrade02;
+
+        if (!mode && !up1 && !up2) animator.SetTrigger(isMeleeAttack);
+    }
+
+    public void RangeBasic(bool mode, bool up1, bool up2)
+    {
+        mode = playerController.AttackModeChange;
+        up1 = playerController.WeaponUpgrade01;
+        up2 = playerController.WeaponUpgrade02;
+
+        if (mode && !up1 && !up2) animator.SetTrigger(isRangeAttack);
+    }
+
+    public void MeleeUpgrade01(bool mode, bool up1, bool up2)
+    {
+        mode = playerController.AttackModeChange;
+        up1 = playerController.WeaponUpgrade01;
+        up2 = playerController.WeaponUpgrade02;
+
+        if (!mode && up1 && !up2) animator.SetTrigger(SwordUp01);
+    }
+
+    public void MeleeUpgrade02(bool mode, bool up1, bool up2)
+    {
+        mode = playerController.AttackModeChange;
+        up1 = playerController.WeaponUpgrade01;
+        up2 = playerController.WeaponUpgrade02;
+
+        if (!mode && !up1 && up2) animator.SetTrigger(SwordUp02);
     }
 }

@@ -4,36 +4,32 @@ using UnityEngine.SceneManagement;
 public class StartSceneManager : MonoBehaviour
 {
     public GameObject optionPanel;//설정패널
-
+    public AudioClip bgm;
     private void Start()
     {
         optionPanel.SetActive(false);
+        AudioManager.Instance.PlayBGM(bgm);
     }
     //새로하기버튼
     public void NewGame()
     {
-        PlayerPrefs.DeleteAll();//데이터를 삭제함
-        PlayerPrefs.Save();
-        SceneManager.LoadScene("TutorialScene");//튜툐리얼 씬 로드
+        SceneManager.LoadScene("GameScene");//게임 씬 로드
     }
     //이어하기버튼
-    public void ContinueGame()
+    public void Custom()
     {
-        if (PlayerPrefs.HasKey("SavedScene"))
-        {
-            string sceneToLoad = PlayerPrefs.GetString("SavedScene");
-            SceneManager.LoadScene(sceneToLoad);//저장된 씬을 로드
-        }
-        else
-        {
-            Debug.Log("저장데이터 없음");
-        }
+        SceneManager.LoadScene("CustomScene");//커스텀 씬 로드
     }
     //설정패널띄우기 버튼
     public void OpenSetting()
     {
         if (optionPanel != null)
             optionPanel.SetActive(true);//설정패널 활성화
+    }
+    public void CloseSetting()
+    {
+        if (optionPanel != null)
+            optionPanel.SetActive(false);//설정패널 활성화
     }
     //게임종료버튼
     public void QuitGame()

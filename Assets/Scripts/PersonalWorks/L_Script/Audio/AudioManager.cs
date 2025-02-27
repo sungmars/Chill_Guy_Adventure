@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -17,17 +18,29 @@ public class AudioManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             //각 컨트롤러 초기화
-            playerAudioController = new PlayerAudioController();
-            bossAudioController = new BossAudioController();
-            bgmController = new BGMController();
-            enemyAudioController = new EnemyAudioController();
+            playerAudioController = gameObject.AddComponent<PlayerAudioController>();
+            bossAudioController = gameObject.AddComponent<BossAudioController>();
+            bgmController = gameObject.AddComponent<BGMController>();
+            enemyAudioController = gameObject.AddComponent<EnemyAudioController>();
         }
         else
         {
             Destroy(gameObject);
         }
     }
+    // BGM 전용 볼륨 업데이트
+    public void SetBGMVolume(float volume)
+    {
+        bgmController.SetVolume(volume);
+    }
 
+    // 효과음(SFX) 전용 볼륨 업데이트 (플레이어, 보스, 몹 효과음 모두 포함)
+    public void SetSFXVolume(float volume)
+    {
+        playerAudioController.SetVolume(volume);
+        bossAudioController.SetVolume(volume);
+        enemyAudioController.SetVolume(volume);
+    }
     public void PlayPlayerSound(AudioClip clip)
     {
         playerAudioController.PlaySound(clip);
