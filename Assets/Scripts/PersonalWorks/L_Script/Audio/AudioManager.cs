@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
     private BGMController bgmController;
     private EnemyAudioController enemyAudioController;
 
+    private const string BGMVolumeKey = "BGMVolume";
+    private const string SFXVolumeKey = "SFXVolume";
     private void Awake()
     {
         if (Instance == null)
@@ -27,6 +29,12 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        //저장된 볼륨값을 불러오고 데이터 없으면 0.5가 기본값
+        float bgmVolume = PlayerPrefs.GetFloat(BGMVolumeKey, 0.5f);
+        float sfxVolume = PlayerPrefs.GetFloat(SFXVolumeKey, 0.5f);
+        SetBGMVolume(bgmVolume);
+        SetSFXVolume(sfxVolume);
     }
     // BGM 전용 볼륨 업데이트
     public void SetBGMVolume(float volume)

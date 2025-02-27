@@ -1911,6 +1911,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkillManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8310015837157267353, guid: 9aeb3fbbe7e9a004a912dbdf12d393a4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8869269243021548251, guid: 9aeb3fbbe7e9a004a912dbdf12d393a4, type: 3}
       propertyPath: player
       value: 
