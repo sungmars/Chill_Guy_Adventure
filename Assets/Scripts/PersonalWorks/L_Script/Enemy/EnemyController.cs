@@ -41,6 +41,10 @@ public abstract class EnemyController : BaseController
 
     protected override void FixedUpdate()
     {
+        if (isStopped)
+        {
+            _rigidbody2D.velocity = Vector2.zero;
+        }
         // base.FixedUpdate();
         if (knockbackDuration > 0.0f)
         {

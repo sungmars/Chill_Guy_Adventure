@@ -21,7 +21,7 @@ public class MeleeEnemy : EnemyController
                 // 플레이어에게 데미지 적용
                 playerController.TakeDamage((int)attack);
                 // 플레이어에게 넉백 효과
-                playerController.ApplyKnockback(transform, knockbackPower, knockbackDuration);
+                playerController.ApplyKnockback(transform, knockbackPower, knockbackTime);
             }
         }
     }
