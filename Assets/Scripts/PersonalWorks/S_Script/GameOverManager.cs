@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class GameOverManager : MonoBehaviour
 {
@@ -13,24 +13,26 @@ public class GameOverManager : MonoBehaviour
     SpriteRenderer playerWeapon;
     [SerializeField] RectTransform uIPanel;
     [SerializeField] Image uiFaceImage;
-    [SerializeField] Image kimFace;
-    [SerializeField] Image soFace;
+    [SerializeField] Sprite kimFace;
+    [SerializeField] Sprite soFace;
     [SerializeField] TextMeshProUGUI chillText;
-    string[] chillTexts = { "죽음도 잠깐의 휴식일 뿐. 그냥 chill하게 누워 있어.", "게임 오버? 아니, 그냥 잠깐 쉬는 거지. Chill.", "이게 끝이라고? 진짜 chill한 놈들은 유령이 돼서도 돌아온다.", "살아있는 게 피곤했지? 이제 좀 chill할 시간이다."};
+
+    [SerializeField] RectTransform endPosition;
+    string[] chillTexts = { "죽음도 잠깐의 휴식일 뿐. 그냥 chill하게 누워 있어.", "게임 오버? 아니, 그냥 잠깐 쉬는 거지. Chill.", "이게 끝이라고? 진짜 chill한 놈들은 유령이 돼서도 돌아온다.", "살아있는 게 피곤했지? 이제 좀 chill할 시간이다." };
 
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameManager.Instance.GetPlayer().gameObject;//GameObject.FindGameObjectWithTag("Player");
         playerSR = player.transform.GetComponentInChildren<SpriteRenderer>();
         player.GetComponent<PlayerInput>().enabled = false;
         player.GetComponentInChildren<Animator>().speed = 0.0f;
         playerWeapon = player.transform.GetChild(1).GetComponentInChildren<SpriteRenderer>();
-        int rand = Random.Range(0,4);
+        int rand = Random.Range(0, 4);
         chillText.text = chillTexts[rand];
-        if (PlayerPrefs.GetInt("PlayerOrder")==0)
-            uiFaceImage = kimFace;
+        if (GameManager.Instance.playerOrder == 0)
+            uiFaceImage.sprite = kimFace;
         else
-            uiFaceImage = soFace;
+            uiFaceImage.sprite = soFace;
     }
 
     void Start()
@@ -68,12 +70,12 @@ public class GameOverManager : MonoBehaviour
     {
         float speed = 1f;
         Debug.Log(uIPanel.position.y);
-        while (uIPanel.position.y > 225f)
+        while (uIPanel.position.y > endPosition.position.y)
         {
             uIPanel.position -= new Vector3(0, speed);
             yield return null;
         }
-        uIPanel.position = new Vector3(uIPanel.position.x, 225);
+        uIPanel.position = endPosition.position;// new Vector3(uIPanel.position.x, 225);
     }
 
     public void GoFirstScene()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BaseController : MonoBehaviour
@@ -120,6 +121,7 @@ public class BaseController : MonoBehaviour
         {
             isgameOver = true;
             Debug.Log("플레이어 사망");
+            SceneManager.LoadScene("GameOverScene");
         }
         else if (gameObject.CompareTag("Enemy"))
             Destroy(gameObject);

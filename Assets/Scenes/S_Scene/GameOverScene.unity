@@ -218,6 +218,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1027708940}
+  - {fileID: 987356953}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -891,7 +892,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uIPanel: {fileID: 1027708940}
+  uiFaceImage: {fileID: 2076321187}
+  kimFace: {fileID: 205900146, guid: 4fdb46f1568e5824387768df2a6daee9, type: 3}
+  soFace: {fileID: -629960792, guid: 67c08bc2a4be8a244b0d983560d63295, type: 3}
   chillText: {fileID: 865960412}
+  endPosition: {fileID: 987356953}
 --- !u!4 &235503686
 Transform:
   m_ObjectHideFlags: 0
@@ -3308,6 +3313,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865960410}
   m_CullTransparentMesh: 1
+--- !u!1 &987356952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 987356953}
+  m_Layer: 5
+  m_Name: EndPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &987356953
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987356952}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 36906915}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1027708939
 GameObject:
   m_ObjectHideFlags: 0
@@ -3594,7 +3634,7 @@ Tilemap:
       - {fileID: -354914151, guid: 3439fe9a23953c24598c01c7f11cad41, type: 3}
       - {fileID: -72922680, guid: 3439fe9a23953c24598c01c7f11cad41, type: 3}
       - {fileID: -1611952474, guid: 3439fe9a23953c24598c01c7f11cad41, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -8, y: 2, z: 0}
