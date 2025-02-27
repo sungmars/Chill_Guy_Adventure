@@ -154,12 +154,6 @@ AnimatorController:
   m_Name: ChillDog
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: KnockbackTrigger
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: AttackTrigger
     m_Type: 9
     m_DefaultFloat: 0
@@ -258,10 +252,10 @@ AnimatorStateMachine:
     m_Position: {x: 380, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4547077448976593088}
-    m_Position: {x: 380, y: 160, z: 0}
+    m_Position: {x: 290, y: 180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1233867193726473050}
-    m_Position: {x: 640, y: 160, z: 0}
+    m_Position: {x: 550, y: 180, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
