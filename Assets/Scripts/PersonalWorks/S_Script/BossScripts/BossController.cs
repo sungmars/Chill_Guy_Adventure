@@ -27,8 +27,6 @@ public class BossController : BaseController
 
     }
 
-
-
     private void Update()
     {
         if (player.transform.position.x < transform.position.x)
