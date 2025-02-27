@@ -53,8 +53,11 @@ MonoBehaviour:
   coolDown: 10
   currentCoolDown: 10
   duration: 7
+  knockbackPower: 0.1
+  knockbackDuration: 0.5
   buffObject: {fileID: 5377139531162746639, guid: b6ab182ab6940c44392a128847842dac, type: 3}
   buffTime: 3
   buffDamage: 1.5
   buffDefense: 1.5
   buffSpeed: 1.5
+  buffAudio: {fileID: 8300000, guid: 817c7d53898a63f40ba9b65f23d9c67e, type: 3}

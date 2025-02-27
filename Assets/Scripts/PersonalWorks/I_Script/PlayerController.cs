@@ -38,6 +38,8 @@ public class PlayerController : BaseController
     public bool WeaponUpgrade01 = false;
     public bool WeaponUpgrade02 = false;
 
+    public bool isUpgradeAction = false;
+
     // 맞았을 때
     private float timeSinceLastChange = float.MaxValue;
     private float healthChangeDelay = .5f; // 맞았을 때 0.5초 동안 빨간색
@@ -48,6 +50,9 @@ public class PlayerController : BaseController
     public AudioClip damagedAudio;
     public AudioClip dieAudio;
     public AudioClip switchAudio;
+
+
+
     protected override void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -76,16 +81,52 @@ public class PlayerController : BaseController
         if (Input.GetKeyDown(KeyCode.F)) ToMeleeWeapon(true, false, false);
         if (Input.GetKeyDown(KeyCode.G)) ToRangeWeapon(false, false, false);
 
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            if (!AttackModeChange) UpgradeMeleeWeaponToVer01(false);
-            else UpgradeRangeWeaponToVer01(true);
-        }
+        // if (Input.GetKeyDown(KeyCode.Z))
+        // {
+        //     if (!AttackModeChange) UpgradeMeleeWeaponToVer01(false);
+        //     else UpgradeRangeWeaponToVer01(true);
+        // }
 
-        if (Input.GetKeyDown(KeyCode.X))
+        // if (Input.GetKeyDown(KeyCode.X))
+        // {
+        //     if (!AttackModeChange && WeaponUpgrade01) UpgradeMeleeWeaponToVer02(false, true);
+        //     else if (AttackModeChange && WeaponUpgrade01) UpgradeRangeWeaponToVer02(true, true);
+        // }
+
+
+        if (!isUpgradeAction)
         {
-            if (!AttackModeChange && WeaponUpgrade01) UpgradeMeleeWeaponToVer02(false, true);
-            else if (AttackModeChange && WeaponUpgrade01) UpgradeRangeWeaponToVer02(true, true);
+            // 업그레이드 행동을 한번 하기
+            isUpgradeAction = true;
+            if (GameManager.Instance.playerWeaponUpgrade == 1) // 1번째 업글 일 시
+            {
+                if (GameManager.Instance.playerWeapon == 0) // 근접무기 업글
+                {
+                    ToMeleeWeapon(true, false, false);
+                    UpgradeMeleeWeaponToVer01(false);
+                }
+                else // 원거리무기 업글
+                {
+                    ToRangeWeapon(false, false, false);
+                    UpgradeRangeWeaponToVer01(true);
+                }
+            }
+            else if (GameManager.Instance.playerWeaponUpgrade == 2) // 2번째 업글 일 시
+            {
+                if (GameManager.Instance.playerWeapon == 0) // 근접무기 업글
+                {
+                    ToMeleeWeapon(true, false, false);
+                    UpgradeMeleeWeaponToVer01(false);
+                    UpgradeMeleeWeaponToVer02(false, true);
+                }
+                else // 원거리무기 업글
+                {
+                    ToRangeWeapon(false, false, false);
+                    UpgradeRangeWeaponToVer01(true);
+                    UpgradeRangeWeaponToVer02(true, true);
+                }
+            }
+            // 아무 업그레이드도 없으면 지나침
         }
 
         if (timeSinceLastChange < healthChangeDelay)
@@ -165,7 +206,7 @@ public class PlayerController : BaseController
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         bool isLeft = Mathf.Abs(rotZ) > 90f;
 
-        _spriteRenderer.flipX = isLeft;
+        // _spriteRenderer.flipX = isLeft;
 
         if (weaponPivot != null)
             weaponPivot.rotation = Quaternion.Euler(0f, 0f, rotZ);

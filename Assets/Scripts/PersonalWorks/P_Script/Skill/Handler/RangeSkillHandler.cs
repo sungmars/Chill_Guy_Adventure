@@ -16,7 +16,8 @@ public class RangeSkillHandler : SkillHandler
     public float rangeAngel = 1f; // 발사체 각도
     public float angelSpread = 1f; // 발사체 오차
 
-
+    //오디오 클립 선언
+    public AudioClip skillAudio;
     public override void AwakeningAction()
     {
         // 쿨타임이 됬는지 확인
@@ -45,6 +46,7 @@ public class RangeSkillHandler : SkillHandler
 
         for (int i = 0; i < rangeCount; i++)
         {
+            AudioManager.Instance.PlayPlayerSound(skillAudio);
             float angle = minAngle + angleSpace * i;
             float randomSpread = Random.Range(-angelSpread, angelSpread);
             angle += randomSpread;

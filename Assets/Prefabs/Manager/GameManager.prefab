@@ -65,3 +65,5 @@ MonoBehaviour:
   - {fileID: 3704856288133761684, guid: 6d8bdbbf8faf5a84081e269b02f2e6f9, type: 3}
   playerOrder: 0
   playerGold: 0
+  playerWeapon: 0
+  playerWeaponUpgrade: 0

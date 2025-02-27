@@ -20,6 +20,9 @@ public class GameManager : MonoSingletonDontDestroy<GameManager>
     public int playerGold = 0;
     private PlayerController feildPlayer = null;
 
+    public int playerWeapon = 0;
+    public int playerWeaponUpgrade = 0;
+
     public void Start()
     {
         if (PlayerPrefs.HasKey("PlayerGold"))
@@ -31,6 +34,19 @@ public class GameManager : MonoSingletonDontDestroy<GameManager>
             playerOrder = PlayerPrefs.GetInt("PlayerOrder");
         }
     }
+
+    public void SelectWeaponUpgrade(int weapon, int upgrade)
+    {
+        playerWeapon = weapon;
+        playerWeaponUpgrade = upgrade;
+    }
+
+    public void WeaponUpgradeInit()
+    {
+        playerWeapon = 0;
+        playerWeaponUpgrade = 0;
+    }
+
 
     public PlayerController GetPlayer()
     {
@@ -74,6 +90,8 @@ public class GameManager : MonoSingletonDontDestroy<GameManager>
 
     public void StartGame()
     {
+        playerWeapon = 0;
+        playerWeaponUpgrade = 0;
         StartRound(0);
     }
 }

@@ -9,6 +9,8 @@ public class StartSceneManager : MonoBehaviour
     {
         optionPanel.SetActive(false);
         AudioManager.Instance.PlayBGM(bgm);
+
+        GameManager.Instance.WeaponUpgradeInit(); // 무기 초기화 : 결합도 ㅈㅅ
     }
     //새로하기버튼
     public void NewGame()
