@@ -4926,6 +4926,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3918958652333927377, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: attack
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3918958652333927377, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
       propertyPath: bossBgm
       value: 
       objectReference: {fileID: 8300000, guid: b0a661acf251c1248bcb92926b7e4cc5, type: 3}
@@ -4937,6 +4941,14 @@ PrefabInstance:
       propertyPath: lookAround
       value: 
       objectReference: {fileID: 8300000, guid: 41702e34931061f46beb71a79e93cc1b, type: 3}
+    - target: {fileID: 4321596193888633206, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4779413718311353874, guid: 7b9552b15a4442e45a4c8484ec4f15e0, type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 1920032163}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
