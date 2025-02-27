@@ -29,16 +29,16 @@ public class MonoSingletonDontDestroy<T> : MonoBehaviour where T : MonoBehaviour
     }
 
     // Scene에 배치하면 Awake가 실행 되어 하나만 남기고 나머지는 Destory()
-    // public void Awake()
-    // {
-    //     if (instance != null)
-    //     {
-    //         Destroy(gameObject);
-    //     }
-    //     else
-    //     {
-    //         instance = GetComponent<T>();
-    //         DontDestroyOnLoad(gameObject);
-    //     }
-    // }
+    public void Awake()
+    {
+        // if (instance != null)
+        // {
+        //     Destroy(gameObject);
+        // }
+        // else
+        // {
+        // }
+        instance = GetComponent<T>();
+        DontDestroyOnLoad(gameObject);
+    }
 }

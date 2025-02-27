@@ -42,8 +42,9 @@ public class GameManager : MonoSingletonDontDestroy<GameManager>
     }
     private GameObject CreatePlayer()
     {
-        Debug.Log($"{playerOrder}");
-        var playerController = Instantiate(playerControllers[playerOrder], new Vector2(0, 0), Quaternion.identity);
+        var position = new Vector2(0, 0);
+        if (RoundSceneList.Count == currentRoundIndex) position = new Vector2(-4, 0);
+        var playerController = Instantiate(playerControllers[playerOrder], position, Quaternion.identity);
         return playerController;
     }
 

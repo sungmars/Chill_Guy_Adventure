@@ -220,7 +220,7 @@ MonoBehaviour:
   knockbackTime: 0
   characterName: 
   level: 1
-  attack: 0
+  attack: 99
   defense: 0
   equipItem: 
   speed: 0
@@ -238,6 +238,7 @@ MonoBehaviour:
   AttackModeChange: 0
   WeaponUpgrade01: 0
   WeaponUpgrade02: 0
+  playerImg: {fileID: 205900146, guid: 4fdb46f1568e5824387768df2a6daee9, type: 3}
 --- !u!114 &2091650598244288567
 MonoBehaviour:
   m_ObjectHideFlags: 0

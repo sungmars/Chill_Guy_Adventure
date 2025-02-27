@@ -37,15 +37,21 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
 
     public void Start()
     {
+
         enemySpawnData = GameManager.Instance.enemySpawnDatas[GameManager.Instance.currentRoundIndex]; // 현재 스테이지 스폰 데이터 불러오기
-        StartWave();
+        if (enemySpawnData != null)
+        {
+            StartWave();
+        }
     }
 
     public void StartWave()
     {
         player = GameManager.Instance.GetPlayer();//GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-
-        StartCoroutine(SpawnWave(enemySpawnData));
+        if (enemySpawnData != null)
+        {
+            StartCoroutine(SpawnWave(enemySpawnData));
+        }
     }
 
     private IEnumerator SpawnWave(EnemySpawnData spawnData)

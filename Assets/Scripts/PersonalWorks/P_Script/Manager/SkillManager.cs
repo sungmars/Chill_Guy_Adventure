@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class SkillManager : MonoSingleton<SkillManager>
 {
@@ -28,6 +29,8 @@ public class SkillManager : MonoSingleton<SkillManager>
     public GetSkillUI upgradeGroup;
     public Image playerImage;
 
+    public TextMeshProUGUI waveText;
+    public Image playerHpBar;
 
     void Awake()
     {
@@ -45,6 +48,15 @@ public class SkillManager : MonoSingleton<SkillManager>
         GetSkillSetting();
         // 왼쪽 오른쪽 스킬 등록
         SetSkillSettingLeftRight(GameManager.Instance.mouseSkill.left, GameManager.Instance.mouseSkill.right);
+        // 스테이지명과 플레이어 이미지 초기화
+        SetStage();
+    }
+
+    public void SetStage()
+    {
+        playerImage.sprite = player.gameObject.GetComponent<PlayerController>().playerImg;
+        waveText.text = $"Stage {GameManager.Instance.currentRoundIndex + 1}";
+        player.gameObject.GetComponent<PlayerController>().hpBarimage = playerHpBar;
     }
     public void OpenGetUpgradePannel()
     {

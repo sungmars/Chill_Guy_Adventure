@@ -1776,6 +1776,8 @@ MonoBehaviour:
   getSkillUIGroup: {fileID: 5706605449272750832}
   upgradeGroup: {fileID: 2142850417848218190}
   playerImage: {fileID: 667046656109010971}
+  waveText: {fileID: 4119398946978771456}
+  playerHpBar: {fileID: 2859336338291979468}
 --- !u!1 &1732099861914014628
 GameObject:
   m_ObjectHideFlags: 0
@@ -3223,7 +3225,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -629960792, guid: 67c08bc2a4be8a244b0d983560d63295, type: 3}
+  m_Sprite: {fileID: 205900146, guid: 4fdb46f1568e5824387768df2a6daee9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
