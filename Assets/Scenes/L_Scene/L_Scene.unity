@@ -695,7 +695,7 @@ MonoBehaviour:
   exp: 10
   gold: 50
   hp: 40
-  maxHp: 20
+  maxHp: 40
   hpBarimage: {fileID: 882291717}
   attackRange: 1
   _spriteRenderer: {fileID: 1597135634}
@@ -775,7 +775,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1597135631}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -810,7 +810,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1597135631}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -863,7 +863,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1220,6 +1220,14 @@ PrefabInstance:
     - target: {fileID: 4274466553957828707, guid: 24643d4f56a9ec54cbdfce6a1708d274, type: 3}
       propertyPath: m_Name
       value: Slime
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944924481457344532, guid: 24643d4f56a9ec54cbdfce6a1708d274, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714542328219483900, guid: 24643d4f56a9ec54cbdfce6a1708d274, type: 3}
+      propertyPath: maxHp
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
