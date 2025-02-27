@@ -216,11 +216,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockback: {x: 0, y: 0}
   knockbackDuration: 0.1
-  knockbackPower: 1
-  knockbackTime: 0.2
+  knockbackPower: 0
+  knockbackTime: 0
   characterName: 
   level: 1
-  attack: 9
+  attack: 0
   defense: 0
   equipItem: 
   speed: 0

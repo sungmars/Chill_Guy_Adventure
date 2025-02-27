@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SkillManager : MonoSingleton<SkillManager>
 {
@@ -25,12 +26,12 @@ public class SkillManager : MonoSingleton<SkillManager>
 
     public GetSkillUI getSkillUIGroup;
     public GetSkillUI upgradeGroup;
+    public Image playerImage;
 
 
-    new void Awake()
+    void Awake()
     {
-        base.Awake();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameManager.Instance.GetPlayer().transform;//GameObject.FindGameObjectWithTag("Player").transform;
 
         allSkillHandlerList = new List<SkillHandler>();
         allSkillHandlerList.AddRange(rangeSkillHandlerList);

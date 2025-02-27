@@ -1775,6 +1775,7 @@ MonoBehaviour:
   getSkillHandlerUIs: []
   getSkillUIGroup: {fileID: 5706605449272750832}
   upgradeGroup: {fileID: 2142850417848218190}
+  playerImage: {fileID: 667046656109010971}
 --- !u!1 &1732099861914014628
 GameObject:
   m_ObjectHideFlags: 0
