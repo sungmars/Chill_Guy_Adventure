@@ -54,5 +54,8 @@ MonoBehaviour:
   coolDown: 10
   currentCoolDown: 10
   duration: 5
+  knockbackPower: 0.1
+  knockbackDuration: 0.5
   areaObject: {fileID: 5377139531162746639, guid: b20ad53c99212ee498cef54ad35dfabb, type: 3}
-  damage: 1
+  damage: 2
+  damageInterval: 1

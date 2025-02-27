@@ -4,14 +4,17 @@ public class PlayerAudioController : MonoBehaviour
 {
     private AudioSource audioSource;
 
-    public PlayerAudioController()
+    private void Awake()
     {
-        GameObject obj = new GameObject("PlayerAudio");
-        audioSource = obj.AddComponent<AudioSource>();
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     public void PlaySound(AudioClip clip)
     {
         audioSource.PlayOneShot(clip);
+    }
+    public void SetVolume(float volume)
+    {
+        audioSource.volume = volume;
     }
 }

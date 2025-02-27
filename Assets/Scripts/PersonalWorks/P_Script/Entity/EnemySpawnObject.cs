@@ -47,7 +47,8 @@ public class EnemySpawnObject : MonoBehaviour
         {
             // ParticleManager.Instance.CreateImpactParticlesAtPostion(position);
         }
-        Instantiate(baseController, position, Quaternion.identity);
+        var enemyController = Instantiate(baseController, position, Quaternion.identity).GetComponent<EnemyController>();
+        EnemySpawnManager.Instance.activeEnemies.Add(enemyController);
 
         Destroy(this.gameObject);
     }

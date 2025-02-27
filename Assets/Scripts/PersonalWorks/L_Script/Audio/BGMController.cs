@@ -4,11 +4,10 @@ public class BGMController : MonoBehaviour
 {
     private AudioSource audioSource;
 
-    public BGMController()
+    private void Awake()
     {
-        GameObject obj = new GameObject("Bgm");
-        audioSource = obj.AddComponent<AudioSource>();
-        audioSource.loop = true; //반복재생 시키키
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.loop = true;
     }
 
     public void PlayMusic(AudioClip clip)
@@ -19,5 +18,9 @@ public class BGMController : MonoBehaviour
     public void StopMusic()
     {
         audioSource.Stop();
+    }
+    public void SetVolume(float volume)
+    {
+        audioSource.volume = volume;
     }
 }

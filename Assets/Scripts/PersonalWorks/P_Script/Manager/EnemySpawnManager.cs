@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
@@ -18,18 +19,20 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
     [SerializeField]
     private GameObject enemySpawnObject; // 생성할 적 프리팹 리스트
 
-    private List<EnemyController> activeEnemies = new List<EnemyController>(); // 현재 활성화된 적들
+    public List<EnemyController> activeEnemies = new List<EnemyController>(); // 현재 활성화된 적들
 
-    public bool enemySpawnComplite;
-
-    [SerializeField] private EnemySpawnData enemySpawnData;
+    private EnemySpawnData enemySpawnData;
     private bool isWaveEnd = false;
 
     [SerializeField] private float timeBetweenSpawns = 0.2f;
     [SerializeField] private float timeBetweenWaves = 1f;
 
+    public CanvasGroup waveUI;
+    public TextMeshProUGUI waveText;
+
     public void Start()
     {
+        enemySpawnData = GameManager.Instance.enemySpawnDatas[GameManager.Instance.currentRoundIndex]; // 현재 스테이지 스폰 데이터 불러오기
         StartWave();
     }
 
@@ -44,16 +47,30 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
     {
         var waveDatas = spawnData.waveDatas;
 
+        int wave = 0;
         // 웨이브 하나하나 생성
         foreach (var waveData in waveDatas)
         {
             isWaveEnd = false;
+            waveText.text = $"{++wave} Wave";
+            while (waveUI.alpha < 1)
+            {
+                waveUI.alpha += 0.01f;
+                yield return null;
+            }
+            yield return new WaitForSeconds(1f);
             // 모든 몹 생성
             for (int i = 0; i < waveData.enemyCount; i++)
             {
                 int randomMob = Random.Range(waveData.MobRange.x, waveData.MobRange.y);
                 SpawnRandomEnemy(randomMob);
             }
+            while (waveUI.alpha > 0)
+            {
+                waveUI.alpha -= 0.01f;
+                yield return null;
+            }
+
 
             // 웨이브가 끝날 때 까지 대기
             while (!isWaveEnd)
@@ -62,6 +79,9 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
             }
         }
 
+        Debug.Log("라운드 종료?");
+        // GameManager.Instance.NextRound();
+        SkillManager.Instance.OpenGetSkillPannel();
         // TODO 모든 웨이브가 끝났을 때 다음 스테이지로
     }
 
@@ -103,18 +123,11 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
             Gizmos.DrawCube(center, size);
         }
     }
-
-    // 적이 생성 될 때 무조건 실행
-    public void CreateEnemyOnInit(EnemyController enemy)
-    {
-        activeEnemies.Add(enemy);
-    }
-
     // 적이 죽을 때 무조건 실행
     public void RemoveEnemyOnDeath(EnemyController enemy)
     {
         activeEnemies.Remove(enemy);
-        if (activeEnemies.Count == 0)
-            isWaveEnd = true; // 라운드가 끝났다고 알림(새 라운드 시작)
+        if (!isWaveEnd && activeEnemies.Count == 0)
+            isWaveEnd = true;
     }
 }
