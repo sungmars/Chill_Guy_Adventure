@@ -25,6 +25,23 @@ public class AnimationHandler : MonoBehaviour
 
         _animator.SetFloat("xDir", moveVector.x);
         _animator.SetFloat("yDir", moveVector.y);
+
+        if (moveVector.x < 0)
+        {
+            _animator.SetFloat("Direction", 0);
+        }
+        else if (moveVector.x > 0)
+        {
+            _animator.SetFloat("Direction", 1);
+        }
+        else if (moveVector.y > 0)
+        {
+            _animator.SetFloat("Direction", 2);
+        }
+        else if (moveVector.y < 0)
+        {
+            _animator.SetFloat("Direction", 3);
+        }
     }
 
     public void Damage()

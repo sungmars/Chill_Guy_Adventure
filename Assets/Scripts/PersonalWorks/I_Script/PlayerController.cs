@@ -206,7 +206,7 @@ public class PlayerController : BaseController
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         bool isLeft = Mathf.Abs(rotZ) > 90f;
 
-        _spriteRenderer.flipX = isLeft;
+        // _spriteRenderer.flipX = isLeft;
 
         if (weaponPivot != null)
             weaponPivot.rotation = Quaternion.Euler(0f, 0f, rotZ);
