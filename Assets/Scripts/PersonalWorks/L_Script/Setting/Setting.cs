@@ -18,6 +18,10 @@ public class Setting : MonoBehaviour, IPointerUpHandler
         sfxSlider.value = sfxVolume;
         bgmSlider.onValueChanged.AddListener(UpdateBGMVolume);
         sfxSlider.onValueChanged.AddListener(UpdateSFXVolume);
+
+        // AudioManager에 저장된 볼륨값 설정
+        AudioManager.Instance.SetBGMVolume(bgmVolume);
+        AudioManager.Instance.SetSFXVolume(sfxVolume);
     }
 
     public void UpdateBGMVolume(float newVolume)
@@ -29,6 +33,7 @@ public class Setting : MonoBehaviour, IPointerUpHandler
 
     public void UpdateSFXVolume(float newVolume)
     {
+        Debug.Log("SFX Volume Updated: " + newVolume);
         AudioManager.Instance.SetSFXVolume(newVolume);
         PlayerPrefs.SetFloat(SFXVolumeKey, newVolume);
         PlayerPrefs.Save();
