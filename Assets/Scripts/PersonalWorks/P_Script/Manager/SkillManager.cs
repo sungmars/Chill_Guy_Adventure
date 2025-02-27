@@ -70,15 +70,15 @@ public class SkillManager : MonoSingleton<SkillManager>
     public void OnClickSetUpgrade()
     {
         int upgradeOrder = upgradeGroup.GetSkillOrder();
-        // TODO 업그레이드 0은 근접 1은 원거리
-        if (upgradeOrder == 0)
+        if (upgradeOrder == 0) // 근거리 업글 1로 올림
         {
-
+            GameManager.Instance.SelectWeaponUpgrade(0, 1);
         }
-        else
+        else // 원거리 업글 1로 올림
         {
-
+            GameManager.Instance.SelectWeaponUpgrade(1, 1);
         }
+
         // 다음 라운드로
         OnClickNextStage();
     }
@@ -115,11 +115,17 @@ public class SkillManager : MonoSingleton<SkillManager>
         }
 
         Debug.Log($"현재 라운드{GameManager.Instance.currentRoundIndex}");
-        if (GameManager.Instance.currentRoundIndex == 2 || GameManager.Instance.currentRoundIndex == 4)
+        if (GameManager.Instance.currentRoundIndex == 2)
         {
-            // 2나 4라면 업그레이드 창으로 띄우기
+            // 3라운드면 업그레이드 창으로 띄우기
             getSkillUIGroup.gameObject.SetActive(false);
             OpenGetUpgradePannel();
+        }
+        else if (GameManager.Instance.currentRoundIndex == 4)
+        {
+            // 5라운드면 업그레이드 창으로 없이 바로 업글
+            GameManager.Instance.SelectWeaponUpgrade(GameManager.Instance.playerWeapon, 2);// 업글을 했다면 업글한 무기 2번째 업글 후 Next스테이지
+            OnClickNextStage();
         }
         else
         {
@@ -127,6 +133,25 @@ public class SkillManager : MonoSingleton<SkillManager>
         }
     }
 
+    public void OnClickSkillCancel()
+    {
+        if (GameManager.Instance.currentRoundIndex == 2)
+        {
+            // 3라운드면 업그레이드 창으로 띄우기
+            getSkillUIGroup.gameObject.SetActive(false);
+            OpenGetUpgradePannel();
+        }
+        else if (GameManager.Instance.currentRoundIndex == 4)
+        {
+            // 5라운드면 업그레이드 창으로 없이 바로 업글
+            GameManager.Instance.SelectWeaponUpgrade(GameManager.Instance.playerWeapon, 2);// 업글을 했다면 업글한 무기 2번째 업글
+            OnClickNextStage();
+        }
+        else
+        {
+            OnClickNextStage();
+        }
+    }
     public void OnClickNextStage()
     {
         GameManager.Instance.NextRound();

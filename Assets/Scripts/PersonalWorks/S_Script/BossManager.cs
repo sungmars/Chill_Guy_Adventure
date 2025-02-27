@@ -18,7 +18,7 @@ public class BossManager : MonoBehaviour
 
     [SerializeField] Transform player;
 
-    public AudioClip bossEye;   
+    public AudioClip bossEye;
 
     private void Awake()
     {
@@ -36,6 +36,7 @@ public class BossManager : MonoBehaviour
     private void Start()
     {
         InvokeRepeating("SkillRepeat", 2f, 5f);
+        player = GameManager.Instance.GetPlayer().transform;
     }
 
     private void SkillRepeat()
