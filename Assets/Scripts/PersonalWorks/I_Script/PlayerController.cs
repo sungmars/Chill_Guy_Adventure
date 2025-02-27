@@ -31,7 +31,7 @@ public class PlayerController : BaseController
 
     private List<bool> isAttackingEnemyIndex;
 
-    private float meleeAttackRange = 1f;
+    private float meleeAttackRange = 1.5f;
     private float longAttackRange = 5f;
 
     public bool AttackModeChange = false; // false가 근접공격, true가 원거리공격
@@ -251,7 +251,7 @@ public class PlayerController : BaseController
         if (!mode)
         {
             WeaponUpgrade01 = true;
-            meleeAttackRange = 1.5f;
+            meleeAttackRange = 2f;
         }
     }
 
@@ -264,7 +264,7 @@ public class PlayerController : BaseController
         {
             WeaponUpgrade01 = false;
             WeaponUpgrade02 = true;
-            meleeAttackRange = 2f;
+            meleeAttackRange = 2.5f;
         }
     }
 
