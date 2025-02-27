@@ -2046,7 +2046,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Chill Guy's Advanture
+  m_text: Chill Guy's Adventure
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 57b03be6162b69f428e12b254b5a4022, type: 2}
   m_sharedMaterial: {fileID: -6199532692575778774, guid: 57b03be6162b69f428e12b254b5a4022, type: 2}
