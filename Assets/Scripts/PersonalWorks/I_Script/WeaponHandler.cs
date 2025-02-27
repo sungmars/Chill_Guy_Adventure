@@ -75,7 +75,9 @@ public class WeaponHandler : MonoBehaviour
         MeleeUpgrade01(false, true, false);
         MeleeUpgrade02(false, false, true);
 
-        RangeBasic(true, false, false);                
+        RangeBasic(true, false, false);
+        RangeBasic(true, true, false);
+        RangeBasic(true, false, true);
     }
 
     public virtual void Rotate(bool isLeft)
@@ -98,7 +100,7 @@ public class WeaponHandler : MonoBehaviour
         up1 = playerController.WeaponUpgrade01;
         up2 = playerController.WeaponUpgrade02;
 
-        if (mode && !up1 && !up2) animator.SetTrigger(isRangeAttack);
+        if (mode) animator.SetTrigger(isRangeAttack);
     }
 
     public void MeleeUpgrade01(bool mode, bool up1, bool up2)
