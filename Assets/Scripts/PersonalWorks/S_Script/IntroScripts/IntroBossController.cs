@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class IntroBossController : MonoBehaviour
 {
@@ -23,13 +24,14 @@ public class IntroBossController : MonoBehaviour
         float z = 0;
         float speed = 0.1f;
 
-        while ((int)transform.position.y != 0)
+        while (Vector2.Distance(transform.position, Vector2.zero) > 0.2f)
         {
             y = transform.position.y - speed;
             transform.position = new Vector3(x, y, z);
             speed += 0.005f;
             yield return new WaitForSeconds(0f);
         }
+        transform.position = Vector2.zero;
         AudioManager.Instance.PlayBossSound(dropClip);
 
         animator.SetBool(findbool, true);

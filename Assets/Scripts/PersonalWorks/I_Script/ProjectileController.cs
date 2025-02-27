@@ -47,6 +47,7 @@ public class ProjectileController : MonoBehaviour
         else if (rangeWeaponHandler.target.Contain(collision.gameObject.layer))
         {
             var enemyController = collision.GetComponent<BaseController>();
+            Debug.Log(collision.name);
             if (enemyController != null)
             {
                 enemyController.TakeDamage((int)baseController.attack);

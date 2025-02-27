@@ -12,6 +12,7 @@ public class KeyBoardAttackController : MonoBehaviour
     [SerializeField] GameObject[] keyPrefabs;
     GameObject player;
     GameObject keyObj;
+    [SerializeField] GameObject boss;
 
     public float damage = 10f;
     public float lifetime = 5f;
@@ -64,7 +65,7 @@ public class KeyBoardAttackController : MonoBehaviour
         float y = player.transform.position.y + 1.1f;
         for (int i = 0; i < 5; i++)
         {
-            int rand = Random.Range(1, 4);
+            int rand = Random.Range(0, 4);
             switch (rand)
             {
                 case 0:
@@ -80,7 +81,7 @@ public class KeyBoardAttackController : MonoBehaviour
                     keyCodes.Enqueue("d");
                     break;
             }
-            keyObj = Instantiate(keyPrefabs[rand - 1], transform);
+            keyObj = Instantiate(keyPrefabs[rand], transform);
             keyObj.transform.position = new Vector2(x, y);
             keyCodesObj.Enqueue(keyObj);
             x += 1f;
@@ -91,6 +92,7 @@ public class KeyBoardAttackController : MonoBehaviour
     {
         onSkill = true;
         player.GetComponent<PlayerInput>().enabled = false;
+        boss.tag = "Untagged";
         float time = 0;
         PlayerController playerController = player.GetComponent<PlayerController>();
         while (time < 6f)
@@ -102,6 +104,7 @@ public class KeyBoardAttackController : MonoBehaviour
         playerController.TakeDamage((int)damage);
         playerController.ApplyKnockback(transform, knockbackPower, knockbackDuration);
         player.GetComponent<PlayerInput>().enabled = true;
+        boss.tag = "Enemy";
         ClearData();
         onSkill = false;
         yield return new WaitForSeconds(2);
@@ -113,6 +116,7 @@ public class KeyBoardAttackController : MonoBehaviour
         {
             StopCoroutine(coroutine);
         }
+        boss.tag = "Enemy";
         player.GetComponent<PlayerInput>().enabled = true;
     }
 

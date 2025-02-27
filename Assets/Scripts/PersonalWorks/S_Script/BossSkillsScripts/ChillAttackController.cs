@@ -28,8 +28,8 @@ public class ChillAttackController : MonoBehaviour
             }
             else
             {
-                float x = Random.Range(-8f, 9f);
-                float y = Random.Range(-4f, 5f);
+                float x = Random.Range(-7f, 7.1f);
+                float y = Random.Range(-2.5f, 2.6f);
                 chillAttackParent.transform.position = new Vector3(x, y, 0f);
             }
         }
