@@ -64,7 +64,7 @@ public class KeyBoardAttackController : MonoBehaviour
         float y = player.transform.position.y + 1.1f;
         for (int i = 0; i < 5; i++)
         {
-            int rand = Random.Range(1, 4);
+            int rand = Random.Range(0, 4);
             switch (rand)
             {
                 case 0:
@@ -80,7 +80,7 @@ public class KeyBoardAttackController : MonoBehaviour
                     keyCodes.Enqueue("d");
                     break;
             }
-            keyObj = Instantiate(keyPrefabs[rand - 1], transform);
+            keyObj = Instantiate(keyPrefabs[rand], transform);
             keyObj.transform.position = new Vector2(x, y);
             keyCodesObj.Enqueue(keyObj);
             x += 1f;
